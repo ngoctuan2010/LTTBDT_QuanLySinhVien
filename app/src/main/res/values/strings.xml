@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StudentManagement</string>
+    <string name="sign_out">Đăng xuất</string>
+    <string name="student">Quản lý sinh viên</string>
+    <string name="admin_collage">Quản lý giảng viên</string>
+    <string name="admin_subject">Quản lý môn học</string>
+    <string name="admin_class">Quản lý lớp</string>
+    <string name="profile">Trang cá nhân</string>
 </resources>
