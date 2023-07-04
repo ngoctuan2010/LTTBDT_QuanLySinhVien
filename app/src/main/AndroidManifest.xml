@@ -17,6 +17,14 @@
             android:exported="false" />
         <activity
             android:name=".Register"
+
+            android:name=".QuanlyMonhoc"
+            android:exported="false" />
+        <activity
+            android:name=".QuanlyLophoc"
+            android:exported="false" />
+        <activity
+            android:name=".QuanlyUser"
             android:exported="false" />
         <activity
             android:name=".LogIn"
