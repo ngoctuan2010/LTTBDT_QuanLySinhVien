@@ -6,18 +6,19 @@ import java.util.Date;
 public class Class implements Serializable {
     private int id;
     private int subject_id;
-    private int collage_id;
+    private int lecture;
     private int quantity;
     private String year;
-    private Date started;
+    private String started;
 
 
-
-    public Class(int id, int subject_id, int collage_id, int quantity) {
+    public Class(int id, int subject_id, int lecture, int quantity, String year, String started) {
         this.id = id;
         this.subject_id = subject_id;
-        this.collage_id = collage_id;
+        this.lecture = lecture;
         this.quantity = quantity;
+        this.year = year;
+        this.started = started;
     }
 
     public int getId() {
@@ -36,12 +37,12 @@ public class Class implements Serializable {
         this.subject_id = subject_id;
     }
 
-    public int getCollage_id() {
-        return collage_id;
+    public int getLecture() {
+        return lecture;
     }
 
-    public void setCollage_id(int collage_id) {
-        this.collage_id = collage_id;
+    public void setLecture(int lecture) {
+        this.lecture = lecture;
     }
 
     public int getQuantity() {
@@ -60,11 +61,11 @@ public class Class implements Serializable {
         this.year = year;
     }
 
-    public Date getStarted() {
+    public String getStarted() {
         return started;
     }
 
-    public void setStarted(Date started) {
+    public void setStarted(String started) {
         this.started = started;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.service;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.example.pojo.Class;
 import com.example.studentmanagement.R;
 
-import java.util.Date;
 import java.util.List;
 
 public class ClassArrayAdapter extends ArrayAdapter {
@@ -47,7 +45,7 @@ public class ClassArrayAdapter extends ArrayAdapter {
             tvClass.setText(cl.getId());
             tvQuantity.setText(cl.getQuantity());
             tvYear.setText(cl.getYear());
-            tvCollage.setText(cl.getCollage_id());
+            tvCollage.setText(cl.getLecture());
             tvDate.setText(cl.getStarted().toString());
 
 

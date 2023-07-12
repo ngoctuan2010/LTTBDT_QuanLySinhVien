@@ -68,11 +68,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CLASS_SUBJECT = "subject_id";
     public static final String CLASS_LECTURE = "lecture_id";
     public static final String CLASS_QUANTITY = "quantity";
+    public static final String CLASS_YEAR = "year";
+    public static final String CLASS_STARTED = "started_date";
+
     public static final String CREATE_CLASS = "create table " + CLASS_TABLE + "( "
                                             + CLASS_ID + " integer primary key autoincrement, "
                                             + CLASS_SUBJECT + " integer, "
                                             + CLASS_LECTURE + " integer, "
                                             + CLASS_QUANTITY + " integer, "
+                                            + CLASS_YEAR + " nvarchar(10), "
+                                            + CLASS_STARTED + "date, "
                                             + "FOREIGN KEY(" + CLASS_SUBJECT + ") REFERENCES " + SUBJECT_TABLE + "(" + SUBJECT_ID + "),"
                                             + "FOREIGN KEY(" + CLASS_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + "));";
 

@@ -8,14 +8,14 @@ public class User implements Serializable {
     private String password;
 
     private int role;
-    private int collage_id;
+    private int lecture;
 
-    public User(int id, String username, String password,int role, int collage_id) {
+    public User(int id, String username, String password,int role, int lecture) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.collage_id = collage_id;
+        this.lecture = lecture;
     }
 
     public int getId() {
@@ -42,12 +42,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getCollage_id() {
-        return collage_id;
+    public int getLecture() {
+        return lecture;
     }
 
-    public void setCollage_id(int collage_id) {
-        this.collage_id = collage_id;
+    public void setLecture(int lecture) {
+        this.lecture = lecture;
     }
 
     public int getRole() {

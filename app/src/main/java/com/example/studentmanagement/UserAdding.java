@@ -51,7 +51,7 @@ public class UserAdding extends AppCompatActivity {
             User user = (User) bundle.get("User");
             edtUsername.setText(user.getUsername());
             edtPassword.setText(user.getPassword());
-            edtCollage.setText(Integer.toString(user.getCollage_id()));
+            edtCollage.setText(Integer.toString(user.getLecture()));
             spRole.setSelection(user.getRole());
         }else{
             btnUpdate.setVisibility(View.GONE);
