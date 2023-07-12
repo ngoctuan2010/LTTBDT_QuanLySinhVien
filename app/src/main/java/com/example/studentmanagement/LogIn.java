@@ -10,10 +10,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.service.QLSVDatabase;
+
 public class LogIn extends AppCompatActivity {
     EditText medtUsername, medtPassword;
     CheckBox mckRemember;
     Button mbtnLogin, mbtnRegister, mbtnForgotPassword;
+
+    QLSVDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class LogIn extends AppCompatActivity {
 
         setContentView(R.layout.activity_log_in);
         getSupportActionBar().hide();
+        db = new QLSVDatabase(this);
         medtUsername = (EditText) findViewById(R.id.edtMaGV);
         medtPassword = (EditText) findViewById(R.id.edtPassword);
 
