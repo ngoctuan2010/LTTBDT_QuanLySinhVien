@@ -68,6 +68,8 @@ public class HomePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_profile) {
+            Intent intent = new Intent(HomePage.this, Profile.class);
+            startActivity(intent);
             Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
         }
 
