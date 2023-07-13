@@ -13,15 +13,52 @@
         android:theme="@style/Theme.AppCompat"
         tools:targetApi="31">
         <activity
+
             android:name=".Profile"
             android:exported="false"
             android:parentActivityName=".HomePage"/>
         <activity
+            android:name=".UserAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyUser"
+            android:theme="@style/MyDialog"/>
+        <activity
+            android:name=".SubjectAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:theme="@style/MyDialog"/>
+        <activity
+            android:name=".ClassAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyLophoc"
+            android:theme="@style/MyDialog"/>
+
+        <activity
             android:name=".HomePage"
             android:exported="false" />
+
         <activity
             android:name=".Register"
             android:exported="false" />
+        <activity
+            android:name=".QuanlyMonhoc"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".QuanlyUser"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".LogIn"
             android:exported="true">
