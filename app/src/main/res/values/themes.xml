@@ -1,12 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.StudentManagement" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.StudentManagement" parent="Theme.AppCompat">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--        <item name="windowActionBar">true</item>-->
+    </style>
+    <style name="Theme.StudentManagement" parent="Base.Theme.StudentManagement" />
 
+    <style name="MyTheme" parent="Theme.AppCompat">
+        <item name="actionBarStyle">@style/MyActionbar</item>
     </style>
 
-    <style name="Theme.StudentManagement" parent="Base.Theme.StudentManagement" />
+    <style name="MyActionbar">
+        <item name="background">@color/buttonBlue</item>
+    </style>
 
     <style name="MyDialog"  parent="Theme.AppCompat.Dialog.MinWidth">
         <item name="windowNoTitle">true</item>
