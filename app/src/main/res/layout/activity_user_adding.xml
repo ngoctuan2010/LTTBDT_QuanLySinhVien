@@ -27,15 +27,15 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Tài khoản"
                 android:textAlignment="center"
@@ -43,55 +43,11 @@
                 android:textColorHint="@color/black"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
-                android:layout_weight="1"
-                android:text="Mật khẩu"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
-                android:layout_weight="1"
-                android:text="Giảng viên"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
-                android:layout_weight="1"
-                android:text="Vai trò"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
-
             <EditText
-                android:id="@+id/edtAddingSubjectName"
-                android:layout_width="wrap_content"
+                android:id="@+id/edtUserAddingUsername"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:ems="10"
@@ -102,11 +58,23 @@
                 android:textColorHint="@color/gray"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/edtAddingSubjectCredit"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:text="Mật khẩu"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edtUserAddingPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:ems="10"
@@ -117,11 +85,23 @@
                 android:textColorHint="@color/gray"
                 android:textSize="20sp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/edtUserAddingCollage"
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:text="Giảng viên"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="20sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/edtUserAddingCollage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:ems="10"
@@ -130,13 +110,25 @@
                 android:padding="5dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
+                android:textSize="20sp"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:text="Vai trò"
+                android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <Spinner
                 android:id="@+id/spUserAddingRole"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/lightBlue"
                 android:scrollbarSize="10sp" />

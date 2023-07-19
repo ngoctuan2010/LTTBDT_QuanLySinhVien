@@ -1,40 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray">
+    android:background="@color/white"
+    android:elevation="2dp">
 
-    <TextView
-        android:id="@+id/tvUserItemID"
+    <ImageView
+        android:id="@+id/imgUserItemAva"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/icon_card"
+        android:padding="5dp"
+        app:srcCompat="@drawable/admin" />
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="ID"
-        android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:layout_marginTop="5dp"
+        android:layout_weight="2">
 
-    <TextView
-        android:id="@+id/tvUserItemUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Tài khoản"
-        android:textAlignment="center"
-        android:textColor="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvUserItemRole"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Vai trò"
-        android:textAlignment="center"
-        android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvUserItemLecture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Người dùng"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvUserItemUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Tài khoản"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvUserItemRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Vai trò"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgUserItemCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="false"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            app:srcCompat="@drawable/circle_check" />
+    </RelativeLayout>
 
 </LinearLayout>

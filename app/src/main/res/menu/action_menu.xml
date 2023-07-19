@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_profile"
-        android:orderInCategory="0"
-        android:title="@string/profile"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_student"
-        android:orderInCategory="1"
-        android:title="@string/student"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_collape"
-        android:orderInCategory="2"
-        app:showAsAction="never"
-        android:title="@string/admin_collage" />
-    <item
-        android:id="@+id/action_subject"
-        android:orderInCategory="3"
-        app:showAsAction="never"
-        android:title="@string/admin_subject" />
-    <item
-        android:id="@+id/action_class"
-        android:orderInCategory="4"
-        app:showAsAction="never"
-        android:title="@string/admin_class" />
-    <item
-        android:id="@+id/action_sign_out"
-        android:orderInCategory="5"
-        app:showAsAction="never"
-        android:title="@string/sign_out" />
+
+    <group
+        android:id="@+id/grMenuDefault"
+        android:visible="false">
+        <item
+            android:id="@+id/action_collape"
+            android:orderInCategory="2"
+            android:title="@string/admin_collage"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_class"
+            android:orderInCategory="4"
+            android:title="@string/admin_class"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_profile"
+            android:orderInCategory="0"
+            android:title="@string/profile"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_sign_out"
+            android:orderInCategory="5"
+            android:title="@string/sign_out"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_subject"
+            android:orderInCategory="3"
+            android:title="@string/admin_subject"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_student"
+            android:orderInCategory="1"
+            android:title="@string/student"
+            app:showAsAction="never" />
+    </group>
+    <group
+        android:id="@+id/grMenuDelete"
+        android:visible="false">
+        <item
+            android:id="@+id/cancel_action"
+            android:title="Huỷ"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/delete_multi"
+            android:title="Xoá"
+            app:showAsAction="ifRoom" />
+    </group>
 </menu>

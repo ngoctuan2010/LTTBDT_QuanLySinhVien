@@ -3,6 +3,7 @@ package com.example.service;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.pojo.Class;
@@ -48,6 +49,28 @@ public class QLSVDatabase {
         String[] args = {Integer.toString(user_id)};
 
         return db.delete(DBHelper.ACCOUNT_TABLE, clause, args);
+    }
+
+    public Cursor get_list(){
+        return db.query(DBHelper.ACCOUNT_TABLE, null, null,null,null,null,DBHelper.ACCOUNT_ID + " DESC" );
+    }
+
+    public Cursor getListBy(String str){
+        String query = "SELECT * " +
+                        "FROM " + DBHelper.ACCOUNT_TABLE +
+                        " WHERE " + DBHelper.ACCOUNT_ID + " = ? OR " + DBHelper.ACCOUNT_USERNAME + " like ?;";
+
+        String[] arg = {str, "%"+str+"%"};
+        return db.rawQuery(query, arg);
+    }
+
+    public Cursor getListUserByRole(int i){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.ACCOUNT_TABLE +
+                " WHERE " + DBHelper.ACCOUNT_ROLE + " = ?;";
+
+        String[] arg = {Integer.toString(i)};
+        return db.rawQuery(query, arg);
     }
 
     //Subject
@@ -114,5 +137,6 @@ public class QLSVDatabase {
     }
 
     //...
+
 
 }

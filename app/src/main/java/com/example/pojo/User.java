@@ -10,6 +10,12 @@ public class User implements Serializable {
     private int role;
     private int lecture;
 
+    public enum ROLE {
+      SUPERADMIN,
+      ADMIN,
+      LECTURE
+    };
+
     public User(int id, String username, String password,int role, int lecture) {
         this.id = id;
         this.username = username;
