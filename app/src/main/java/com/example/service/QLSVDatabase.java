@@ -149,7 +149,7 @@ public class QLSVDatabase {
         values.put(DBHelper.STUDENT_FNAME, student.getFirst_name());
         values.put(DBHelper.STUDENT_LNAME, student.getLast_name());
         values.put(DBHelper.STUDENT_GENDER, student.isGender());
-        values.put(DBHelper.STUDENT_BIRTH, student.getBirth().getTime());
+        values.put(DBHelper.STUDENT_BIRTH, student.getBirth());
         values.put(DBHelper.STUDENT_ADDRESS, student.getAddress());
         values.put(DBHelper.STUDENT_PHONE, student.getPhone());
         values.put(DBHelper.STUDENT_DEPARTMENT, student.getDepartment());
@@ -164,7 +164,7 @@ public class QLSVDatabase {
         values.put(DBHelper.STUDENT_FNAME, student.getFirst_name());
         values.put(DBHelper.STUDENT_LNAME, student.getLast_name());
         values.put(DBHelper.STUDENT_GENDER, student.isGender());
-        values.put(DBHelper.STUDENT_BIRTH, student.getBirth().getTime());
+        values.put(DBHelper.STUDENT_BIRTH, student.getBirth());
         values.put(DBHelper.STUDENT_ADDRESS, student.getAddress());
         values.put(DBHelper.STUDENT_PHONE, student.getPhone());
         values.put(DBHelper.STUDENT_DEPARTMENT, student.getDepartment());
@@ -178,24 +178,6 @@ public class QLSVDatabase {
     }
 
     //lấy danh sách sinh viên
-    public ArrayList<Student> getListStudent() throws ParseException {
-        ArrayList<Student> studentsList = new ArrayList<>();
-        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, null, null, null, null, null, DBHelper.STUDENT_ID + " DESC");
-        cursor.moveToPosition(-1);
-        while (cursor.moveToNext()) {
-            String firstName = cursor.getString(1);
-            String lastName = cursor.getString(2);
-            boolean gender = cursor.getInt(3) == 1;
-            String birth = cursor.getString(4);
-            String address = cursor.getString(5);
-            String phone = cursor.getString(6);
-            String department = cursor.getString(7);
-            String schoolYear = cursor.getString(8);
-            Student student = new Student(firstName, lastName, gender, birth, address, phone, department, schoolYear);
-            studentsList.add(student);
-        }
-        cursor.close();
-        return studentsList;
-    }
+
 }
 

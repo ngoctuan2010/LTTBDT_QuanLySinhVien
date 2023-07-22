@@ -60,6 +60,7 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                 startActivity(intent);
             }
         });
+        studentArrayAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -12,21 +12,20 @@ public class Student implements Serializable {
     private String first_name;
     private String last_name;
     private boolean gender;
-    private Date birth;
+    private String birth;
     private String address;
     private String phone;
     private String department;
     private String school_year;
-    SimpleDateFormat spdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public Student() {
     }
 
-    public Student(String first_name, String last_name, boolean gender, String birth, String address, String phone, String department, String school_year) throws ParseException {
+    public Student(String first_name, String last_name, boolean gender, String birth, String address, String phone, String department, String school_year){
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
-        this.birth = spdf.parse(birth);
+        this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.department = department;
@@ -65,12 +64,12 @@ public class Student implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
     public void setBirth(String birth) throws ParseException {
-        this.birth = spdf.parse(birth);
+        this.birth = birth;
     }
 
     public String getAddress() {
