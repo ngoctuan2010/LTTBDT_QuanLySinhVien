@@ -13,8 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Student
     public static final String STUDENT_TABLE = "student";
     public static final String STUDENT_ID = "id";
-    public static final String STUDENT_FNAME = "first_name";
-    public static final String STUDENT_LNAME = "last_name";
+    public static final String STUDENT_NAME = "student_name";
     public static final String STUDENT_GENDER = "gender";
     public static final String STUDENT_BIRTH = "birthday";
     public static final String STUDENT_ADDRESS = "address";
@@ -23,8 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String STUDENT_YEAR = "school_year";
     public static final String CREATE_STUDENT = "create table " + STUDENT_TABLE + "( "
                                                 + STUDENT_ID + " integer primary key autoincrement, "
-                                                + STUDENT_FNAME + " nvarchar(20) not null, "
-                                                + STUDENT_LNAME + " nvarchar(20) not null, "
+                                                + STUDENT_NAME + " nvarchar(20) not null, "
                                                 + STUDENT_GENDER + " text, "
                                                 + STUDENT_BIRTH + " text, "
                                                 + STUDENT_ADDRESS + " text, "

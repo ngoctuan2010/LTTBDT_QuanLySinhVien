@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm sinh viên"
+        android:text="Sửa sinh viên"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -128,11 +128,11 @@
 
     <Button
         android:layout_marginTop="20dp"
-        android:id="@+id/btnAddingStudent"
+        android:id="@+id/btnUpdateStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/buttonBlue"
-        android:text="Thêm" />
+        android:text="Sửa" />
 
 </LinearLayout>

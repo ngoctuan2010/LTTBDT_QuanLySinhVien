@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.pojo.Class;
 import com.example.pojo.Student;
@@ -145,9 +146,7 @@ public class QLSVDatabase {
     //thêm một sinh viên
     public long add_student(Student student) {
         ContentValues values = new ContentValues();
-        values.put(DBHelper.STUDENT_ID, student.getId());
-        values.put(DBHelper.STUDENT_FNAME, student.getFirst_name());
-        values.put(DBHelper.STUDENT_LNAME, student.getLast_name());
+        values.put(DBHelper.STUDENT_NAME, student.getName());
         values.put(DBHelper.STUDENT_GENDER, student.isGender());
         values.put(DBHelper.STUDENT_BIRTH, student.getBirth());
         values.put(DBHelper.STUDENT_ADDRESS, student.getAddress());
@@ -157,27 +156,111 @@ public class QLSVDatabase {
         return db.insert(DBHelper.STUDENT_TABLE, null, values);
     }
 
+
     //sửa một sinh viên
     public long update_student(Student student) {
         ContentValues values = new ContentValues();
-        values.put(DBHelper.STUDENT_ID, student.getId());
-        values.put(DBHelper.STUDENT_FNAME, student.getFirst_name());
-        values.put(DBHelper.STUDENT_LNAME, student.getLast_name());
+        values.put(DBHelper.STUDENT_NAME, student.getName());
         values.put(DBHelper.STUDENT_GENDER, student.isGender());
         values.put(DBHelper.STUDENT_BIRTH, student.getBirth());
         values.put(DBHelper.STUDENT_ADDRESS, student.getAddress());
         values.put(DBHelper.STUDENT_PHONE, student.getPhone());
         values.put(DBHelper.STUDENT_DEPARTMENT, student.getDepartment());
         values.put(DBHelper.STUDENT_YEAR, student.getSchool_year());
-        return db.update(DBHelper.STUDENT_TABLE, values, DBHelper.STUDENT_ID + " = " + student.getId(), null);
+
+        String clause = DBHelper.STUDENT_ID + " = ?";
+        String[] args = {String.valueOf(student.getId())};
+
+        return db.update(DBHelper.STUDENT_TABLE, values, clause, args);
     }
+
 
     //xóa một sinh viên
     public long delete_student(Student student) {
         return db.delete(DBHelper.STUDENT_TABLE, DBHelper.STUDENT_ID + " = " + "'" + student.getId() + "'", null);
     }
 
-    //lấy danh sách sinh viên
+    //lấy toàn bộ danh sách sinh viên
+    public ArrayList<Student> get_list_student() {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, null, null, null, null, DBHelper.STUDENT_ID);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
 
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birth, address, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    //lấy một sinh viên theo mã sinh viên
+    public Student getStudentById(int studentId) {
+        String[] columns = {
+                DBHelper.STUDENT_ID,
+                DBHelper.STUDENT_NAME,
+                DBHelper.STUDENT_GENDER,
+                DBHelper.STUDENT_BIRTH,
+                DBHelper.STUDENT_ADDRESS,
+                DBHelper.STUDENT_PHONE,
+                DBHelper.STUDENT_DEPARTMENT,
+                DBHelper.STUDENT_YEAR
+        };
+
+        String selection = DBHelper.STUDENT_ID + " = ?";
+        String[] selectionArgs = { String.valueOf(studentId) };
+
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, columns, selection, selectionArgs, null, null, null);
+
+        Student student = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+            int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+            int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+            int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+            int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+            int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+            int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+            int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+            int id = cursor.getInt(idIndex);
+            String name = cursor.getString(nameIndex);
+            boolean gender = cursor.getInt(genderIndex) == 1;
+            String birth = cursor.getString(birthIndex);
+            String address = cursor.getString(addressIndex);
+            String phone = cursor.getString(phoneIndex);
+            String department = cursor.getString(departmentIndex);
+            String schoolYear = cursor.getString(schoolYearIndex);
+
+            student = new Student(name, gender, birth, address, phone, department, schoolYear);
+            student.setId(id);
+
+            cursor.close();
+        }
+
+        return student;
+    }
 }
 

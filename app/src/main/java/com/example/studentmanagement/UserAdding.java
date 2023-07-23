@@ -31,7 +31,6 @@ public class UserAdding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_adding);
         db = new QLSVDatabase(this);
-
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
         edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
         edtPassword = (EditText) findViewById(R.id.edtUserAddingPassword);

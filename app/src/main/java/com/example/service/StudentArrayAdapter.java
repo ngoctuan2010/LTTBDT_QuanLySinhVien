@@ -1,7 +1,6 @@
 package com.example.service;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.example.pojo.Student;
 import com.example.studentmanagement.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StudentArrayAdapter extends ArrayAdapter<Student> {
     int layoutId;
@@ -41,7 +39,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
             ImageView img = convertView.findViewById(R.id.imgItemStudent);
             CheckBox chk = convertView.findViewById(R.id.chkitemStudent);
             Student student = arr.get(position);
-            txt.setText(student.getId() + " " + student.getFirst_name() + " " + student.getLast_name());
+            txt.setText(student.getId() + ". " + student.getName());
             if (student.isGender())
                 img.setImageResource(R.drawable.malestudent);
             else
