@@ -9,9 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.pojo.Lecture;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 
@@ -34,9 +32,9 @@ public class UserAdding extends AppCompatActivity {
         db = new QLSVDatabase(this);
 
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
-        edtPassword = (EditText) findViewById(R.id.edtUserAddingPassword);
-        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
+        edtUsername = (EditText) findViewById(R.id.edtClassAddingStarted);
+        edtPassword = (EditText) findViewById(R.id.edtClassAddingQuantity);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtClassAddingLecture);
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 
@@ -84,8 +82,8 @@ public class UserAdding extends AppCompatActivity {
                 public void onClick(View v) {
                     String username = edtUsername.getText().toString();
                     String password = edtPassword.getText().toString();
-int lecture_id = Integer.parseInt(edtLecture.getText().toString());
-int role = spRole.getSelectedItemPosition();
+                    int lecture_id = Integer.parseInt(edtLecture.getText().toString());
+                    int role = spRole.getSelectedItemPosition();
                     User user = new User(10, username, password, role, lecture_id);
                     db.add_user(user);
                 }
