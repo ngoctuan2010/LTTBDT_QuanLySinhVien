@@ -46,26 +46,35 @@ public class StudentUpdate extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         int studentId = bundle.getInt("student_id", -1);
-        student = database.getStudentById(studentId);
+        try {
+            student = database.getStudentById(studentId);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         doDuLieuLenEditText();
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!checkInput()) {
-                    Toast.makeText(StudentUpdate.this, "Vui lòng nhập đầy đủ thông tin!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentUpdate.this, "Vui lòng nhập đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!checkPhone()) {
-                    Toast.makeText(StudentUpdate.this, "Vui lòng nhập đúng thông tin số điện thoại!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentUpdate.this, "Vui lòng nhập đúng thông tin số điện thoại.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
                     if (!checkBirth(edtBirth.getText().toString())) {
-                        Toast.makeText(StudentUpdate.this, "Vui lòng nhập ngày sinh đúng định dạng!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentUpdate.this, "Vui lòng nhập ngày sinh đúng định dạng(dd/MM/yyyy).", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
+                }
+                if(!checkSchoolyear(edtSchoolyear.getText().toString().trim()))
+                {
+                    Toast.makeText(StudentUpdate.this, "Vui lòng nhập niên khóa đúng định dạng(yyyy-yyyy).", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 String nameStudentUpdate = edtName.getText().toString();
                 String birthStudentUpdate = edtBirth.getText().toString();
@@ -76,19 +85,24 @@ public class StudentUpdate extends AppCompatActivity {
                 boolean gt = false;
                 if (rbMale.isChecked())
                     gt = true;
-                Student studentUpdate = new Student(nameStudentUpdate, gt, birthStudentUpdate, addressStudentUpdate, phoneStudentUpdate, departmentStudentUpdate, schoolyearStudentUpdate);
+                Student studentUpdate = null;
+                try {
+                    studentUpdate = new Student(nameStudentUpdate, gt, birthStudentUpdate, addressStudentUpdate, phoneStudentUpdate, departmentStudentUpdate, schoolyearStudentUpdate);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 studentUpdate.setId(studentId);
                 if (database.update_student(studentUpdate) == -1)
-                    Toast.makeText(StudentUpdate.this, "Sửa thất bại!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentUpdate.this, "Sửa thất bại.", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(StudentUpdate.this, "Sửa thành công!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentUpdate.this, "Sửa thành công.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void doDuLieuLenEditText() {
         edtName.setText(student.getName());
-        edtBirth.setText(student.getBirth());
+        edtBirth.setText(spdf.format(student.getBirth()));
         edtAddress.setText(student.getAddress());
         edtPhone.setText(student.getPhone());
         edtDepartment.setText(student.getDepartment());
@@ -122,5 +136,22 @@ public class StudentUpdate extends AppCompatActivity {
         } catch (ParseException e) {
             return false;
         }
+    }
+    private boolean checkSchoolyear(String string) {
+        if (string.length() != 9)
+            return false;
+        if (string.charAt(4) != '-')
+            return false;
+        String nam1 = string.substring(0, 4);
+        String nam2 = string.substring(5, 9);
+        try {
+            int year1 = Integer.parseInt(nam1);
+            int year2 = Integer.parseInt(nam2);
+            if (year1 >= year2)
+                return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }

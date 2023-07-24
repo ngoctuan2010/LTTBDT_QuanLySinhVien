@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Student implements Serializable {
+    public static SimpleDateFormat spdf = new SimpleDateFormat("dd/MM/yyyy");
     private int id;
 
     public String getName() {
@@ -20,7 +21,16 @@ public class Student implements Serializable {
 
     private String name;
     private boolean gender;
-    private String birth;
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    private Date birth;
     private String address;
     private String phone;
     private String department;
@@ -29,10 +39,10 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(String name, boolean gender, String birth, String address, String phone, String department, String school_year) {
+    public Student(String name, boolean gender, String birth, String address, String phone, String department, String school_year) throws ParseException {
+        this.birth = spdf.parse(birth);
         this.name = name;
         this.gender = gender;
-        this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.department = department;
@@ -55,13 +65,6 @@ public class Student implements Serializable {
         this.gender = gender;
     }
 
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
 
     public String getAddress() {
         return address;
@@ -102,7 +105,7 @@ public class Student implements Serializable {
             gt = "Nam";
         else
             gt = "Nữ";
-        String chuoi = "Mã sinh viên: " + id + "\n" + "Tên sinh viên: " + name + "\n" + "Giới tính: " + gt + "\n" + "Ngày sinh: " + birth + "\n" + "Địa chỉ: " + address + "\n"
+        String chuoi = "Mã sinh viên: " + id + "\n" + "Tên sinh viên: " + name + "\n" + "Giới tính: " + gt + "\n" + "Ngày sinh: " + spdf.format(birth) + "\n" + "Địa chỉ: " + address + "\n"
                 + "Số điện thoại: " + phone + "\n" + "Khoa: " + department + "\n" + "Niên khóa: " + school_year + "\n";
         return chuoi;
     }

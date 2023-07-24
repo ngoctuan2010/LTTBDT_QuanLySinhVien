@@ -121,6 +121,8 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:textColorHint="@color/black"
+                android:hint="yyyy-yyyy"
                 android:id="@+id/edtShoolyear"
                 android:textColor="@color/black" />
         </TableRow>

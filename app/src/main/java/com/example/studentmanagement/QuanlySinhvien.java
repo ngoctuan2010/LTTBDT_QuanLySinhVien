@@ -1,6 +1,5 @@
 package com.example.studentmanagement;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +7,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,7 +27,6 @@ import com.example.service.QLSVDatabase;
 import com.example.service.StudentArrayAdapter;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -59,7 +56,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
         database = new QLSVDatabase(QuanlySinhvien.this);
         adapter = new ArrayAdapter<String>(QuanlySinhvien.this, android.R.layout.simple_spinner_dropdown_item, itemsSpinner);
         mspnProperties.setAdapter(adapter);
-        get_Full_List();
+        try {
+            get_Full_List();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         mspnProperties.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -72,7 +73,6 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                     case 2:
                     case 4:
                     case 6:
-                    case 7:
                         medtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
                         break;
                     case 5:
@@ -81,6 +81,10 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                     case 3:
                         medtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
                         medtSearch.setHint("dd/MM/yyyy");
+                        break;
+                    case 7:
+                        medtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
+                        medtSearch.setHint("yyyy-yyyy");
                         break;
                 }
             }
@@ -115,7 +119,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                         database.delete_student(student);
                     }
                 }
-                get_Full_List();
+                try {
+                    get_Full_List();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         mbtnSearch.setOnClickListener(new View.OnClickListener() {
@@ -128,11 +136,15 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập mã sinh viên.", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if (database.getStudentById(Integer.parseInt(string)) == null) {
-                            Toast.makeText(QuanlySinhvien.this, "Không tìm thấy sinh viên phù hợp.", Toast.LENGTH_SHORT).show();
-                            arrayListStudent.clear();
-                            studentArrayAdapter.notifyDataSetChanged();
-                            return;
+                        try {
+                            if (database.getStudentById(Integer.parseInt(string)) == null) {
+                                Toast.makeText(QuanlySinhvien.this, "Không tìm thấy sinh viên phù hợp.", Toast.LENGTH_SHORT).show();
+                                arrayListStudent.clear();
+                                studentArrayAdapter.notifyDataSetChanged();
+                                return;
+                            }
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
                         }
                         checkAndShow();
                         break;
@@ -142,7 +154,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_name(string));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_name(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 2:
@@ -156,7 +172,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 3:
@@ -165,7 +185,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_birth(string));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_birth(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 4:
@@ -174,7 +198,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_address(string));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_address(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 5:
@@ -183,7 +211,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get__list_students_by_phone(string));
+                        try {
+                            arrayListStudent.addAll(database.get__list_students_by_phone(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 6:
@@ -192,7 +224,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_department(string));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_department(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                     case 7:
@@ -201,7 +237,11 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                             return;
                         }
                         arrayListStudent.clear();
-                        arrayListStudent.addAll(database.get_list_students_by_schoolyear(string));
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_schoolyear(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         checkAndShow();
                         break;
                 }
@@ -214,65 +254,102 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (selectedSpinnerPosition == 5) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get__list_students_by_phone(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 0) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_id(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 3) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_birth(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 7) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_schoolyear(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 4) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_address(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 1) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_name(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 2) {
-                    String string = medtSearch.getText().toString().trim().toLowerCase();
-                    boolean gioiTinh;
-                    if (string.equals("nam"))
-                        gioiTinh = true;
-                    else if (string.equals("nu") || string.equals("nữ"))
-                        gioiTinh = false;
-                    else
-                        return;
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 6) {
-                    arrayListStudent.clear();
-                    arrayListStudent.addAll(database.get_list_students_by_department(medtSearch.getText().toString().trim().toLowerCase()));
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
+//                if (selectedSpinnerPosition == 5) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get__list_students_by_phone(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 0) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_id(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 3) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_birth(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 7) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_schoolyear(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 4) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_address(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 1) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_name(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 2) {
+//                    String string = medtSearch.getText().toString().trim().toLowerCase();
+//                    boolean gioiTinh;
+//                    if (string.equals("nam"))
+//                        gioiTinh = true;
+//                    else if (string.equals("nu") || string.equals("nữ"))
+//                        gioiTinh = false;
+//                    else
+//                        return;
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
+//                if (selectedSpinnerPosition == 6) {
+//                    arrayListStudent.clear();
+//                    try {
+//                        arrayListStudent.addAll(database.get_list_students_by_department(medtSearch.getText().toString().trim().toLowerCase()));
+//                    } catch (ParseException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    studentArrayAdapter.notifyDataSetChanged();
+//                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (medtSearch.getText().toString().trim().isEmpty())
-                    get_Full_List();
+                if (medtSearch.getText().toString().trim().isEmpty()) {
+                    try {
+                        get_Full_List();
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
 
-    public void get_Full_List() {
+    public void get_Full_List() throws ParseException {
         arrayListStudent = new ArrayList<>();
         studentArrayAdapter = new StudentArrayAdapter(QuanlySinhvien.this, R.layout.custom_layout_listview_student, arrayListStudent);
         mlvSV.setAdapter(studentArrayAdapter);
@@ -284,13 +361,21 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
     @Override
     protected void onResume() {
         super.onResume();
-        get_Full_List();
+        try {
+            get_Full_List();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        get_Full_List();
+        try {
+            get_Full_List();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showPopupMenu(View view, int position) {

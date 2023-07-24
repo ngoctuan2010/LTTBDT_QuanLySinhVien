@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pojo.Student;
 import com.example.service.QLSVDatabase;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class StudentAdding extends AppCompatActivity {
@@ -46,30 +48,40 @@ public class StudentAdding extends AppCompatActivity {
             public void onClick(View view) {
                 db = new QLSVDatabase(StudentAdding.this);
                 if (!checkInput()) {
-                    Toast.makeText(StudentAdding.this, "Vui lòng nhập đầy đủ thông tin!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentAdding.this, "Vui lòng nhập đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!checkPhone()) {
-                    Toast.makeText(StudentAdding.this, "Vui lòng nhập đúng thông tin số điện thoại!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentAdding.this, "Vui lòng nhập đúng thông tin số điện thoại.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
                     if (!checkBirth(edtBirth.getText().toString())) {
-                        Toast.makeText(StudentAdding.this, "Vui lòng nhập ngày sinh đúng định dạng!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentAdding.this, "Vui lòng nhập ngày sinh đúng định dạng(dd/MM/yyyy).", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
+                if(!checkSchoolyear(edtSchoolyear.getText().toString().trim()))
+                {
+                    Toast.makeText(StudentAdding.this, "Vui lòng nhập niên khóa đúng định dạng(yyyy-yyyy).", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 boolean gioiTinh = false;
                 if (rdgSex.getCheckedRadioButtonId() == rdMale.getId())
                     gioiTinh = true;
-                Student student = new Student(edtName.getText().toString(), gioiTinh, edtBirth.getText().toString(), edtAddress.getText().toString(), edtPhone.getText().toString(), edtDepartment.getText().toString(), edtSchoolyear.getText().toString());
+                Student student;
+                try {
+                    student = new Student(edtName.getText().toString(), gioiTinh, edtBirth.getText().toString(), edtAddress.getText().toString(), edtPhone.getText().toString(), edtDepartment.getText().toString(), edtSchoolyear.getText().toString());
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 long result = db.add_student(student);
                 if (result == -1)
-                    Toast.makeText(StudentAdding.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentAdding.this, "Thêm thất bại.", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(StudentAdding.this, "Thêm thành công!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentAdding.this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,5 +111,23 @@ public class StudentAdding extends AppCompatActivity {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    private boolean checkSchoolyear(String string) {
+        if (string.length() != 9)
+            return false;
+        if (string.charAt(4) != '-')
+            return false;
+        String nam1 = string.substring(0, 4);
+        String nam2 = string.substring(5, 9);
+        try {
+            int year1 = Integer.parseInt(nam1);
+            int year2 = Integer.parseInt(nam2);
+            if (year1 >= year2)
+                return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }

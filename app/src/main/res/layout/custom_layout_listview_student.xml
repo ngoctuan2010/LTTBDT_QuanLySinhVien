@@ -14,13 +14,12 @@
         app:srcCompat="@drawable/femalestudent" />
 
     <TextView
-
         android:id="@+id/txtItemStudent"
         android:layout_width="256dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="17dp" />
 
     <CheckBox
         android:id="@+id/chkitemStudent"
