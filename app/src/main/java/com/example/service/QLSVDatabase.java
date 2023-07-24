@@ -181,7 +181,7 @@ public class QLSVDatabase {
     }
 
     //lấy toàn bộ danh sách sinh viên
-    public ArrayList<Student> get_list_student() {
+    public ArrayList<Student> get_list_students() {
         ArrayList<Student> studentsList = new ArrayList<>();
         Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, null, null, null, null, DBHelper.STUDENT_ID);
         if (cursor != null) {
@@ -229,7 +229,7 @@ public class QLSVDatabase {
         };
 
         String selection = DBHelper.STUDENT_ID + " = ?";
-        String[] selectionArgs = { String.valueOf(studentId) };
+        String[] selectionArgs = {String.valueOf(studentId)};
 
         Cursor cursor = db.query(DBHelper.STUDENT_TABLE, columns, selection, selectionArgs, null, null, null);
 
@@ -262,5 +262,308 @@ public class QLSVDatabase {
 
         return student;
     }
+
+    // lấy danh sách sinh viên theo tên sinh viên
+    public ArrayList<Student> get_list_students_by_name(String name) {
+        ArrayList<Student> listStudent = new ArrayList<>();
+        String query = "SELECT * FROM " + DBHelper.STUDENT_TABLE + " WHERE " + DBHelper.STUDENT_NAME + " LIKE ?;";
+        String[] args = new String[]{"%" + name + "%"};
+        Cursor cursor = db.rawQuery(query, args);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String studentName = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+
+                    Student student = new Student(studentName, gender, birth, address, phone, department, schoolYear);
+                    student.setId(id);
+                    listStudent.add(student);
+                }
+            }
+        }
+        cursor.close();
+        return listStudent;
+    }
+
+    // lấy danh sách sinh viên theo giới tính sinh viên
+    public ArrayList<Student> get_list_students_by_gender(boolean gender) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        int genderValue = gender ? 1 : 0;
+
+        String selection = DBHelper.STUDENT_GENDER + " = ?";
+        String[] selectionArgs = {String.valueOf(genderValue)};
+
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, selection, selectionArgs, null, null, DBHelper.STUDENT_ID);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean studentGender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, studentGender, birth, address, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    // lấy danh sách sinh viên theo ngày sinh sinh viên
+    public ArrayList<Student> get_list_students_by_birth(String birth) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, DBHelper.STUDENT_BIRTH + " LIKE ?", new String[]{"%" + birth + "%"}, null, null, DBHelper.STUDENT_ID);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birthDate = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birthDate, address, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    // lấy danh sách sinh viên theo địa chỉ sinh viên
+    public ArrayList<Student> get_list_students_by_address(String address) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, DBHelper.STUDENT_ADDRESS + " LIKE ?", new String[]{"%" + address + "%"}, null, null, DBHelper.STUDENT_ID);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birthDate = cursor.getString(birthIndex);
+                    String addressrecive = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birthDate, addressrecive, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    // lấy danh sách sinh viên theo số điện thoại
+    public ArrayList<Student> get__list_students_by_phone(String phoneNumber) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        Cursor cursor = db.query(DBHelper.STUDENT_TABLE, null, DBHelper.STUDENT_PHONE + " LIKE ?", new String[]{"%" + phoneNumber + "%"}, null, null, DBHelper.STUDENT_ID);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birthDate = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birthDate, address, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    // lấy danh sách sinh viên theo khoa
+    public ArrayList<Student> get_list_students_by_department(String department) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        String query = "SELECT * FROM " + DBHelper.STUDENT_TABLE + " WHERE " + DBHelper.STUDENT_DEPARTMENT + " LIKE ?;";
+        String[] args = {"%" + department + "%"};
+
+        Cursor cursor = db.rawQuery(query, args);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String departmentName = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birth, address, phone, departmentName, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+
+    // lấy danh sách sinh viên theo niên khóa
+    public ArrayList<Student> get_list_students_by_schoolyear(String schoolYear) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        String query = "SELECT * FROM " + DBHelper.STUDENT_TABLE + " WHERE " + DBHelper.STUDENT_YEAR + " LIKE ?;";
+        String[] args = {"%" + schoolYear + "%"};
+
+        Cursor cursor = db.rawQuery(query, args);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String studentSchoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birth, address, phone, department, studentSchoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+    // lấy danh sách sinh viên theo mã sinh viên(các sinh viên có mã tương đối giống nhau)
+    public ArrayList<Student> get_list_students_by_id(String studentId) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        String query = "SELECT * FROM " + DBHelper.STUDENT_TABLE + " WHERE " + DBHelper.STUDENT_ID + " LIKE ?;";
+        String[] args = {"%" + studentId + "%"};
+
+        Cursor cursor = db.rawQuery(query, args);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(DBHelper.STUDENT_ID);
+                int nameIndex = cursor.getColumnIndex(DBHelper.STUDENT_NAME);
+                int genderIndex = cursor.getColumnIndex(DBHelper.STUDENT_GENDER);
+                int birthIndex = cursor.getColumnIndex(DBHelper.STUDENT_BIRTH);
+                int addressIndex = cursor.getColumnIndex(DBHelper.STUDENT_ADDRESS);
+                int phoneIndex = cursor.getColumnIndex(DBHelper.STUDENT_PHONE);
+                int departmentIndex = cursor.getColumnIndex(DBHelper.STUDENT_DEPARTMENT);
+                int schoolYearIndex = cursor.getColumnIndex(DBHelper.STUDENT_YEAR);
+
+                if (idIndex >= 0 && nameIndex >= 0 && genderIndex >= 0 && birthIndex >= 0 &&
+                        addressIndex >= 0 && phoneIndex >= 0 && departmentIndex >= 0 && schoolYearIndex >= 0) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    boolean gender = cursor.getInt(genderIndex) == 1;
+                    String birth = cursor.getString(birthIndex);
+                    String address = cursor.getString(addressIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    String department = cursor.getString(departmentIndex);
+                    String schoolYear = cursor.getString(schoolYearIndex);
+                    Student student = new Student(name, gender, birth, address, phone, department, schoolYear);
+                    student.setId(id);
+                    studentsList.add(student);
+                }
+            }
+            cursor.close();
+        }
+        return studentsList;
+    }
+
+
 }
 

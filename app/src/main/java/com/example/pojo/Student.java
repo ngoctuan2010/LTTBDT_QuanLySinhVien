@@ -102,7 +102,7 @@ public class Student implements Serializable {
             gt = "Nam";
         else
             gt = "Nữ";
-        String chuoi = "Mã: " + id + "\n" + "Tên: " + name + "\n" + "Giới tính: " + gt + "\n" + "Ngày sinh: " + birth + "\n" + "Địa chỉ: " + address + "\n"
+        String chuoi = "Mã sinh viên: " + id + "\n" + "Tên sinh viên: " + name + "\n" + "Giới tính: " + gt + "\n" + "Ngày sinh: " + birth + "\n" + "Địa chỉ: " + address + "\n"
                 + "Số điện thoại: " + phone + "\n" + "Khoa: " + department + "\n" + "Niên khóa: " + school_year + "\n";
         return chuoi;
     }
