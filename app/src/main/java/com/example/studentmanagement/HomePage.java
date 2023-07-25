@@ -29,6 +29,8 @@ public class HomePage extends AppCompatActivity {
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, QuanlySinhvien.class);
+                startActivity(intent);
                 Toast.makeText(HomePage.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
             }
         });
@@ -68,6 +70,8 @@ public class HomePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_profile) {
+            Intent intent = new Intent(HomePage.this, Profile.class);
+            startActivity(intent);
             Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
         }
 
