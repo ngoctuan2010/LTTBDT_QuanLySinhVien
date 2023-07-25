@@ -41,8 +41,8 @@ public class DBHelper extends SQLiteOpenHelper {
             + SUBJECT_ID + " integer primary key autoincrement, "
             + SUBJECT_NAME + " nvarchar(20), "
             + SUBJECT_CREDIT + " integer, "
-            + SUBJECT_MIDGRACEPERCENT + " double, "
-            + SUBJECT_FINALGRACEPERCENT + " double);";
+            + SUBJECT_MIDGRACEPERCENT + " float, "
+            + SUBJECT_FINALGRACEPERCENT + " float);";
 
     //LECTURE
     public static final String LECTURE_TABLE = "lecture";
@@ -103,12 +103,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SCORE_ID = "id";
     public static final String SCORE_STUDENT = "student_id";
     public static final String SCORE_CLASS = "class_id";
-    public static final String SCORE_POINT = "point";
+    public static final String SCORE_MIDGRACE = "midGrace";
+    public static final String SCORE_FINALGRACE = "finalGrace";
     public static final String CREATE_SCORE = "create table " + SCORE_TABLE + "("
             + SCORE_ID + " integer primary key autoincrement, "
             + SCORE_STUDENT + " integer, "
             + SCORE_CLASS + " integer, "
-            + SCORE_POINT + " float, "
+            + SCORE_MIDGRACE + " float, "
+            + SCORE_FINALGRACE + " float, "
             + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + "), "
             + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + "));";
 
