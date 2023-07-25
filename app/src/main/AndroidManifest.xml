@@ -13,24 +13,41 @@
         android:theme="@style/MyTheme"
         tools:targetApi="31">
         <activity
-            android:name=".Profile"
-            android:exported="false"
-            android:parentActivityName=".HomePage"/>
+            android:name=".infomation.ClassInfomation"
+            android:parentActivityName=".QuanlyLophoc"
+            android:exported="false" />
         <activity
-            android:name=".UserAdding"
+            android:name=".infomation.SubjectInfomation"
+            android:theme="@style/MyDialog"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:exported="false" />
+        <activity
+            android:name=".infomation.UserInformation"
+            android:theme="@style/MyDialog"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStatictical"
+            android:exported="false" />
+        <activity
+            android:name=".adding.UserAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyUser"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".SubjectAdding"
+            android:name=".adding.SubjectAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".ClassAdding"
+            android:name=".adding.ClassAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyLophoc"
-            android:theme="@style/MyDialog"/>
+            android:theme="@style/MyDialog" />
+            
+        <activity
+            android:name=".Profile"
+            android:exported="false"
+            android:parentActivityName=".HomePage"/>
 
         <activity
             android:name=".StudentAdding"
@@ -41,13 +58,6 @@
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
         <activity
-            android:name=".HomePage"
-            android:exported="false" />
-
-        <activity
-            android:name=".Register"
-            android:exported="false" />
-        <activity
             android:name=".QuanlySinhvien"
             android:exported="true">
             <intent-filter>
@@ -56,5 +66,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".LogIn"
+            android:exported="true" />
+        </activity>
+
     </application>
 </manifest>

@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Class implements Serializable {
     private int id;
+
+    private String name;
     private int subject_id;
     private int lecture;
     private int quantity;
@@ -12,8 +14,12 @@ public class Class implements Serializable {
     private String started;
 
 
-    public Class(int id, int subject_id, int lecture, int quantity, String year, String started) {
+    public Class() {
+    }
+
+    public Class(int id, String name, int subject_id, int lecture, int quantity, String year, String started) {
         this.id = id;
+        this.name = name;
         this.subject_id = subject_id;
         this.lecture = lecture;
         this.quantity = quantity;
@@ -67,5 +73,13 @@ public class Class implements Serializable {
 
     public void setStarted(String started) {
         this.started = started;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
