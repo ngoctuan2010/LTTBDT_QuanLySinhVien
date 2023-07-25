@@ -168,7 +168,7 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                         else if (string.equals("nu") || string.equals("nữ"))
                             gioiTinh = false;
                         else {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập đúng giá trị giới tính(Nam hoặc Nữ).", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập đúng giới tính(Nam hoặc Nữ).", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         arrayListStudent.clear();
@@ -254,86 +254,86 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (selectedSpinnerPosition == 5) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get__list_students_by_phone(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 0) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_id(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 3) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_birth(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 7) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_schoolyear(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 4) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_address(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 1) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_name(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 2) {
-//                    String string = medtSearch.getText().toString().trim().toLowerCase();
-//                    boolean gioiTinh;
-//                    if (string.equals("nam"))
-//                        gioiTinh = true;
-//                    else if (string.equals("nu") || string.equals("nữ"))
-//                        gioiTinh = false;
-//                    else
-//                        return;
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
-//                if (selectedSpinnerPosition == 6) {
-//                    arrayListStudent.clear();
-//                    try {
-//                        arrayListStudent.addAll(database.get_list_students_by_department(medtSearch.getText().toString().trim().toLowerCase()));
-//                    } catch (ParseException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    studentArrayAdapter.notifyDataSetChanged();
-//                }
+                if (selectedSpinnerPosition == 5) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get__list_students_by_phone(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 0) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_id(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 3) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_birth(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 7) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_schoolyear(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 4) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_address(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 1) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_name(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 2) {
+                    String string = medtSearch.getText().toString().trim().toLowerCase();
+                    boolean gioiTinh;
+                    if (string.equals("nam"))
+                        gioiTinh = true;
+                    else if (string.equals("nu") || string.equals("nữ"))
+                        gioiTinh = false;
+                    else
+                        return;
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
+                if (selectedSpinnerPosition == 6) {
+                    arrayListStudent.clear();
+                    try {
+                        arrayListStudent.addAll(database.get_list_students_by_department(medtSearch.getText().toString().trim().toLowerCase()));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    studentArrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

@@ -39,7 +39,7 @@ public class StudentArrayAdapter extends ArrayAdapter<Student> {
             ImageView img = convertView.findViewById(R.id.imgItemStudent);
             CheckBox chk = convertView.findViewById(R.id.chkitemStudent);
             Student student = arr.get(position);
-            txt.setText(student.getId() + ". " + student.getName());
+            txt.setText(student.getId() + " - " + student.getName());
             if (student.isGender())
                 img.setImageResource(R.drawable.malestudent);
             else
