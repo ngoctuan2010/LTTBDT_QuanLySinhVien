@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,9 +23,10 @@ import com.example.pojo.Class;
 import com.example.service.ClassArrayAdapter;
 import com.example.service.DateFormatter;
 import com.example.service.QLSVDatabase;
+import com.example.studentmanagement.adding.ClassAdding;
+import com.example.studentmanagement.infomation.ClassInfomation;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class QuanlyLophoc extends AppCompatActivity {
@@ -41,10 +43,10 @@ public class QuanlyLophoc extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_lophoc);
 
         db = new QLSVDatabase(this);
-
         btnAdd = (Button) findViewById(R.id.btnAddClass);
         btnFilter = (Button) findViewById(R.id.btnFilterClass);
 
@@ -73,6 +75,12 @@ public class QuanlyLophoc extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         int id = item.getItemId();
                         if(id == R.id.object_show){
+                            Intent intent = new Intent(QuanlyLophoc.this, ClassInfomation.class);
+                            Bundle bundle = new Bundle();
+                            Serializable pack = (Serializable) classList.get(position);
+                            bundle.putSerializable("class", pack);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                             return true;
                         }else if(id == R.id.object_edit){
                             Intent intent = new Intent(QuanlyLophoc.this, ClassAdding.class);
@@ -83,10 +91,14 @@ public class QuanlyLophoc extends AppCompatActivity {
                             startActivity(intent);
                             return true;
                         }else if(id == R.id.object_delete){
+                            Cursor c = db.getListSubjectById(classList.get(position).getSubject_id());
+                            c.moveToFirst();
+                            String subject_name = c.getString(1);
+
                             AlertDialog.Builder builder = new AlertDialog.Builder(QuanlyLophoc.this);
                             builder.setTitle("Xoá người dùng");
-                            builder.setMessage("Bạn có chắc chắn muốn xoá lớp học này: \n" +
-                                    classList.get(position).getName() + " - " + classList.get(position).getSubject_id());
+                            builder.setMessage("Bạn có chắc chắn muốn xoá lớp học này: \n> " +
+                                    classList.get(position).getName() + " - " + subject_name);
                             builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -145,6 +157,13 @@ public class QuanlyLophoc extends AppCompatActivity {
         super.onResume();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     public void initData(Cursor c) {
         DateFormatter df = new DateFormatter("dd/MM/yyyy");
         c.moveToPosition(-1);
@@ -162,4 +181,5 @@ public class QuanlyLophoc extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         c.close();
     }
+
 }

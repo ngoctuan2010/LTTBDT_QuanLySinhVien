@@ -26,6 +26,12 @@ public class Lecture implements Serializable {
         this.department = department;
     }
 
+    public Lecture(int id, String first_name, String last_name) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
     public int getId() {
         return id;
     }

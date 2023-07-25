@@ -116,6 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                             + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + "), "
                                             + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + "));";
 
+
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, 1);
     }

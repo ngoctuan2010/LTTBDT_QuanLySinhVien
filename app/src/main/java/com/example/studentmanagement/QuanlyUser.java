@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 import com.example.service.UserArrrayAdapter;
+import com.example.studentmanagement.adding.UserAdding;
+import com.example.studentmanagement.infomation.UserInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class QuanlyUser extends AppCompatActivity {
 
     QLSVDatabase db;
 
-    String[] _role = {"Quản trị viên cấp cao", "Quản trị viên", "Giảng viên"};
+    String[] _role = {"Quản trị viên", "Giảng viên"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class QuanlyUser extends AppCompatActivity {
 
 
         db = new QLSVDatabase(this);
-
+        db.init();
         edtUserSearch = (EditText) findViewById(R.id.edtSearchUser);
         btnUserFilter = (Button) findViewById(R.id.btnFilterUser);
         btnUserAdd = (Button) findViewById(R.id.btnAddUser);
@@ -134,6 +136,8 @@ public class QuanlyUser extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         int choice = item.getItemId();
                         if(choice == R.id.object_show){
+                            Intent intent = new Intent(QuanlyUser.this, UserInformation.class);
+                            startActivity(intent);
                             return true;
                         }else if(choice == R.id.object_edit){
                             Intent intent = new Intent(QuanlyUser.this, UserAdding.class);

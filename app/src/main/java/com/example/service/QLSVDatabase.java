@@ -10,6 +10,7 @@ import com.example.pojo.Subject;
 import com.example.pojo.User;
 
 public class QLSVDatabase {
+
     SQLiteDatabase db;
     DBHelper helper;
 
@@ -72,6 +73,30 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
+    public Cursor getUserByUsername(String username){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.ACCOUNT_TABLE +
+                " WHERE " + DBHelper.ACCOUNT_USERNAME + " = ?;";
+
+        String[] arg = {username};
+        return db.rawQuery(query, arg);
+    }
+
+    public int countUsers(){
+        String query = "SELECT COUNT(*) " +
+                    "FROM " + DBHelper.ACCOUNT_TABLE + ";";
+        return db.rawQuery(query, null).getInt(0);
+    }
+
+    public int countUsersByRole(int role){
+        String _role = Integer.toString(role);
+        String query = "SELECT COUNT(*) " +
+                        "FROM " + DBHelper.ACCOUNT_TABLE +
+                        " WHERE " + DBHelper.ACCOUNT_ROLE + " = ?;";
+        String[] args = {_role};
+        return db.rawQuery(query, args).getInt(0);
+    }
+
 
     //Subject
     public long add_subject(Subject subject){
@@ -128,6 +153,13 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
+    public int countSubject(){
+        String query = "SELECT COUNT(*) " +
+                    "FROM " + DBHelper.SUBJECT_TABLE + ";";
+        return db.rawQuery(query, null).getInt(0);
+
+    }
+
     //Class
     public long add_class(Class cl){
         ContentValues values = new ContentValues();
@@ -144,6 +176,7 @@ public class QLSVDatabase {
     public int update_class(Class cl){
         ContentValues values = new ContentValues();
         values.put(DBHelper.CLASS_ID, cl.getId());
+        values.put(DBHelper.CLASS_NAME, cl.getName());
         values.put(DBHelper.CLASS_LECTURE, cl.getLecture());
         values.put(DBHelper.CLASS_SUBJECT, cl.getSubject_id());
         values.put(DBHelper.CLASS_QUANTITY, cl.getQuantity());
@@ -175,6 +208,7 @@ public class QLSVDatabase {
                     "  JOIN " + DBHelper.LECTURE_TABLE + " as l " +
                     "ON c." + DBHelper.CLASS_LECTURE + " = l." + DBHelper.LECTURE_ID +
                     " WHERE c." + DBHelper.CLASS_ID + " = ? OR " +
+                            "c." + DBHelper.CLASS_NAME + " like ? OR " +
                             "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
                             "l." + DBHelper.LECTURE_FNAME + " = ? OR " +
                             "l." + DBHelper.LECTURE_LNAME + " = ?;";
@@ -183,7 +217,74 @@ public class QLSVDatabase {
         return db.rawQuery(query, args);
     }
 
-    //...
+    public int countClasses() {
+        String query = "SELECT COUNT(*) " +
+                "FROM " + DBHelper.CLASS_TABLE + ";";
+        return db.rawQuery(query, null).getInt(0);
+    }
 
+    //
+    public int countLecture(){
+        String query = "SELECT COUNT(*) " +
+                "FROM " + DBHelper.LECTURE_TABLE + ";";
+        return db.rawQuery(query, null).getInt(0);
+    }
 
+    public Cursor getListLecture(){
+        return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, null);
+    }
+
+    public Cursor getLectureById(int lecture_id){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.LECTURE_TABLE +
+                " WHERE " + DBHelper.LECTURE_ID + " = ?;";
+        String[] arg = {Integer.toString(lecture_id)};
+        return db.rawQuery(query, arg);
+    }
+
+    public Cursor getListQuantityLectureByDepartment(){
+        String query = "SELECT COUNT(" + DBHelper.LECTURE_DEPARTMENT + ") " +
+                        "FROM " + DBHelper.LECTURE_TABLE +
+                        " GROUP BY " + DBHelper.LECTURE_DEPARTMENT + ";";
+
+        return db.rawQuery(query, null);
+    }
+
+    public void init(){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.LECTURE_ID, 1);
+        values.put(DBHelper.LECTURE_FNAME, "TRần");
+        values.put(DBHelper.LECTURE_LNAME, "Ngọc Tuấn");
+//        String[] args = {"1", "Trần", "Ngọc Tuấn", "1", "20/10/2002", "TP. Phan Thiết", "0388005520", "CNTT"};
+        ContentValues values1 = new ContentValues();
+        values1.put(DBHelper.SUBJECT_NAME, "Cơ sở dữ liệu");
+        values1.put(DBHelper.SUBJECT_CREDIT, 15);
+
+        ContentValues values2 = new ContentValues();
+        values1.put(DBHelper.SUBJECT_NAME, "Cơ sở");
+        values1.put(DBHelper.SUBJECT_CREDIT, 15);
+
+        db.insert(DBHelper.LECTURE_TABLE, null, values);
+        db.insert(DBHelper.SUBJECT_TABLE, null, values1);
+        db.insert(DBHelper.SUBJECT_TABLE, null, values2);
+    }
+
+    public int countStudents(){
+        String query = "SELECT COUNT(*) " +
+                "FROM " + DBHelper.SUBJECT_TABLE + ";";
+        return db.rawQuery(query, null).getInt(0);
+    }
+
+    public Cursor getListStudentByClass(int class_id){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.SCORE_TABLE + " as l " +
+                "  JOIN " + DBHelper.CLASS_TABLE + " as c " +
+                "ON l." + DBHelper.SCORE_CLASS + " = c." + DBHelper.CLASS_ID +
+                "  JOIN " + DBHelper.STUDENT_TABLE + " as s " +
+                "ON l." + DBHelper.SCORE_STUDENT + " = s." + DBHelper.STUDENT_ID +
+                " WHERE " + DBHelper.CLASS_ID + " = ?;";
+
+        String[] arg = {Integer.toString(class_id)};
+        return db.rawQuery(query, arg);
+    }
 }

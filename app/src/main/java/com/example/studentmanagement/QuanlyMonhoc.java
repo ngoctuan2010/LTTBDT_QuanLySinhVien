@@ -11,7 +11,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,9 +21,10 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.pojo.Subject;
-import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 import com.example.service.SubjectArrayAdapter;
+import com.example.studentmanagement.adding.SubjectAdding;
+import com.example.studentmanagement.infomation.SubjectInfomation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,13 +102,17 @@ public class QuanlyMonhoc extends AppCompatActivity {
                                     dialog.cancel();
                                 }
                             });
-
                             builder.create();
                             builder.show();
-
-
-
-
+                            return true;
+                        }else if(id == R.id.object_show){
+                            Intent intent = new Intent(QuanlyMonhoc.this, SubjectInfomation.class);
+                            Bundle bundle = new Bundle();
+                            Serializable pack = (Serializable) subjectList.get(position);
+                            bundle.putSerializable("Subject", pack);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            return true;
                         }
                         return false;
                     }
@@ -141,8 +145,6 @@ public class QuanlyMonhoc extends AppCompatActivity {
 
 
         String[] filter1 = {"A - Z", "Z - A"};
-        CharSequence[] filter2 = {"A", "B"};
-        boolean[] boolFilter = {true, false};
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.service;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,14 @@ public class ClassArrayAdapter extends ArrayAdapter {
     int layoutID;
     List<Class> listClass = null;
 
+    QLSVDatabase db;
+
     public ClassArrayAdapter(Activity context, int layoutID, List<Class> listClass) {
         super(context, layoutID, listClass);
         this.context = context;
         this.layoutID = layoutID;
         this.listClass = listClass;
+        db = new QLSVDatabase(context);
     }
 
     @NonNull
@@ -33,6 +37,9 @@ public class ClassArrayAdapter extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(R.layout.listview_class_item, null);
         if(listClass.size() > 0 && position >= 0){
+
+
+
             TextView tvSubject = (TextView) convertView.findViewById(R.id.tvClassSubject);
             TextView tvClass = (TextView) convertView.findViewById(R.id.tvClassName);
             TextView tvQuantity = (TextView) convertView.findViewById(R.id.tvClassQuantity);
@@ -42,10 +49,14 @@ public class ClassArrayAdapter extends ArrayAdapter {
 
             Class cl = listClass.get(position);
 
-            tvSubject.setText(Integer.toString(cl.getSubject_id()));
+            Cursor cur = db.getListSubjectById(cl.getSubject_id());
+            cur.moveToFirst();
+            tvSubject.setText(cur.getString(1));
+
+            tvLecture.setText("GV: " + Integer.toString(cl.getLecture()));
+
             tvClass.setText("[" + cl.getId() + "] " + cl.getName());
             tvQuantity.setText("SL: " +Integer.toString(cl.getQuantity()));
-            tvLecture.setText("GV: " + Integer.toString(cl.getLecture()));
             tvDate.setText("Thời gian bắt đầu: " + cl.getStarted());
             tvYear.setText("Khoá: " + cl.getYear());
 

@@ -6,4 +6,5 @@
     <string name="admin_subject">Quản lý môn học</string>
     <string name="admin_class">Quản lý lớp</string>
     <string name="profile">Trang cá nhân</string>
+    <string name="inputRequired">Vui lòng nhập dữ liệu</string>
 </resources>
