@@ -1,13 +1,36 @@
 package com.example.pojo;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Student implements Serializable {
+    public static SimpleDateFormat spdf = new SimpleDateFormat("dd/MM/yyyy");
     private int id;
-    private String first_name;
-    private String last_name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
     private boolean gender;
-    private String birth;
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    private Date birth;
     private String address;
     private String phone;
     private String department;
@@ -16,12 +39,10 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(int id, String first_name, String last_name, boolean gender, String birth, String address, String phone, String department, String school_year) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Student(String name, boolean gender, String birth, String address, String phone, String department, String school_year) throws ParseException {
+        this.birth = spdf.parse(birth);
+        this.name = name;
         this.gender = gender;
-        this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.department = department;
@@ -36,22 +57,6 @@ public class Student implements Serializable {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
     public boolean isGender() {
         return gender;
     }
@@ -60,13 +65,6 @@ public class Student implements Serializable {
         this.gender = gender;
     }
 
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
 
     public String getAddress() {
         return address;
@@ -98,5 +96,17 @@ public class Student implements Serializable {
 
     public void setSchool_year(String school_year) {
         this.school_year = school_year;
+    }
+
+    @Override
+    public String toString() {
+        String gt;
+        if (gender)
+            gt = "Nam";
+        else
+            gt = "Nữ";
+        String chuoi = "Mã sinh viên: " + id + "\n" + "Tên sinh viên: " + name + "\n" + "Giới tính: " + gt + "\n" + "Ngày sinh: " + spdf.format(birth) + "\n" + "Địa chỉ: " + address + "\n"
+                + "Số điện thoại: " + phone + "\n" + "Khoa: " + department + "\n" + "Niên khóa: " + school_year + "\n";
+        return chuoi;
     }
 }

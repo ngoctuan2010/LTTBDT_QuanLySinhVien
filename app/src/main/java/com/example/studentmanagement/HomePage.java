@@ -29,6 +29,8 @@ public class HomePage extends AppCompatActivity {
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, QuanlySinhvien.class);
+                startActivity(intent);
                 Toast.makeText(HomePage.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
             }
         });

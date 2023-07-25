@@ -30,16 +30,13 @@ public class UserAdding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_adding);
-
         db = new QLSVDatabase(this);
-
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
         edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
         edtPassword = (EditText) findViewById(R.id.edtUserAddingPassword);
         edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
-
 
 
         ArrayAdapter roleAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, role);
@@ -49,8 +46,7 @@ public class UserAdding extends AppCompatActivity {
         edtLecture.setAdapter(lectureAdapter);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null)
-        {
+        if (bundle != null) {
             btnAdd.setVisibility(View.GONE);
             edtLecture.setEnabled(false);
 
@@ -75,23 +71,20 @@ public class UserAdding extends AppCompatActivity {
                     onBackPressed();
                 }
             });
-        }
-        else
-        {
+        } else {
             btnUpdate.setVisibility(View.GONE);
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String username = edtUsername.getText().toString();
                     String password = edtPassword.getText().toString();
-int lecture_id = Integer.parseInt(edtLecture.getText().toString());
-int role = spRole.getSelectedItemPosition();
+                    int lecture_id = Integer.parseInt(edtLecture.getText().toString());
+                    int role = spRole.getSelectedItemPosition();
                     User user = new User(10, username, password, role, lecture_id);
                     db.add_user(user);
                 }
             });
         }
-
 
 
     }

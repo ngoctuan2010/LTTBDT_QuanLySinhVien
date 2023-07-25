@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightBlue"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm sinh viên"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:text="Họ tên: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="373dp"
+                android:textColor="@color/black" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Giới tính: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <RadioGroup
+                android:id="@+id/rdgSex"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdbMale"
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Nam"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <RadioButton
+                    android:id="@+id/rdbFemale"
+                    android:layout_width="171dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nữ"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Ngày sinh: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtBirth"
+                android:hint="dd/MM/yyyy"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Địa chỉ: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtAddress"
+                android:textColor="@color/black" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="SĐT: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtPhone"
+                android:inputType="phone"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Khoa: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtDepartment"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Niên khóa: "
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtShoolyear"
+                android:hint="yyyy-yyyy"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btnAddingStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/buttonBlue"
+        android:text="Thêm" />
+
+</LinearLayout>
