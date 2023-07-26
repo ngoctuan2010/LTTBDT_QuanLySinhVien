@@ -84,8 +84,8 @@ public class UserAdding extends AppCompatActivity {
                 public void onClick(View v) {
                     String username = edtUsername.getText().toString();
                     String password = edtPassword.getText().toString();
-int lecture_id = Integer.parseInt(edtLecture.getText().toString());
-int role = spRole.getSelectedItemPosition();
+                    int lecture_id = Integer.parseInt(edtLecture.getText().toString());
+                    int role = spRole.getSelectedItemPosition();
                     User user = new User(10, username, password, role, lecture_id);
                     db.add_user(user);
                 }

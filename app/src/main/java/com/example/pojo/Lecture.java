@@ -19,6 +19,7 @@ public class Lecture implements Serializable {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
+        //True la nu, false la nam
         this.gender = gender;
         this.birth = birth;
         this.address = address;

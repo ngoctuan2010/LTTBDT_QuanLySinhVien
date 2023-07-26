@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String username;
     private String password;
 
+    //1 la ADMIN, 2 la GIANGVIEN
     private int role;
     private int lecture;
 

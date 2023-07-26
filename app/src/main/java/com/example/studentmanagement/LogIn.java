@@ -3,6 +3,7 @@ package com.example.studentmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pojo.Lecture;
+import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 
 public class LogIn extends AppCompatActivity {
@@ -25,7 +28,11 @@ public class LogIn extends AppCompatActivity {
 
         setContentView(R.layout.activity_log_in);
         getSupportActionBar().hide();
+
         db = new QLSVDatabase(this);
+        db.add_lecture(new Lecture(2051052089, "Trong", "Nghia", false, "03/07/2002", "TP.HCM", "0636236224", "CNTT"));
+        db.add_user(new User(1, "admin", "123", 1, 2051052089));
+
         medtUsername = (EditText) findViewById(R.id.edtMaGV);
         medtPassword = (EditText) findViewById(R.id.edtPassword);
 
@@ -37,9 +44,11 @@ public class LogIn extends AppCompatActivity {
         mbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (medtUsername.getText().toString().equals("admin") && medtPassword.getText().toString().equals("123")) {
-                    Toast.makeText(LogIn.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LogIn.this, HomePage.class);
+                if (logIn() != -1) {
+                    Intent intent = new Intent(LogIn.this, HomePageAdmin.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("idUser", logIn());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
                 else {
@@ -57,5 +66,13 @@ public class LogIn extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private int logIn() {
+        Cursor cursor = db.checkLogin(medtUsername.getText().toString(), medtPassword.getText().toString());
+        if (cursor.getCount() > 0) {
+            return cursor.getInt(0);
+        }
+        else {return -1;}
     }
 }

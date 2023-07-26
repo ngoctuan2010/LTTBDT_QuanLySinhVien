@@ -3,6 +3,8 @@ package com.example.studentmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,9 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pojo.Lecture;
+import com.example.pojo.User;
+import com.example.service.QLSVDatabase;
+
 public class Register extends AppCompatActivity {
     EditText medtMaGV, medtRegisterUserName, medtRegisterPasswordConfirm, medtRegisterPassword;
     Button mbtnRegister, mbtnSwitchLogin, mbtnRegisterForgotPassword;
+
+    QLSVDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +39,13 @@ public class Register extends AppCompatActivity {
         mbtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(medtMaGV.getText().toString())) {
-                    Toast.makeText(Register.this, "Bạn phải nhập mã giảng viên", Toast.LENGTH_SHORT).show();
-                    medtMaGV.requestFocus();
-                    return;
+                if(equalToLectureId()){
+                    User user = new User(1, medtRegisterUserName.getText().toString(), medtRegisterPassword.getText().toString(), 1, Integer.parseInt(medtMaGV.getText().toString()));
+                    db.add_user(user);
+                    Toast.makeText(Register.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                 }
-                if (TextUtils.isEmpty(medtRegisterUserName.getText().toString())) {
-                    Toast.makeText(Register.this, "Bạn phải nhập username", Toast.LENGTH_SHORT).show();
-                    medtRegisterUserName.requestFocus();
-                    return;
-                }
-                if (TextUtils.isEmpty(medtRegisterPassword.getText().toString())) {
-                    Toast.makeText(Register.this, "Bạn phải nhập password", Toast.LENGTH_SHORT).show();
-                    medtRegisterPassword.requestFocus();
-                    return;
-                }
-                if (!medtRegisterPasswordConfirm.getText().toString().equals(medtRegisterPassword.getText().toString())) {
-                    Toast.makeText(Register.this, "Mật khẩu xác nhận không khớp với mật khẩu của bạn", Toast.LENGTH_SHORT).show();
-                    medtRegisterPasswordConfirm.selectAll();
-                    medtRegisterPasswordConfirm.requestFocus();
+                else {
+                    Toast.makeText(Register.this, "Mã giảng viên không đúng", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -61,5 +57,15 @@ public class Register extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public boolean equalToLectureId() {
+        Cursor c = db.getLectureById(Integer.parseInt(medtMaGV.getText().toString().trim()));
+        if(c.getCount() > 0)
+        {
+            return true;
+        }else{
+            return false;
+        }
     }
 }

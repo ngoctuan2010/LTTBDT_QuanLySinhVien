@@ -1,45 +1,32 @@
 package com.example.studentmanagement;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pojo.Lecture;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 import com.example.service.UserArrrayAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class QuanlyUser extends AppCompatActivity {
 
@@ -248,7 +235,7 @@ public class QuanlyUser extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         userList.clear();
-        Cursor c = db.get_list();
+        Cursor c = db.getListUser();
         initUserList(c);
     }
 
