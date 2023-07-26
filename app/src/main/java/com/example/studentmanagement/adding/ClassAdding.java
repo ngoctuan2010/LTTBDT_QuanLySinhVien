@@ -33,6 +33,8 @@ public class ClassAdding extends AppCompatActivity {
 
     AutoCompleteTextView actvSubject, actvLecture;
     Button btnAdd, btnEdit;
+
+    TextView tvTitle;
     ImageButton imgCalendar;
     QLSVDatabase db;
 
@@ -55,6 +57,8 @@ public class ClassAdding extends AppCompatActivity {
 
         btnAdd = (Button) findViewById(R.id.btnClassAdd);
         btnEdit = (Button) findViewById(R.id.btnClassEdit);
+
+        tvTitle = (TextView) findViewById(R.id.tvTitleClassDialog);
 
         imgCalendar = (ImageButton) findViewById(R.id.imgCalendar);
 
@@ -127,25 +131,33 @@ public class ClassAdding extends AppCompatActivity {
             }
         });
 
-
-
-
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-
             btnAdd.setVisibility(View.GONE);
+            tvTitle.setText("Sửa thông tin lớp học");
+
             Class _class = (Class) bundle.getSerializable("class");
             edtName.setText(_class.getName());
 
             Cursor c = db.getListSubjectById(_class.getSubject_id());
-            c.moveToFirst();
-            String name = c.getString(1);
+            Toast.makeText(ClassAdding.this, Integer.toString(_class.getSubject_id()),Toast.LENGTH_SHORT).show();
+            String name = "";
+            if(c.getCount() > 0)
+            {
+                c.moveToFirst();
+                name = c.getString(1);
+            }
+
             actvSubject.setText(name);
             subject_id = _class.getSubject_id();
 
             c = db.getLectureById(_class.getLecture());
-            c.moveToFirst();
-            String lecture = c.getString(1) + " " + c.getString(2) + " [" + c.getString(0) + "]";
+            String lecture = "";
+            if(c.getCount() > 0){
+                c.moveToFirst();
+                lecture = c.getString(1) + " [" + c.getString(0) + "]";
+            }
+
             actvLecture.setText(lecture);
             lecture_id = _class.getLecture();
 
@@ -246,9 +258,8 @@ public class ClassAdding extends AppCompatActivity {
         c.moveToPosition(-1);
         while(c.moveToNext()){
             int id = c.getInt(0);
-            String fname = c.getString(1);
-            String lname = c.getString(2);
-            Lecture lecture = new Lecture(id, fname, lname);
+            String name = c.getString(1);
+            Lecture lecture = new Lecture(id, name);
             list.add(lecture);
         }
         c.close();

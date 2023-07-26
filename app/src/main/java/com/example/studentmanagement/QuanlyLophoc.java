@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 
 import com.example.pojo.Class;
+import com.example.pojo.Lecture;
 import com.example.service.ClassArrayAdapter;
 import com.example.service.DateFormatter;
 import com.example.service.QLSVDatabase;
@@ -46,7 +47,9 @@ public class QuanlyLophoc extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_lophoc);
 
+
         db = new QLSVDatabase(this);
+//        db.insert_lecture();
         btnAdd = (Button) findViewById(R.id.btnAddClass);
         btnFilter = (Button) findViewById(R.id.btnFilterClass);
 
@@ -74,7 +77,7 @@ public class QuanlyLophoc extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int id = item.getItemId();
-                        if(id == R.id.object_show){
+                        if(id == R.id.object_show) {
                             Intent intent = new Intent(QuanlyLophoc.this, ClassInfomation.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) classList.get(position);
@@ -82,7 +85,8 @@ public class QuanlyLophoc extends AppCompatActivity {
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
-                        }else if(id == R.id.object_edit){
+                        }
+                        else if(id == R.id.object_edit) {
                             Intent intent = new Intent(QuanlyLophoc.this, ClassAdding.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) classList.get(position);
@@ -90,7 +94,8 @@ public class QuanlyLophoc extends AppCompatActivity {
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
-                        }else if(id == R.id.object_delete){
+                        }
+                        else if(id == R.id.object_delete){
                             Cursor c = db.getListSubjectById(classList.get(position).getSubject_id());
                             c.moveToFirst();
                             String subject_name = c.getString(1);

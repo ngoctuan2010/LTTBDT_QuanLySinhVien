@@ -111,6 +111,8 @@ public class QLSVDatabase {
         ContentValues values = new ContentValues();
         values.put(DBHelper.SUBJECT_NAME, subject.getName());
         values.put(DBHelper.SUBJECT_CREDIT, subject.getCredit());
+        values.put(DBHelper.SUBJECT_MIDGRACEPERCENT, subject.getMidGracePercent());
+        values.put(DBHelper.SUBJECT_FINALGRACEPERCENT, subject.getFinalGracePercent());
 
         return db.insert(DBHelper.SUBJECT_TABLE, null, values);
     }
@@ -120,6 +122,8 @@ public class QLSVDatabase {
         values.put(DBHelper.SUBJECT_ID, subject.getId());
         values.put(DBHelper.SUBJECT_NAME, subject.getName());
         values.put(DBHelper.SUBJECT_CREDIT, subject.getCredit());
+        values.put(DBHelper.SUBJECT_MIDGRACEPERCENT, subject.getMidGracePercent());
+        values.put(DBHelper.SUBJECT_FINALGRACEPERCENT, subject.getFinalGracePercent());
 
         String clause = DBHelper.SUBJECT_ID + " = ?";
         String[] args = {Integer.toString(subject.getId())};
@@ -131,6 +135,7 @@ public class QLSVDatabase {
         String clause = DBHelper.SUBJECT_ID + " = ?";
         String[] args = {Integer.toString(subject_id)};
 
+        db.setForeignKeyConstraintsEnabled(true);
         return db.delete(DBHelper.SUBJECT_TABLE, clause, args);
     }
 
@@ -208,6 +213,43 @@ public class QLSVDatabase {
         return db.query(DBHelper.CLASS_TABLE, null, null, null, null, null, null);
     }
 
+    public long add_student_to_class(int student_id, int class_id){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.SCORE_STUDENT, student_id);
+        values.put(DBHelper.SCORE_CLASS, class_id);
+
+        return db.insert(DBHelper.SCORE_TABLE, null, values);
+    }
+
+    public long delete_student_from_class(int student_id, int class_id){
+        String clause = DBHelper.SCORE_STUDENT + " = ? AND " + DBHelper.SCORE_CLASS + " = ?";
+        String[] args = {Integer.toString(student_id), Integer.toString(class_id)};
+        return db.delete(DBHelper.SCORE_TABLE, clause, args);
+    }
+
+    public boolean is_student_in_class(int student_id, int  class_id){
+        String query = "SELECT * " +
+                        " FROM " + DBHelper.SCORE_TABLE +
+                        " WHERE " + DBHelper.SCORE_STUDENT + " = ? AND " + DBHelper.SCORE_CLASS + " = ?";
+
+        String[] args = {Integer.toString(student_id), Integer.toString(class_id)};
+        Cursor c = db.rawQuery(query, args);
+        return c.getCount() > 0;
+    }
+
+    public Cursor find_student_in_class_by(String param, int class_id) {
+        String query = "SELECT * " +
+                " FROM " + DBHelper.STUDENT_TABLE +
+                " WHERE (" + DBHelper.STUDENT_ID + " = ? OR " + DBHelper.STUDENT_NAME + " like ?) AND " +
+                DBHelper.STUDENT_ID + " in (SELECT " + DBHelper.SCORE_STUDENT +
+                                            " FROM " + DBHelper.SCORE_TABLE +
+                                            " WHERE " + DBHelper.SCORE_CLASS + " = ?)";
+
+        String[]  args = {param, "%"+param+"%",Integer.toString(class_id)};
+
+        return db.rawQuery(query,args);
+    }
+
     public int countLecture(){
         String query = "SELECT COUNT(*) " +
                 "FROM " + DBHelper.LECTURE_TABLE + ";";
@@ -217,7 +259,12 @@ public class QLSVDatabase {
     public Cursor getListLecture(){
         return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, null);
     }
+    public long insert_lecture(){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.LECTURE_NAME, "Trần Ngọc Tú Ân");
 
+        return db.insert(DBHelper.LECTURE_TABLE, null, values);
+    }
     public Cursor getLectureById(int lecture_id){
         String query = "SELECT * " +
                 "FROM " + DBHelper.LECTURE_TABLE +
@@ -243,21 +290,18 @@ public class QLSVDatabase {
                     " WHERE c." + DBHelper.CLASS_ID + " = ? OR " +
                             "c." + DBHelper.CLASS_NAME + " like ? OR " +
                             "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
-                            "l." + DBHelper.LECTURE_FNAME + " = ? OR " +
-                            "l." + DBHelper.LECTURE_LNAME + " = ?;";
+                            "l." + DBHelper.LECTURE_NAME + " = ?;";
+
         String[] args = {str, "%"+str+"%"};
         return db.rawQuery(query, args);
     }
 
     public Cursor getListStudentByClass(int class_id){
         String query = "SELECT * " +
-                "FROM " + DBHelper.SCORE_TABLE + " as l " +
-                "  JOIN " + DBHelper.CLASS_TABLE + " as c " +
-                "ON l." + DBHelper.SCORE_CLASS + " = c." + DBHelper.CLASS_ID +
-                "  JOIN " + DBHelper.STUDENT_TABLE + " as s " +
-                "ON l." + DBHelper.SCORE_STUDENT + " = s." + DBHelper.STUDENT_ID +
-                " WHERE " + DBHelper.CLASS_ID + " = ?;";
-
+                "FROM " + DBHelper.STUDENT_TABLE +
+                " WHERE " + DBHelper.STUDENT_ID + " in (SELECT " + DBHelper.SCORE_STUDENT +
+                                                    " FROM " + DBHelper.SCORE_TABLE +
+                                                    " WHERE " + DBHelper.SCORE_CLASS + " = ?)";
         String[] arg = {Integer.toString(class_id)};
         return db.rawQuery(query, arg);
     }
