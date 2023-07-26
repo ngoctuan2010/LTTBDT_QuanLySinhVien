@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.studentmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,6 +96,7 @@ public class UserAdding extends AppCompatActivity {
 
 
     }
+
 
 
 }

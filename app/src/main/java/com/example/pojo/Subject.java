@@ -1,16 +1,39 @@
 package com.example.pojo;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class Subject implements Serializable {
     private int id;
     private String name;
     private int credit;
+    private double finalGracePercent;
+    private double midGracePercent;
 
-    public Subject(int id, String name, int credit) {
+    public double getFinalGracePercent() {
+        return finalGracePercent;
+    }
+
+    public void setFinalGracePercent(double finalGracePercent) {
+        this.finalGracePercent = finalGracePercent;
+    }
+
+    public double getMidGracePercent() {
+        return midGracePercent;
+    }
+
+    public void setMidGracePercent(double midGracePercent) {
+        this.midGracePercent = midGracePercent;
+    }
+
+
+    public Subject(int id, String name, int credit, double midGracePercent, double finalGracePercent) {
         this.id = id;
         this.name = name;
         this.credit = credit;
+        this.midGracePercent = midGracePercent;
+        this.finalGracePercent = finalGracePercent;
     }
 
     public int getId() {
@@ -36,4 +59,9 @@ public class Subject implements Serializable {
     public void setCredit(int credit) {
         this.credit = credit;
     }
+
+    public String toString() {
+        return this.getName();
+    }
+
 }

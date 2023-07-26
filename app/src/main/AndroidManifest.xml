@@ -13,18 +13,59 @@
         android:theme="@style/MyTheme"
         tools:targetApi="31">
         <activity
-            android:name=".HomePageLecture"
-            android:exported="true" >
+
+            android:name=".infomation.ClassInfomation"
+            android:parentActivityName=".QuanlyLophoc"
+            android:exported="false" />
+        <activity
+            android:name=".infomation.SubjectInfomation"
+            android:theme="@style/MyDialog"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:exported="false" />
+        <activity
+            android:name=".infomation.UserInformation"
+            android:theme="@style/MyDialog"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStatictical"
+            android:exported="false" />
+        <activity
+            android:name=".adding.UserAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyUser"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".adding.SubjectAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".adding.ClassAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyLophoc"
+            android:theme="@style/MyDialog" />
+            
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+
+        <activity
+            android:name=".StudentAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlySinhvien"/>
+        <activity
+            android:name=".StudentUpdate"
+            android:exported="false"
+            android:parentActivityName=".QuanlySinhvien" />
+        <activity
+            android:name=".QuanlySinhvien"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Profile"
-            android:exported="false"
-            android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".UserAdding"
             android:exported="false"
@@ -60,6 +101,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".LogIn"
             android:exported="true">
@@ -68,7 +110,8 @@
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
-        </activity>
-    </application>
 
+        </activity>
+
+    </application>
 </manifest>

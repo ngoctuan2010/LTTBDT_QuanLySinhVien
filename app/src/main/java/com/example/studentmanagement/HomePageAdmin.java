@@ -53,6 +53,7 @@ public class HomePageAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomePageAdmin.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
+
             }
         });
         mbtnCollage.setOnClickListener(new View.OnClickListener() {

@@ -12,7 +12,6 @@ public class User implements Serializable {
     private int lecture;
 
     public enum ROLE {
-      SUPERADMIN,
       ADMIN,
       LECTURE
     };

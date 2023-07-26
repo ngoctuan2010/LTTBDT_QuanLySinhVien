@@ -2,24 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@drawable/class_item_style"
+    android:elevation="6dp">
 
-    <TextView
-        android:id="@+id/tvClassSuject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/lightBlue"
-        android:padding="10dp"
-        android:text="Tên môn học"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+    <FrameLayout
+        android:id="@+id/flClassState"
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:background="@color/lightBlue">
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@drawable/class_item_style"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -27,46 +24,77 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvClassID"
+                android:id="@+id/tvClassName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Lớp"
-                android:textColor="@color/black" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Lớp học"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvClassQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:padding="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="Số lượng"
-                android:textColor="@color/black" />
-
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tvClassCollage"
-            android:layout_width="match_parent"
+            android:id="@+id/tvClassSubject"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Tên môn học"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvClassLecture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Giảng viên"
             android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tvClassYear"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Khoá"
-            android:textColor="@color/black" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvClassDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Ngày bắt đầu"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvClassStarted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Thời gian bắt đầu"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvClassYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Niên khoá"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
     </LinearLayout>
+
 </LinearLayout>

@@ -4,8 +4,16 @@ import java.io.Serializable;
 
 public class Lecture implements Serializable {
     private int id;
-    private String first_name;
-    private String last_name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
     private boolean gender;
     private String birth;
     private String address;
@@ -15,16 +23,26 @@ public class Lecture implements Serializable {
     public Lecture() {
     }
 
-    public Lecture(int id, String first_name, String last_name, boolean gender, String birth, String address, String phone, String department) {
+    public Lecture(int id, String name, boolean gender, String birth, String address, String phone, String department) {
+        this.name = name;
         this.id = id;
+<<<<<<< HEAD
         this.first_name = first_name;
         this.last_name = last_name;
         //True la nu, false la nam
+=======
+>>>>>>> main
         this.gender = gender;
         this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.department = department;
+    }
+
+    public Lecture(int id, String first_name, String last_name) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
     }
 
     public int getId() {
@@ -33,22 +51,6 @@ public class Lecture implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
     }
 
     public boolean isGender() {
@@ -91,7 +93,7 @@ public class Lecture implements Serializable {
         this.department = department;
     }
 
-    public String toString(){
-        return this.getFirst_name() + " " + this.getLast_name() + " - " + this.getId();
+    public String toString() {
+        return name + " - " + this.getId();
     }
 }

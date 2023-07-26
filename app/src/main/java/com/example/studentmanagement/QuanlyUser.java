@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 import com.example.service.UserArrrayAdapter;
+import com.example.studentmanagement.adding.UserAdding;
+import com.example.studentmanagement.infomation.UserInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,18 +42,17 @@ public class QuanlyUser extends AppCompatActivity {
 
     QLSVDatabase db;
 
-    String[] _role = {"Quản trị viên cấp cao", "Quản trị viên", "Giảng viên"};
+    String[] _role = {"Quản trị viên", "Giảng viên"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_user);
 
 
         db = new QLSVDatabase(this);
-
+        db.init();
         edtUserSearch = (EditText) findViewById(R.id.edtSearchUser);
         btnUserFilter = (Button) findViewById(R.id.btnFilterUser);
         btnUserAdd = (Button) findViewById(R.id.btnAddUser);
@@ -90,9 +91,9 @@ public class QuanlyUser extends AppCompatActivity {
 
            @Override
            public void afterTextChanged(Editable s) {
-                userList.clear();
+               userList.clear();
                Cursor c = db.getListBy(s.toString());
-                initUserList(c);
+               initUserList(c);
            }
        });
 
@@ -134,9 +135,11 @@ public class QuanlyUser extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int choice = item.getItemId();
-                        if(choice == R.id.user_show){
+                        if(choice == R.id.object_show){
+                            Intent intent = new Intent(QuanlyUser.this, UserInformation.class);
+                            startActivity(intent);
                             return true;
-                        }else if(choice == R.id.user_edit){
+                        }else if(choice == R.id.object_edit){
                             Intent intent = new Intent(QuanlyUser.this, UserAdding.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) userList.get(position);
@@ -144,7 +147,7 @@ public class QuanlyUser extends AppCompatActivity {
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
-                        }else if(choice == R.id.user_delete){
+                        }else if(choice == R.id.object_delete){
                             AlertDialog.Builder builder = new AlertDialog.Builder(QuanlyUser.this);
                             builder.setTitle("Xoá người dùng");
                             builder.setMessage("Bạn có chắc chắn muốn xoá người dùng này: \n" +
@@ -236,6 +239,7 @@ public class QuanlyUser extends AppCompatActivity {
         super.onResume();
         userList.clear();
         Cursor c = db.getListUser();
+
         initUserList(c);
     }
 
@@ -253,4 +257,5 @@ public class QuanlyUser extends AppCompatActivity {
         userArrrayAdapter.notifyDataSetChanged();
         c.close();
     }
+
 }
