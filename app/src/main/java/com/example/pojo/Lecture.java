@@ -14,7 +14,7 @@ public class Lecture implements Serializable {
     }
 
     private String name;
-    private boolean gender;
+    private boolean gender; //true la nu, false la nam
     private String birth;
     private String address;
     private String phone;
@@ -26,6 +26,7 @@ public class Lecture implements Serializable {
     public Lecture(int id, String name, boolean gender, String birth, String address, String phone, String department) {
         this.name = name;
         this.id = id;
+        //True la nu, false la nam
         this.gender = gender;
         this.birth = birth;
         this.address = address;

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.pojo.Class;
+import com.example.pojo.Lecture;
 import com.example.pojo.Student;
 import com.example.pojo.Subject;
 import com.example.pojo.User;
@@ -57,8 +58,27 @@ public class QLSVDatabase {
         return db.delete(DBHelper.ACCOUNT_TABLE, clause, args);
     }
 
-    public Cursor get_list_user(){
+    public Cursor getListUser(){
         return db.query(DBHelper.ACCOUNT_TABLE, null, null,null,null,null,null );
+    }
+
+
+    public Cursor getLectureById(int id){
+        String query = "SELECT * " +
+                    " FROM " + DBHelper.LECTURE_TABLE +
+                    " WHERE " + DBHelper.LECTURE_ID + " = ?;";
+
+        String[] args = {Integer.toString(id)};
+        return db.rawQuery(query,args);
+    }
+
+    public Cursor checkLogin(String username, String password) {
+        String query = "SELECT * " +
+                " FROM " + DBHelper.ACCOUNT_TABLE +
+                " WHERE " + DBHelper.ACCOUNT_USERNAME + " = ? AND " + DBHelper.ACCOUNT_PASSWORD + " = ?;";
+
+        String[] arg = {username, password};
+        return db.rawQuery(query, arg);
     }
 
     public Cursor getListBy(String str) {
@@ -70,7 +90,14 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
-    public Cursor getListUserByRole(int i) {
+    public Cursor getUserById(int i) {
+        String query = "SELECT * FROM " + DBHelper.ACCOUNT_TABLE + " WHERE " + DBHelper.ACCOUNT_ID + " = ?;";
+
+        String[] arg = {Integer.toString(i)};
+        return db.rawQuery(query, arg);
+    }
+
+    public Cursor getListUserByRole(int i){
         String query = "SELECT * " +
                 "FROM " + DBHelper.ACCOUNT_TABLE +
                 " WHERE " + DBHelper.ACCOUNT_ROLE + " = ?;";
@@ -261,6 +288,18 @@ public class QLSVDatabase {
         return db.delete(DBHelper.CLASS_TABLE, clause, args);
     }
 
+    //Lecture
+    public long add_lecture(Lecture lecture) {
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.LECTURE_NAME, lecture.getName());
+        values.put(DBHelper.LECTURE_GENDER, lecture.isGender());
+        values.put(DBHelper.LECTURE_BIRTH, lecture.getBirth());
+        values.put(DBHelper.LECTURE_ADDRESS, lecture.getAddress());
+        values.put(DBHelper.LECTURE_PHONE, lecture.getPhone());
+        values.put(DBHelper.LECTURE_DEPARTMENT, lecture.getDepartment());
+
+        return db.insert(DBHelper.LECTURE_TABLE, null, values);
+    }
     public Cursor get_list_class(){
         return db.query(DBHelper.CLASS_TABLE, null, null, null, null, null, null);
     }
@@ -321,16 +360,9 @@ public class QLSVDatabase {
     }
 
     public Cursor getListLecture(){
-        return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, null);
+        return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, DBHelper.LECTURE_ID+ " DESC");
     }
 
-    public Cursor getLectureById(int lecture_id){
-        String query = "SELECT * " +
-                "FROM " + DBHelper.LECTURE_TABLE +
-                " WHERE " + DBHelper.LECTURE_ID + " = ?;";
-        String[] arg = {Integer.toString(lecture_id)};
-        return db.rawQuery(query, arg);
-    }
 
     public Cursor getListQuantityLectureByDepartment(){
         String query = "SELECT COUNT(" + DBHelper.LECTURE_DEPARTMENT + ") " +
@@ -350,7 +382,10 @@ public class QLSVDatabase {
                             "c." + DBHelper.CLASS_NAME + " like ? OR " +
                             "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
                             "l." + DBHelper.LECTURE_NAME + " = ?;";
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
         String[] args = {str, "%"+str+"%"};
         return db.rawQuery(query, args);
     }
@@ -396,6 +431,29 @@ public class QLSVDatabase {
         return db.update(DBHelper.STUDENT_TABLE, values, clause, args);
     }
 
+    public int update_lecture(Lecture lecture) {
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.LECTURE_ID, lecture.getId());
+        values.put(DBHelper.LECTURE_NAME, lecture.getName());
+        values.put(DBHelper.LECTURE_GENDER, lecture.isGender());
+        values.put(DBHelper.LECTURE_BIRTH, lecture.getBirth());
+        values.put(DBHelper.LECTURE_ADDRESS, lecture.getAddress());
+        values.put(DBHelper.LECTURE_PHONE, lecture.getPhone());
+        values.put(DBHelper.LECTURE_DEPARTMENT, lecture.getDepartment());
+
+        String clause = DBHelper.LECTURE_ID + " = ?";
+        String[] arg = {Integer.toString(lecture.getId())};
+
+        return db.update(DBHelper.LECTURE_TABLE, values, clause, arg);
+    }
+
+    public int delete_lecture(int lecture_id) {
+
+        String clause = DBHelper.LECTURE_ID + " = ?";
+        String[] args = {Integer.toString(lecture_id)};
+
+        return db.delete(DBHelper.LECTURE_TABLE, clause, args);
+    }
 
     //xóa một sinh viên
     public long delete_student(Student student) {

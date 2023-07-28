@@ -4,48 +4,71 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomePage extends AppCompatActivity {
+import com.example.service.QLSVDatabase;
+
+public class HomePageAdmin extends AppCompatActivity {
     ImageButton mbtnStudent, mbtnCollage, mbtnSubject, mbtnClass;
+    TextView mtxtName, mtxtId, mtxtBirth;
+
+    QLSVDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_home_page_admin);
 
         mbtnStudent = (ImageButton) findViewById(R.id.btnStudent);
         mbtnCollage = (ImageButton) findViewById(R.id.btnCollage);
         mbtnSubject = (ImageButton) findViewById(R.id.btnSubject);
         mbtnClass = (ImageButton) findViewById(R.id.btnClass);
 
+        mtxtName = (TextView) findViewById(R.id.txtName);
+        mtxtId = (TextView) findViewById(R.id.txtId);
+        mtxtBirth = (TextView) findViewById(R.id.txtBirth);
+
+        db = new QLSVDatabase(this);
+
+        Bundle bundle = getIntent().getExtras();
+        int idUser = bundle.getInt("idUser");
+        Cursor cursor = db.getUserById(idUser);
+        cursor.moveToFirst();
+        int idLecture = cursor.getInt(3);
+        Cursor cursorLecture = db.getLectureById(idLecture);
+        cursorLecture.moveToFirst();
+
+//        SetText textview
+        mtxtName.setText(cursorLecture.getString(1));
+        mtxtId.setText(cursorLecture.getString(0));
+        mtxtBirth.setText(cursorLecture.getString(4));
+
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, QuanlySinhvien.class);
-                startActivity(intent);
-                Toast.makeText(HomePage.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomePageAdmin.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
+
             }
         });
         mbtnCollage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý giảng viên", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomePageAdmin.this, QuanLyGiangVien.class);
+                startActivity(intent);
             }
         });
         mbtnSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, QuanlyMonhoc.class);
+                Intent intent = new Intent(HomePageAdmin.this, QuanlyMonhoc.class);
                 startActivity(intent);
-                Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý môn học", Toast.LENGTH_SHORT).show();
             }
         });
         mbtnClass.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +83,9 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        inflater.inflate(R.menu.action_menu, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void onClick() {
@@ -74,8 +96,6 @@ public class HomePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_profile) {
-            Intent intent = new Intent(HomePage.this, Profile.class);
-            startActivity(intent);
             Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
         }
 
@@ -84,7 +104,8 @@ public class HomePage extends AppCompatActivity {
         }
 
         if (id == R.id.action_collape) {
-            Toast.makeText(this, "Bạn vào trang sửa giảng viên", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanLyGiangVien.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_student) {
@@ -92,13 +113,15 @@ public class HomePage extends AppCompatActivity {
         }
 
         if (id == R.id.action_subject) {
-            Toast.makeText(this, "Bạn vào trang sửa môn học", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanlyMonhoc.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_sign_out) {
-            Intent intent = new Intent(HomePage.this, LogIn.class);
+            Intent intent = new Intent(HomePageAdmin.this, LogIn.class);
             startActivity(intent);
             Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+            finish();
         }
         return true;
     }

@@ -237,7 +237,8 @@ public class QuanlyUser extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         userList.clear();
-        Cursor c = db.get_list_user();
+        Cursor c = db.getListUser();
+
         initUserList(c);
     }
 
