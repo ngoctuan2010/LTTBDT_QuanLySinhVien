@@ -1,5 +1,7 @@
 package com.example.pojo;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +27,12 @@ public class Class implements Serializable {
         this.quantity = quantity;
         this.year = year;
         this.started = started;
+    }
+
+    public Class(int id, String name, int subject_id) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
     }
 
     public int getId() {
@@ -81,5 +89,11 @@ public class Class implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

@@ -43,12 +43,16 @@ public class HomePage extends AppCompatActivity {
         mbtnSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, QuanlyMonhoc.class);
+                startActivity(intent);
                 Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý môn học", Toast.LENGTH_SHORT).show();
             }
         });
         mbtnClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, QuanlyLophoc.class);
+                startActivity(intent);
                 Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý lớp học", Toast.LENGTH_SHORT).show();
             }
         });

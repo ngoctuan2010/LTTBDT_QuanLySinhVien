@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/student_detail"
+        android:title="Xem thông tin" />
+    <item
+        android:id="@+id/student_score"
+        android:title="Xem điểm" />
+    <item
+        android:id="@+id/student_remove"
+        android:title="Xoá sinh viên" />
+</menu>

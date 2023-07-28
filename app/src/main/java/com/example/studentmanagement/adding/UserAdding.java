@@ -206,9 +206,8 @@ public class UserAdding extends AppCompatActivity {
         c.moveToPosition(-1);
         while(c.moveToNext()){
             int id = c.getInt(0);
-            String fname = c.getString(1);
-            String lname = c.getString(2);
-            Lecture lecture = new Lecture(id, fname, lname);
+            String name = c.getString(1);
+            Lecture lecture = new Lecture(id, name);
             list.add(lecture);
         }
         c.close();

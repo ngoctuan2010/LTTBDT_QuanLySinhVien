@@ -39,7 +39,6 @@ public class ClassArrayAdapter extends ArrayAdapter {
         if(listClass.size() > 0 && position >= 0){
 
 
-
             TextView tvSubject = (TextView) convertView.findViewById(R.id.tvClassSubject);
             TextView tvClass = (TextView) convertView.findViewById(R.id.tvClassName);
             TextView tvQuantity = (TextView) convertView.findViewById(R.id.tvClassQuantity);
@@ -50,10 +49,22 @@ public class ClassArrayAdapter extends ArrayAdapter {
             Class cl = listClass.get(position);
 
             Cursor cur = db.getListSubjectById(cl.getSubject_id());
-            cur.moveToFirst();
-            tvSubject.setText(cur.getString(1));
+            if(cur.getCount() > 0){
+                cur.moveToFirst();
+                tvSubject.setText(cur.getString(1));
+            }else{
+                tvSubject.setText("...");
+            }
 
-            tvLecture.setText("GV: " + Integer.toString(cl.getLecture()));
+
+            cur = db.getLectureById(cl.getLecture());
+            if(cur.getCount() > 0){
+                cur.moveToFirst();
+                tvLecture.setText("GV: " + cur.getString(1));
+            }else{
+                tvLecture.setText("GV: ");
+            }
+
 
             tvClass.setText("[" + cl.getId() + "] " + cl.getName());
             tvQuantity.setText("SL: " +Integer.toString(cl.getQuantity()));
