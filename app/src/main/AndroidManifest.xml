@@ -30,7 +30,7 @@
         <activity
             android:name=".StudentAdding"
             android:exported="false"
-            android:parentActivityName=".QuanlySinhvien"/>
+            android:parentActivityName=".QuanlySinhvien" />
         <activity
             android:name=".StudentUpdate"
             android:exported="false"
@@ -42,8 +42,10 @@
         <activity
             android:name=".Register"
             android:exported="false" />
-        <activity android:name=".QuanlySinhvien"
-            android:exported="false"/>
+        <activity
+            android:name=".QuanlySinhvien"
+            android:exported="false"
+            android:parentActivityName=".HomePage" />
         <activity
             android:name=".LogIn"
             android:exported="true">

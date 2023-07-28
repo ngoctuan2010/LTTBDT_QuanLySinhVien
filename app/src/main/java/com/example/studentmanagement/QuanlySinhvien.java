@@ -67,15 +67,18 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                 selectedSpinnerPosition = i;
                 switch (selectedSpinnerPosition) {
                     case 0:
+                        medtSearch.setHint("Nhập thông tin");
                         medtSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
                         break;
                     case 1:
                     case 2:
                     case 4:
                     case 6:
+                        medtSearch.setHint("Nhập thông tin");
                         medtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
                         break;
                     case 5:
+                        medtSearch.setHint("Nhập thông tin");
                         medtSearch.setInputType(InputType.TYPE_CLASS_PHONE);
                         break;
                     case 3:
