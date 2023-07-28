@@ -2,6 +2,7 @@ package com.example.service;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,14 @@ public class UserArrrayAdapter extends ArrayAdapter {
     List<User> userList = null;
     public ArrayList<Boolean> checkList;
 
+    QLSVDatabase db;
+
     public UserArrrayAdapter(Activity context, int layoutId, List<User> userList) {
         super(context, layoutId, userList);
         this.context = context;
         this.layoutId = layoutId;
         this.userList = userList;
-
-
-
+        db = new QLSVDatabase(context);
     }
 
     @NonNull
@@ -52,7 +53,10 @@ public class UserArrrayAdapter extends ArrayAdapter {
             ImageView ava = (ImageView) convertView.findViewById(R.id.imgUserItemAva);
             User user = userList.get(position);
 
-            String title = "[" + Integer.toString(user.getId()) + "] " + user.getLecture();
+
+            Cursor c = db.getLectureById(user.getLecture());
+            c.moveToFirst();
+            String title = "[" + Integer.toString(user.getId()) + "] " + c.getString(1);
             tvId.setText(title);
             String username = "Tài khoản: " + user.getUsername();
             tvUsername.setText(username);
@@ -61,7 +65,7 @@ public class UserArrrayAdapter extends ArrayAdapter {
 
             String path = "";
             int uRole = user.getRole();
-            if(uRole == 2)
+            if(uRole == 1)
                 path = "user";
             else
                 path = "admin";

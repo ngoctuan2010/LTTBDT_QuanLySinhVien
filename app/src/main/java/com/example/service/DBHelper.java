@@ -65,6 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Class
     public static final String CLASS_TABLE = "class";
     public static final String CLASS_ID = "id";
+    public static final String CLASS_NAME = "name";
     public static final String CLASS_SUBJECT = "subject_id";
     public static final String CLASS_LECTURE = "lecture_id";
     public static final String CLASS_QUANTITY = "quantity";
@@ -72,14 +73,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CLASS_STARTED = "started_date";
 
     public static final String CREATE_CLASS = "create table " + CLASS_TABLE + "( "
-            + CLASS_ID + " integer primary key autoincrement, "
-            + CLASS_SUBJECT + " integer, "
-            + CLASS_LECTURE + " integer, "
-            + CLASS_QUANTITY + " integer, "
-            + CLASS_YEAR + " nvarchar(10), "
-            + CLASS_STARTED + "date, "
-            + "FOREIGN KEY(" + CLASS_SUBJECT + ") REFERENCES " + SUBJECT_TABLE + "(" + SUBJECT_ID + "),"
-            + "FOREIGN KEY(" + CLASS_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + "));";
+                                            + CLASS_ID + " integer primary key autoincrement, "
+                                            + CLASS_NAME + " nvarchar(50), "
+                                            + CLASS_SUBJECT + " integer, "
+                                            + CLASS_LECTURE + " integer, "
+                                            + CLASS_QUANTITY + " integer, "
+                                            + CLASS_YEAR + " nvarchar(10), "
+                                            + CLASS_STARTED + " date, "
+                                            + "FOREIGN KEY(" + CLASS_SUBJECT + ") REFERENCES " + SUBJECT_TABLE + "(" + SUBJECT_ID + ") ON DELETE SET NULL,"
+                                            + "FOREIGN KEY(" + CLASS_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + ") ON DELETE SET NULL);";
+
 
 
     //Account
@@ -95,7 +98,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + ACCOUNT_PASSWORD + " text not null, "
             + ACCOUNT_LECTURE + " integer, "
             + ACCOUNT_ROLE + " integer, "
-            + " FOREIGN KEY (" + ACCOUNT_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + "));";
+            + " FOREIGN KEY (" + ACCOUNT_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + ") ON DELETE CASCADE);";
 
 
     //Score Board
@@ -111,8 +114,9 @@ public class DBHelper extends SQLiteOpenHelper {
             + SCORE_CLASS + " integer, "
             + SCORE_MIDGRACE + " float, "
             + SCORE_FINALGRACE + " float, "
-            + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + "), "
-            + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + "));";
+            + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + ") ON DELETE SET NULL, "
+            + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + ") ON DELETE SET NULL);";
+
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, 1);

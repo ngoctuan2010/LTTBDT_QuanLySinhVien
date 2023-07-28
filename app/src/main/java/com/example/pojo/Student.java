@@ -109,4 +109,15 @@ public class Student implements Serializable {
                 + "Số điện thoại: " + phone + "\n" + "Khoa: " + department + "\n" + "Niên khóa: " + school_year + "\n";
         return chuoi;
     }
+
+    public Student(int id, String name, boolean gender, Date birth, String address, String phone, String department, String school_year) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.birth = birth;
+        this.address = address;
+        this.phone = phone;
+        this.department = department;
+        this.school_year = school_year;
+    }
 }
