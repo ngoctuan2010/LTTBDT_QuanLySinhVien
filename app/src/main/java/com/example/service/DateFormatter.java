@@ -25,6 +25,16 @@ public class DateFormatter {
         return formatter.parse(date);
     }
 
+    public static String reformat(String date, String inputFormat, String outputFormat) throws ParseException {
+        DateFormat iFormat = new SimpleDateFormat(inputFormat);
+        Date iDate = (Date) iFormat.parse(date);
+
+        DateFormat oFormat = new SimpleDateFormat(outputFormat);
+        String oDate = oFormat.format(iDate);
+
+        return oDate;
+    }
+
 
     public String getDateFormat() {
         return dateFormat;

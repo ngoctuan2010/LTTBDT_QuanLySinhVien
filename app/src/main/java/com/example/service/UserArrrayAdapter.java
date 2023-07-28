@@ -56,7 +56,7 @@ public class UserArrrayAdapter extends ArrayAdapter {
 
             Cursor c = db.getLectureById(user.getLecture());
             c.moveToFirst();
-            String title = "[" + Integer.toString(user.getId()) + "] " + c.getString(1) + " " + c.getString(2);
+            String title = "[" + Integer.toString(user.getId()) + "] " + c.getString(1);
             tvId.setText(title);
             String username = "Tài khoản: " + user.getUsername();
             tvUsername.setText(username);

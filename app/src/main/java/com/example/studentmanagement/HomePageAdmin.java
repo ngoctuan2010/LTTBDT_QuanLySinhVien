@@ -74,7 +74,9 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomePageAdmin.this, "Bạn chọn vòa quản lý lớp học", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomePage.this, QuanlyLophoc.class);
+                startActivity(intent);
+                Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý lớp học", Toast.LENGTH_SHORT).show();
             }
         });
     }

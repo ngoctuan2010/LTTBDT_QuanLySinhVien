@@ -171,7 +171,9 @@ public class QuanlyMonhoc extends AppCompatActivity {
             int id = c.getInt(0);
             String name = c.getString(1);
             int credit = c.getInt(2);
-            Subject s = new Subject(id, name, credit);
+            double midPercent = c.getDouble(3);
+            double finalPercent = c.getDouble(4);
+            Subject s = new Subject(id, name, credit, midPercent, finalPercent);
             subjectList.add(s);
         }
         adapter.notifyDataSetChanged();
