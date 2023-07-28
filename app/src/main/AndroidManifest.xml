@@ -105,8 +105,14 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+            android:name=".QuanlySinhvien"
+            android:exported="false"
+            android:parentActivityName=".HomePage" />
+=======
             android:name=".HomePageLecture"
             android:exported="false" />
+>>>>>>> main
         <activity
             android:name=".LogIn"
             android:exported="true">

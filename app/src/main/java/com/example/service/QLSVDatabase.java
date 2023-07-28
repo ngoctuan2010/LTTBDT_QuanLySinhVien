@@ -6,7 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.pojo.Class;
+<<<<<<< HEAD
+import com.example.pojo.Score;
+=======
 import com.example.pojo.Lecture;
+>>>>>>> main
 import com.example.pojo.Student;
 import com.example.pojo.Subject;
 import com.example.pojo.User;
@@ -842,6 +846,84 @@ public class QLSVDatabase {
             cursor.close();
         }
         return studentsList;
+    }
+
+    //lấy một điểm theo mã SV, mã lớp
+    public Score get_Score(int idStudent, int idClass) {
+        String query = "SELECT * FROM " + DBHelper.SCORE_TABLE +
+                " WHERE " + DBHelper.SCORE_STUDENT + " = ? AND " + DBHelper.SCORE_CLASS + " = ?;";
+        String[] args = {String.valueOf(idStudent), String.valueOf(idClass)};
+        Cursor cursor = db.rawQuery(query, args);
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.SCORE_ID);
+            int midGradeIndex = cursor.getColumnIndex(DBHelper.SCORE_MIDGRACE);
+            int finalGradeIndex = cursor.getColumnIndex(DBHelper.SCORE_FINALGRACE);
+
+            int id = cursor.getInt(idIndex);
+            float midGrade = cursor.getFloat(midGradeIndex);
+            float finalGrade = cursor.getFloat(finalGradeIndex);
+            Score score = new Score(id, idStudent, idClass, midGrade, finalGrade);
+            return score;
+        }
+        return null;
+    }
+
+    public Score getScore(int idStudent, int idClass) {
+        Score score = null;
+
+        String query = "SELECT * FROM " + DBHelper.SCORE_TABLE +
+                " WHERE " + DBHelper.SCORE_STUDENT + " = ? AND " + DBHelper.SCORE_CLASS + " = ?;";
+        String[] args = {String.valueOf(idStudent), String.valueOf(idClass)};
+        Cursor cursor = db.rawQuery(query, args);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.SCORE_ID);
+            int midGradeIndex = cursor.getColumnIndex(DBHelper.SCORE_MIDGRACE);
+            int finalGradeIndex = cursor.getColumnIndex(DBHelper.SCORE_FINALGRACE);
+
+            int id = cursor.getInt(idIndex);
+            float midGrade = cursor.getFloat(midGradeIndex);
+            float finalGrade = cursor.getFloat(finalGradeIndex);
+
+            score = new Score(id, idStudent, idClass, midGrade, finalGrade);
+            cursor.close();
+        }
+
+        return score;
+    }
+
+    public Subject getSubjectByStudentAndClass(int studentId, int classId) {
+        Subject subject = null;
+
+        String query = "SELECT * FROM " + DBHelper.SUBJECT_TABLE +
+                " WHERE " + DBHelper.SUBJECT_ID + " = (SELECT " + DBHelper.SUBJECT_ID + " FROM " + DBHelper.SCORE_TABLE +
+                " INNER JOIN " + DBHelper.CLASS_TABLE + " ON " + DBHelper.CLASS_TABLE + "." + DBHelper.CLASS_ID + " = " + DBHelper.SCORE_TABLE + "." + DBHelper.SCORE_CLASS +
+                " WHERE " + DBHelper.SCORE_TABLE + "." + DBHelper.SCORE_STUDENT + " = ? AND " + DBHelper.SCORE_TABLE + "." + DBHelper.SCORE_CLASS + " = ?);";
+
+        String[] args = {String.valueOf(studentId), String.valueOf(classId)};
+
+        Cursor cursor = db.rawQuery(query, args);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.SUBJECT_ID);
+            int nameIndex = cursor.getColumnIndex(DBHelper.SUBJECT_NAME);
+            int creditIndex = cursor.getColumnIndex(DBHelper.SUBJECT_CREDIT);
+            int midGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_MIDGRACEPERCENT);
+            int finalGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_FINALGRACEPERCENT);
+
+            if (idIndex >= 0 && nameIndex >= 0 && creditIndex >= 0 && midGracePercentIndex >= 0 && finalGracePercentIndex >= 0) {
+                int id = cursor.getInt(idIndex);
+                String name = cursor.getString(nameIndex);
+                int credit = cursor.getInt(creditIndex);
+                float midGracePercent = cursor.getFloat(midGracePercentIndex);
+                float finalGracePercent = cursor.getFloat(finalGracePercentIndex);
+
+                subject = new Subject(id, name, credit, midGracePercent, finalGracePercent);
+            }
+
+            cursor.close();
+        }
+        return subject;
     }
 }
 

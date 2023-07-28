@@ -7,8 +7,9 @@
     android:elevation="6dp">
 
     <ImageView
+        android:layout_marginLeft="10dp"
         android:id="@+id/imgItemStudent"
-        android:layout_width="106dp"
+        android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="5dp"
@@ -16,9 +17,13 @@
 
     <TextView
         android:id="@+id/txtItemStudent"
-        android:layout_width="256dp"
+        android:layout_width="230dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Le Ho Truong Vu"
         android:textColor="@color/black"
         android:textSize="17dp" />
 
