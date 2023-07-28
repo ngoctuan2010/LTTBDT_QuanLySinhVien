@@ -14,7 +14,7 @@ public class Lecture implements Serializable {
     }
 
     private String name;
-    private boolean gender;
+    private boolean gender; //true la nu, false la nam
     private String birth;
     private String address;
     private String phone;
@@ -26,12 +26,7 @@ public class Lecture implements Serializable {
     public Lecture(int id, String name, boolean gender, String birth, String address, String phone, String department) {
         this.name = name;
         this.id = id;
-<<<<<<< HEAD
-        this.first_name = first_name;
-        this.last_name = last_name;
         //True la nu, false la nam
-=======
->>>>>>> main
         this.gender = gender;
         this.birth = birth;
         this.address = address;
@@ -39,10 +34,9 @@ public class Lecture implements Serializable {
         this.department = department;
     }
 
-    public Lecture(int id, String first_name, String last_name) {
+    public Lecture(int id, String name) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.name = name;
     }
 
     public int getId() {

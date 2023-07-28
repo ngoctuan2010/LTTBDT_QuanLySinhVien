@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/lightBlue"
-        android:text="Lập trình trên thiết bị di động"
+        android:padding="10dp"
+        android:text="aaa"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        android:padding="10dp"/>
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/tvSubjectClass"

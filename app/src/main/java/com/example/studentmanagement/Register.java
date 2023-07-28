@@ -26,7 +26,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        getSupportActionBar().hide();
         medtMaGV = (EditText) findViewById(R.id.edtMaGV);
         medtRegisterUserName = (EditText) findViewById(R.id.edtRegisterUserName);
         medtRegisterPassword = (EditText) findViewById(R.id.edtRegisterPassword);
@@ -36,16 +36,28 @@ public class Register extends AppCompatActivity {
         mbtnSwitchLogin = (Button) findViewById(R.id.btnSwitchLogin);
         mbtnRegisterForgotPassword = (Button) findViewById(R.id.btnRegisterForgotPassword);
 
+        db = new QLSVDatabase(this);
+
         mbtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(equalToLectureId()){
-                    User user = new User(1, medtRegisterUserName.getText().toString(), medtRegisterPassword.getText().toString(), 1, Integer.parseInt(medtMaGV.getText().toString()));
-                    db.add_user(user);
-                    Toast.makeText(Register.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                if (isEmpty(medtMaGV) || isEmpty(medtRegisterUserName) || isEmpty(medtRegisterPassword) || isEmpty(medtRegisterPasswordConfirm)) {
+                    Toast.makeText(Register.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(Register.this, "Mã giảng viên không đúng", Toast.LENGTH_SHORT).show();
+                    if (equalToLectureId(medtMaGV)) {
+                        if (medtRegisterPassword.getText().toString().equals(medtRegisterPasswordConfirm.getText().toString())) {
+                            User user = new User(1, medtRegisterUserName.getText().toString(), medtRegisterPassword.getText().toString(), 1, Integer.parseInt(medtMaGV.getText().toString().trim()));
+                            db.add_user(user);
+                            Toast.makeText(Register.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(Register.this, "Mật khẩu không trùng nhau", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(Register.this, "Mã giảng viên không hợp lệ", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -59,13 +71,22 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    public boolean equalToLectureId() {
-        Cursor c = db.getLectureById(Integer.parseInt(medtMaGV.getText().toString().trim()));
+    public boolean equalToLectureId(EditText editText) {
+        Cursor c = db.getLectureById(Integer.parseInt(editText.getText().toString().trim()));
+        c.moveToFirst();
         if(c.getCount() > 0)
         {
             return true;
-        }else{
+        }
+        else{
             return false;
         }
+    }
+
+    public boolean isEmpty(EditText editText) {
+        if (editText.getText().toString().equals("")) {
+            return true;
+        }
+        return false;
     }
 }

@@ -24,10 +24,10 @@ public class SubjectAdding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_subject_adding);
         db = new QLSVDatabase(this);
-        edtSubjectCredit = (EditText) findViewById(R.id.edtClassAddingQuantity);
-        edtSubjectName = (EditText) findViewById(R.id.edtClassAddingStarted);
-        btnSubjectAdd = (Button) findViewById(R.id.btnClassAdd);
-        btnSubjectUpdate = (Button) findViewById(R.id.btnSubjectEdit);
+        edtSubjectCredit = (EditText) findViewById(R.id.edtLectureAddingName);
+        edtSubjectName = (EditText) findViewById(R.id.edtLectureAddingId);
+        btnSubjectAdd = (Button) findViewById(R.id.btnLectureAdd);
+        btnSubjectUpdate = (Button) findViewById(R.id.btnLectureEdit);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){

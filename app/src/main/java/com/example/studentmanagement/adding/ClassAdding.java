@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +47,12 @@ public class ClassAdding extends AppCompatActivity {
 
         edtName = (EditText) findViewById(R.id.edtClassAddingName);
         actvSubject = (AutoCompleteTextView) findViewById(R.id.edtClassAddingSubject);
-        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtClassAddingLecture);
-        edtStarted = (EditText) findViewById(R.id.edtClassAddingStarted);
-        edtQuantity = (EditText) findViewById(R.id.edtClassAddingQuantity);
+        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
+        edtStarted = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtQuantity = (EditText) findViewById(R.id.edtLectureAddingName);
         edtYear = (EditText) findViewById(R.id.edtClassAddingYear);
 
-        btnAdd = (Button) findViewById(R.id.btnClassAdd);
+        btnAdd = (Button) findViewById(R.id.btnLectureAdd);
         btnEdit = (Button) findViewById(R.id.btnClassEdit);
 
         imgCalendar = (ImageButton) findViewById(R.id.imgCalendar);
@@ -246,9 +245,8 @@ public class ClassAdding extends AppCompatActivity {
         c.moveToPosition(-1);
         while(c.moveToNext()){
             int id = c.getInt(0);
-            String fname = c.getString(1);
-            String lname = c.getString(2);
-            Lecture lecture = new Lecture(id, fname, lname);
+            String name = c.getString(1);
+            Lecture lecture = new Lecture(id, name);
             list.add(lecture);
         }
         c.close();
@@ -267,7 +265,6 @@ public class ClassAdding extends AppCompatActivity {
             Subject s = new Subject(id, name, credit);
             list.add(s);
         }
-
         return list;
     }
 

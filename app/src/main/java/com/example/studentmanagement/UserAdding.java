@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.example.studentmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.pojo.Lecture;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 
@@ -30,13 +27,13 @@ public class UserAdding extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_adding);
+        setContentView(R.layout.layout_user_adding);
 
         db = new QLSVDatabase(this);
 
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
-        edtPassword = (EditText) findViewById(R.id.edtUserAddingPassword);
+        edtUsername = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtPassword = (EditText) findViewById(R.id.edtLectureAddingName);
         edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);

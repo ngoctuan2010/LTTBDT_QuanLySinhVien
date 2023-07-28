@@ -52,7 +52,6 @@ public class QuanlyUser extends AppCompatActivity {
 
 
         db = new QLSVDatabase(this);
-        db.init();
         edtUserSearch = (EditText) findViewById(R.id.edtSearchUser);
         btnUserFilter = (Button) findViewById(R.id.btnFilterUser);
         btnUserAdd = (Button) findViewById(R.id.btnAddUser);

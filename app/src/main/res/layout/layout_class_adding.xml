@@ -91,7 +91,7 @@
         android:textSize="20sp" />
 
     <AutoCompleteTextView
-        android:id="@+id/edtClassAddingLecture"
+        android:id="@+id/edtUserAddingCollage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10sp"
@@ -157,7 +157,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/edtClassAddingStarted"
+            android:id="@+id/edtLectureAddingId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -200,7 +200,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/edtClassAddingQuantity"
+        android:id="@+id/edtLectureAddingName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10sp"
@@ -227,7 +227,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnClassAdd"
+            android:id="@+id/btnLectureAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

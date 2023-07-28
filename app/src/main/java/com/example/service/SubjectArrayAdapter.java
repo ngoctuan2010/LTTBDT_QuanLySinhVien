@@ -1,7 +1,6 @@
 package com.example.service;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.pojo.Subject;
 import com.example.studentmanagement.R;
@@ -36,8 +34,8 @@ public class SubjectArrayAdapter extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
 
-        TextView tvSubjectName = (TextView) convertView.findViewById(R.id.tvSubjectItemName);
-        TextView tvSubjectCredit = (TextView) convertView.findViewById(R.id.tvSubjectItemCredit);
+        TextView tvSubjectName = (TextView) convertView.findViewById(R.id.tvLectureId);
+        TextView tvSubjectCredit = (TextView) convertView.findViewById(R.id.tvLectureName);
 
 
         Subject sj = subjectList.get(position);

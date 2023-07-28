@@ -42,9 +42,9 @@ public class UserAdding extends AppCompatActivity {
         db = new QLSVDatabase(this);
 
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtClassAddingStarted);
-        edtPassword = (EditText) findViewById(R.id.edtClassAddingQuantity);
-        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtClassAddingLecture);
+        edtUsername = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtPassword = (EditText) findViewById(R.id.edtLectureAddingName);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 
@@ -206,9 +206,8 @@ public class UserAdding extends AppCompatActivity {
         c.moveToPosition(-1);
         while(c.moveToNext()){
             int id = c.getInt(0);
-            String fname = c.getString(1);
-            String lname = c.getString(2);
-            Lecture lecture = new Lecture(id, fname, lname);
+            String name = c.getString(1);
+            Lecture lecture = new Lecture(id, name);
             list.add(lecture);
         }
         c.close();

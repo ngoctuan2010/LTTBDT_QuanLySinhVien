@@ -44,7 +44,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/edtClassAddingStarted"
+                android:id="@+id/edtLectureAddingId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -71,7 +71,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/edtClassAddingQuantity"
+                android:id="@+id/edtLectureAddingName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -99,7 +99,7 @@
                 android:textSize="20sp" />
 
             <AutoCompleteTextView
-                android:id="@+id/edtClassAddingLecture"
+                android:id="@+id/edtUserAddingCollage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

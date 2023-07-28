@@ -7,11 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.pojo.Class;
-<<<<<<< HEAD
 import com.example.pojo.Lecture;
-=======
 import com.example.pojo.Student;
->>>>>>> main
 import com.example.pojo.Subject;
 import com.example.pojo.User;
 
@@ -63,14 +60,14 @@ public class QLSVDatabase {
         return db.delete(DBHelper.ACCOUNT_TABLE, clause, args);
     }
 
-<<<<<<< HEAD
     public Cursor getListUser(){
-        return db.query(DBHelper.ACCOUNT_TABLE, null, null,null,null,null,DBHelper.ACCOUNT_ID + " DESC" );
+        return db.query(DBHelper.ACCOUNT_TABLE, null, null,null,null,null,null );
     }
+
 
     public Cursor getLectureById(int id){
         String query = "SELECT * " +
-                    "FROM " + DBHelper.LECTURE_TABLE +
+                    " FROM " + DBHelper.LECTURE_TABLE +
                     " WHERE " + DBHelper.LECTURE_ID + " = ?;";
 
         String[] args = {Integer.toString(id)};
@@ -86,14 +83,7 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
-    public Cursor getListBy(String str){
-=======
-    public Cursor get_list_user(){
-        return db.query(DBHelper.ACCOUNT_TABLE, null, null,null,null,null,null );
-    }
-
     public Cursor getListBy(String str) {
->>>>>>> main
         String query = "SELECT * " +
                 "FROM " + DBHelper.ACCOUNT_TABLE +
                 " WHERE " + DBHelper.ACCOUNT_ID + " = ? OR " + DBHelper.ACCOUNT_USERNAME + " like ?;";
@@ -102,18 +92,14 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
-<<<<<<< HEAD
     public Cursor getUserById(int i) {
-        String query = "FROM " + DBHelper.ACCOUNT_TABLE + " WHERE " + DBHelper.ACCOUNT_ID + " = " + i + ";";
+        String query = "SELECT * FROM " + DBHelper.ACCOUNT_TABLE + " WHERE " + DBHelper.ACCOUNT_ID + " = ?;";
 
         String[] arg = {Integer.toString(i)};
         return db.rawQuery(query, arg);
     }
 
     public Cursor getListUserByRole(int i){
-=======
-    public Cursor getListUserByRole(int i) {
->>>>>>> main
         String query = "SELECT * " +
                 "FROM " + DBHelper.ACCOUNT_TABLE +
                 " WHERE " + DBHelper.ACCOUNT_ROLE + " = ?;";
@@ -245,18 +231,18 @@ public class QLSVDatabase {
         return db.delete(DBHelper.CLASS_TABLE, clause, args);
     }
 
-<<<<<<< HEAD
     //Lecture
     public long add_lecture(Lecture lecture) {
         ContentValues values = new ContentValues();
-        values.put(DBHelper.LECTURE_FNAME, lecture.getFirst_name());
-        values.put(DBHelper.LECTURE_LNAME, lecture.getLast_name());
+        values.put(DBHelper.LECTURE_NAME, lecture.getName());
         values.put(DBHelper.LECTURE_GENDER, lecture.isGender());
         values.put(DBHelper.LECTURE_BIRTH, lecture.getBirth());
         values.put(DBHelper.LECTURE_ADDRESS, lecture.getAddress());
         values.put(DBHelper.LECTURE_PHONE, lecture.getPhone());
         values.put(DBHelper.LECTURE_DEPARTMENT, lecture.getDepartment());
-=======
+
+        return db.insert(DBHelper.LECTURE_TABLE, null, values);
+    }
     public Cursor get_list_class(){
         return db.query(DBHelper.CLASS_TABLE, null, null, null, null, null, null);
     }
@@ -268,16 +254,9 @@ public class QLSVDatabase {
     }
 
     public Cursor getListLecture(){
-        return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, null);
+        return db.query(DBHelper.LECTURE_TABLE, null, null, null, null, null, DBHelper.LECTURE_ID+ " DESC");
     }
 
-    public Cursor getLectureById(int lecture_id){
-        String query = "SELECT * " +
-                "FROM " + DBHelper.LECTURE_TABLE +
-                " WHERE " + DBHelper.LECTURE_ID + " = ?;";
-        String[] arg = {Integer.toString(lecture_id)};
-        return db.rawQuery(query, arg);
-    }
 
     public Cursor getListQuantityLectureByDepartment(){
         String query = "SELECT COUNT(" + DBHelper.LECTURE_DEPARTMENT + ") " +
@@ -296,8 +275,7 @@ public class QLSVDatabase {
                     " WHERE c." + DBHelper.CLASS_ID + " = ? OR " +
                             "c." + DBHelper.CLASS_NAME + " like ? OR " +
                             "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
-                            "l." + DBHelper.LECTURE_FNAME + " = ? OR " +
-                            "l." + DBHelper.LECTURE_LNAME + " = ?;";
+                            "l." + DBHelper.LECTURE_NAME + " = ?;";
         String[] args = {str, "%"+str+"%"};
         return db.rawQuery(query, args);
     }
@@ -361,17 +339,11 @@ public class QLSVDatabase {
 
         return db.update(DBHelper.STUDENT_TABLE, values, clause, args);
     }
->>>>>>> main
 
-        return db.insert(DBHelper.LECTURE_TABLE, null, values);
-    }
-
-<<<<<<< HEAD
     public int update_lecture(Lecture lecture) {
         ContentValues values = new ContentValues();
         values.put(DBHelper.LECTURE_ID, lecture.getId());
-        values.put(DBHelper.LECTURE_FNAME, lecture.getFirst_name());
-        values.put(DBHelper.LECTURE_LNAME, lecture.getLast_name());
+        values.put(DBHelper.LECTURE_NAME, lecture.getName());
         values.put(DBHelper.LECTURE_GENDER, lecture.isGender());
         values.put(DBHelper.LECTURE_BIRTH, lecture.getBirth());
         values.put(DBHelper.LECTURE_ADDRESS, lecture.getAddress());
@@ -384,13 +356,14 @@ public class QLSVDatabase {
         return db.update(DBHelper.LECTURE_TABLE, values, clause, arg);
     }
 
-    public int delete_lecture(int lecture_id){
+    public int delete_lecture(int lecture_id) {
 
         String clause = DBHelper.LECTURE_ID + " = ?";
         String[] args = {Integer.toString(lecture_id)};
 
-        return db.delete(DBHelper.LECTURE_TABLE, clause,args);
-=======
+        return db.delete(DBHelper.LECTURE_TABLE, clause, args);
+    }
+
     //xóa một sinh viên
     public long delete_student(Student student) {
         return db.delete(DBHelper.STUDENT_TABLE, DBHelper.STUDENT_ID + " = " + "'" + student.getId() + "'", null);
@@ -778,7 +751,6 @@ public class QLSVDatabase {
             cursor.close();
         }
         return studentsList;
->>>>>>> main
     }
 }
 

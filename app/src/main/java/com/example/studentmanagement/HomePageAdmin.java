@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -41,13 +40,15 @@ public class HomePageAdmin extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int idUser = bundle.getInt("idUser");
         Cursor cursor = db.getUserById(idUser);
+        cursor.moveToFirst();
         int idLecture = cursor.getInt(3);
         Cursor cursorLecture = db.getLectureById(idLecture);
+        cursorLecture.moveToFirst();
 
-        //SetText textview
-//        mtxtName.setText(cursorLecture.getString(1) + cursorLecture.getString(2));
-//        mtxtId.setText(cursorLecture.getString(0));
-//        mtxtBirth.setText(cursorLecture.getString(4));
+//        SetText textview
+        mtxtName.setText(cursorLecture.getString(1));
+        mtxtId.setText(cursorLecture.getString(0));
+        mtxtBirth.setText(cursorLecture.getString(4));
 
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,13 +60,15 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnCollage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomePageAdmin.this, "Bạn chọn vòa quản lý giảng viên", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomePageAdmin.this, QuanLyGiangVien.class);
+                startActivity(intent);
             }
         });
         mbtnSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomePageAdmin.this, "Bạn chọn vòa quản lý môn học", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomePageAdmin.this, QuanlyMonhoc.class);
+                startActivity(intent);
             }
         });
         mbtnClass.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +81,9 @@ public class HomePageAdmin extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        inflater.inflate(R.menu.action_menu, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void onClick() {
@@ -92,8 +94,6 @@ public class HomePageAdmin extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_profile) {
-            Intent intent = new Intent(HomePageAdmin.this, Profile.class);
-            startActivity(intent);
             Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
         }
 
@@ -102,7 +102,8 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_collape) {
-            Toast.makeText(this, "Bạn vào trang sửa giảng viên", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanLyGiangVien.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_student) {
@@ -110,13 +111,15 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_subject) {
-            Toast.makeText(this, "Bạn vào trang sửa môn học", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanlyMonhoc.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_sign_out) {
             Intent intent = new Intent(HomePageAdmin.this, LogIn.class);
             startActivity(intent);
             Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+            finish();
         }
         return true;
     }

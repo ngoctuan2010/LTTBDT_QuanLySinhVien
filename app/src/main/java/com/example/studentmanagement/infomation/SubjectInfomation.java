@@ -29,6 +29,5 @@ public class SubjectInfomation extends AppCompatActivity {
         tvId.setText("ID: " + Integer.toString(subject.getId()));
         tvName.setText("Tên môn học: " + subject.getName());
         tvCredit.setText("Số tín chỉ: " + Integer.toString(subject.getCredit()));
-
     }
 }
