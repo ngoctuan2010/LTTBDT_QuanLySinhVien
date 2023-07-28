@@ -191,7 +191,7 @@ public class ClassInfomation extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int id = item.getItemId();
-                        if (id == R.id.object_show) {
+                        if (id == R.id.student_detail) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
                             builder.setTitle("Thông tin sinh viên");
                             builder.setMessage(st.toString());
@@ -204,9 +204,9 @@ public class ClassInfomation extends AppCompatActivity {
                             builder.create();
                             builder.show();
                             return true;
-                        } else if (id == R.id.object_edit) {
+                        } else if (id == R.id.student_score) {
                             return true;
-                        } else if (id == R.id.object_delete) {
+                        } else if (id == R.id.student_remove) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
                             builder.setTitle("Xác nhận");
                             builder.setMessage("Bạn có chắc chắn muốn xoá sinh viên này: " + st.getName() + " - " + st.getId());
@@ -235,7 +235,7 @@ public class ClassInfomation extends AppCompatActivity {
                         return false;
                     }
                 });
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_menu_student_in_class);
                 popupMenu.setGravity(Gravity.END);
 
                 popupMenu.show();

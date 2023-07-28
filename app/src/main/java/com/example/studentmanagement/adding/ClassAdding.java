@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +21,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pojo.Class;
 import com.example.pojo.Lecture;
 import com.example.pojo.Subject;
+import com.example.service.DateFormatter;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.R;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ClassAdding extends AppCompatActivity {
+    DateFormatter df = new DateFormatter("dd/MM/yyyy");
 
     EditText edtName, edtStarted, edtQuantity, edtYear;
 
@@ -69,6 +72,12 @@ public class ClassAdding extends AppCompatActivity {
         ArrayList<Lecture> lectures = initListLecture();
         ArrayAdapter<Lecture> lAdapter = new ArrayAdapter<>(ClassAdding.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lectures);
         actvLecture.setAdapter(lAdapter);
+
+        try {
+            checkDateValidate("7/29/2023");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         actvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,7 +149,6 @@ public class ClassAdding extends AppCompatActivity {
             edtName.setText(_class.getName());
 
             Cursor c = db.getListSubjectById(_class.getSubject_id());
-            Toast.makeText(ClassAdding.this, Integer.toString(_class.getSubject_id()),Toast.LENGTH_SHORT).show();
             String name = "";
             if(c.getCount() > 0)
             {
@@ -161,10 +169,12 @@ public class ClassAdding extends AppCompatActivity {
             actvLecture.setText(lecture);
             lecture_id = _class.getLecture();
 
-
-
             edtYear.setText(_class.getYear());
-            edtStarted.setText(_class.getStarted());
+            try {
+                edtStarted.setText(DateFormatter.reformat(_class.getStarted(), "yyyy-MM-dd", "dd/MM/yyyy"));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             edtQuantity.setText(Integer.toString(_class.getQuantity()));
 
 
@@ -189,10 +199,28 @@ public class ClassAdding extends AppCompatActivity {
                        _class.setQuantity(Integer.parseInt(edtQuantity.getText().toString()));
                        _class.setYear(edtYear.getText().toString());
 
-                       if(db.update_class(_class) > 0){
-                           Toast.makeText(ClassAdding.this, "Bạn đã cập nhật lớp học thành công", Toast.LENGTH_SHORT).show();
-                       }else{
-                           Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
+                       if(db.getDiffClassBySubjectAndName(_class.getName(), _class.getId()).getCount() > 0){
+                           Toast.makeText(ClassAdding.this, "Lớp học đã tồn tại", Toast.LENGTH_SHORT).show();
+                           return;
+                       }
+
+                       try {
+                           if(!checkDateValidate(_class.getStarted())){
+                               Toast.makeText(ClassAdding.this, "Thời gian không phù hợp", Toast.LENGTH_SHORT).show();
+                               return;
+                           }
+                       } catch (ParseException e) {
+                           throw new RuntimeException(e);
+                       }
+
+                       try {
+                           if(db.update_class(_class) > 0){
+                               Toast.makeText(ClassAdding.this, "Bạn đã cập nhật lớp học thành công", Toast.LENGTH_SHORT).show();
+                           }else{
+                               Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
+                           }
+                       } catch (ParseException e) {
+                           throw new RuntimeException(e);
                        }
                    }else{
                        requiredInput();
@@ -221,10 +249,28 @@ public class ClassAdding extends AppCompatActivity {
                         String year = edtYear.getText().toString();
                         Class _class = new Class(-1, name, subject_id, lecture_id, quantity, year, started);
 
-                        if(db.add_class(_class) > 0){
-                            Toast.makeText(ClassAdding.this, "Bạn đã thêm lớp học thành công", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
+                        if(db.getDiffClassBySubjectAndName(name, -1).getCount() > 0){
+                            Toast.makeText(ClassAdding.this, "Lớp học đã tồn tại", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        try {
+                            if(!checkDateValidate(DateFormatter.reformat(started, "dd/MM/yyyy", "yyyy-MM-dd"))){
+                                Toast.makeText(ClassAdding.this, "Thời gian không phù hợp", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            try {
+                                if(db.add_class(_class) > 0){
+                                    Toast.makeText(ClassAdding.this, "Bạn đã thêm lớp học thành công", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
                         }
                     }else{
                         requiredInput();
@@ -325,4 +371,12 @@ public class ClassAdding extends AppCompatActivity {
             edtQuantity.setError(getResources().getString(R.string.inputRequired));
 
     }
+
+    private boolean checkDateValidate(String date) throws ParseException {
+        Date d = df.StringToDate(date);
+        Date now = new Date();
+        long m = d.getTime() - now.getTime();
+        return m > 0 ? true : false;
+    }
 }
+

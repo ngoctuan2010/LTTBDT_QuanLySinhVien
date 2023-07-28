@@ -72,6 +72,11 @@ public class SubjectAdding extends AppCompatActivity {
                         subject.setMidGracePercent(_mid);
                         subject.setFinalGracePercent(_final);
 
+                        if(db.getSubjectByName(name).getCount() > 0){
+                            Toast.makeText(SubjectAdding.this, "Môn học đã tồn tại", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         if(db.update_subject(subject) > 0){
                             Toast.makeText(SubjectAdding.this, "Bạn đã sửa môn học thành công", Toast.LENGTH_SHORT).show();
                         }else{
@@ -101,6 +106,10 @@ public class SubjectAdding extends AppCompatActivity {
                             return;
                         }
 
+                        if(db.getSubjectByName(name).getCount() > 0){
+                            Toast.makeText(SubjectAdding.this, "Môn học đã tồn tại", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         Subject s = new Subject(-1, name, credit, _mid, _final);
                         if(db.add_subject(s) > 0){

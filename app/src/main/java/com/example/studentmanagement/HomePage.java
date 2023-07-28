@@ -37,8 +37,6 @@ public class HomePage extends AppCompatActivity {
         mbtnCollage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, QuanlyUser.class);
-                startActivity(intent);
                 Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý giảng viên", Toast.LENGTH_SHORT).show();
             }
         });

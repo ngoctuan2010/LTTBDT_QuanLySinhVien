@@ -26,11 +26,14 @@
             android:theme="@style/MyDialog"
             android:exported="false" />
         <activity
-            android:name=".AdminStatictical"
-            android:exported="false" />
+            android:name=".AdminStatistical"
+            android:exported="true" >
+
+        </activity>
         <activity android:name=".QuanlyUser"
-            android:exported="false"
-            android:parentActivityName=".HomePage"/>
+            android:exported="true"
+            android:parentActivityName=".HomePage">
+        </activity>
         <activity
             android:name=".adding.UserAdding"
             android:exported="true"
@@ -77,7 +80,6 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
