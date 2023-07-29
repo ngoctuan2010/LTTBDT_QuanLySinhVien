@@ -8,39 +8,34 @@ public class Subject implements Serializable {
     private int id;
     private String name;
     private int credit;
-    private double finalGracePercent;
-    private double midGracePercent;
+    private double finalGradePercent;
+    private double midGradePercent;
 
-    public double getFinalGracePercent() {
-        return finalGracePercent;
+    public double getFinalGradePercent() {
+        return finalGradePercent;
     }
 
-    public void setFinalGracePercent(double finalGracePercent) {
-        this.finalGracePercent = finalGracePercent;
+    public void setFinalGradePercent(double finalGradePercent) {
+        this.finalGradePercent = finalGradePercent;
     }
 
-    public double getMidGracePercent() {
-        return midGracePercent;
+    public double getMidGradePercent() {
+        return midGradePercent;
     }
 
-    public void setMidGracePercent(double midGracePercent) {
-        this.midGracePercent = midGracePercent;
+    public void setMidGradePercent(double midGradePercent) {
+        this.midGradePercent = midGradePercent;
     }
 
 
-    public Subject(int id, String name, int credit, double midGracePercent, double finalGracePercent) {
+    public Subject(int id, String name, int credit, double midGradePercent, double finalGradePercent) {
         this.id = id;
         this.name = name;
         this.credit = credit;
-        this.midGracePercent = midGracePercent;
-        this.finalGracePercent = finalGracePercent;
+        this.midGradePercent = midGradePercent;
+        this.finalGradePercent = finalGradePercent;
     }
-
-<<<<<<< HEAD
-    public Subject(int id, String name, int credit) {
-=======
     public Subject(int id, String name, int credit){
->>>>>>> main
         this.id = id;
         this.name = name;
         this.credit = credit;

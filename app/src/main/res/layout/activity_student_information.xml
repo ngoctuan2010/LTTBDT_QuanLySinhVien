@@ -207,11 +207,12 @@
 
             <EditText
                 android:id="@+id/edtEndScore"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="40dp"
                 android:background="@color/gray"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="9.6"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
