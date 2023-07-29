@@ -2,7 +2,9 @@ package com.example.studentmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,9 @@ public class LogIn extends AppCompatActivity {
     EditText medtUsername, medtPassword;
     CheckBox mckRemember;
     Button mbtnLogin, mbtnRegister, mbtnForgotPassword;
+
+    SharedPreferences myPrefs = getSharedPreferences("account_saves", Activity.MODE_PRIVATE);
+    SharedPreferences.Editor editor = myPrefs.edit();
 
     QLSVDatabase db;
     int idRole;
