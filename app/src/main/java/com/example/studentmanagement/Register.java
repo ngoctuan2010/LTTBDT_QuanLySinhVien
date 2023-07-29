@@ -14,12 +14,12 @@ import android.widget.Toast;
 
 import com.example.pojo.Lecture;
 import com.example.pojo.User;
+import com.example.service.HashSHA1;
 import com.example.service.QLSVDatabase;
 
 public class Register extends AppCompatActivity {
     EditText medtMaGV, medtRegisterUserName, medtRegisterPasswordConfirm, medtRegisterPassword;
     Button mbtnRegister, mbtnSwitchLogin, mbtnRegisterForgotPassword;
-
     QLSVDatabase db;
 
     @Override
@@ -47,7 +47,18 @@ public class Register extends AppCompatActivity {
                 else {
                     if (equalToLectureId(medtMaGV)) {
                         if (medtRegisterPassword.getText().toString().equals(medtRegisterPasswordConfirm.getText().toString())) {
-                            User user = new User(1, medtRegisterUserName.getText().toString(), medtRegisterPassword.getText().toString(), 1, Integer.parseInt(medtMaGV.getText().toString().trim()));
+                            String username = medtRegisterUserName.getText().toString().trim();
+                            String hashPassword = HashSHA1.SHA1(medtRegisterPassword.getText().toString().trim());
+                            int IdLecture = Integer.parseInt(medtMaGV.getText().toString().trim());
+
+                            Cursor c = db.getUserByUsername(username);
+                            if(c.getCount() > 0){
+                                Toast.makeText(Register.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+
+                            User user = new User(1, username, hashPassword, 1, IdLecture);
                             db.add_user(user);
                             Toast.makeText(Register.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                         }

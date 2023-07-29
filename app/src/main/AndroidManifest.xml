@@ -13,47 +13,38 @@
         android:theme="@style/MyTheme"
         tools:targetApi="31">
         <activity
-            android:name=".infomation.LectureInformation"
+            android:name=".AdminStatistical"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".information.LectureInformation"
             android:exported="false"
             android:theme="@style/MyDialog" />
+        <activity
+            android:name=".information.SubjectInformation"
+            android:exported="false"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".information.UserInformation"
+            android:exported="false"
+            android:theme="@style/MyDialog" />
+        <activity android:name=".information.ClassInformation"
+            android:exported="false"/>
         <activity
             android:name=".adding.LectureAdding"
             android:exported="false"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".infomation.SubjectInfomation"
-            android:exported="false"
-            android:parentActivityName=".QuanlyMonhoc"
-            android:theme="@style/MyDialog" />
-        <activity
-            android:name=".infomation.UserInformation"
-            android:exported="false"
-            android:theme="@style/MyDialog" />
-        <activity
-            android:name=".AdminStatistical"
-            android:exported="true">
-
-        </activity>
-
-<!--        <activity-->
-<!--            android:name=".QuanlyUser"-->
-<!--            android:exported="true" />-->
-        <activity
             android:name=".adding.UserAdding"
             android:exported="true"
             android:parentActivityName=".QuanlyUser"
             android:theme="@style/MyDialog"></activity>
-<!--        <activity-->
-<!--            android:name=".QuanlyMonhoc"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".adding.SubjectAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
-<!--        <activity-->
-<!--            android:name=".QuanlyLophoc"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".adding.ClassAdding"
             android:exported="false"
@@ -71,20 +62,33 @@
             android:name=".StudentUpdate"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-<!--        <activity-->
-<!--            android:name=".QuanlySinhvien"-->
-<!--            android:exported="false" />-->
+        <activity android:name=".QuanlySinhvien"
+            android:exported="false"/>
+        <activity
+            android:name=".QuanlyUser"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".QuanlyLophoc"
+            android:exported="true"
+            android:parentActivityName=".HomePageAdmin">
+        </activity>
+        <activity android:name=".QuanlyMonhoc"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin"/>
+        <activity android:name=".QuanLyGiangVien"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin"/>
         <activity
             android:name=".HomePageAdmin"
-            android:exported="false" />
-        <activity
-            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".HomePageLecture"
             android:exported="false" />
         <activity
-            android:name=".QuanlyLophoc"
+            android:name=".Register"
+            android:exported="false" />
+        <activity android:name=".LogIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

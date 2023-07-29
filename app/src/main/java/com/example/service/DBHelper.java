@@ -72,6 +72,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CLASS_YEAR = "year";
     public static final String CLASS_STARTED = "started_date";
 
+    public static final String CLASS_STATUS = "status";
+
     public static final String CREATE_CLASS = "create table " + CLASS_TABLE + "( "
                                             + CLASS_ID + " integer primary key autoincrement, "
                                             + CLASS_NAME + " nvarchar(50), "
@@ -80,6 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                             + CLASS_QUANTITY + " integer, "
                                             + CLASS_YEAR + " nvarchar(10), "
                                             + CLASS_STARTED + " date, "
+                                            + CLASS_STATUS + " bit, "
                                             + "FOREIGN KEY(" + CLASS_SUBJECT + ") REFERENCES " + SUBJECT_TABLE + "(" + SUBJECT_ID + ") ON DELETE SET NULL,"
                                             + "FOREIGN KEY(" + CLASS_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + ") ON DELETE SET NULL);";
 
