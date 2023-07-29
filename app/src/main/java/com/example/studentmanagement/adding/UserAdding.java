@@ -45,9 +45,9 @@ public class UserAdding extends AppCompatActivity {
         db = new QLSVDatabase(this);
 
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtClassAddingStarted);
+        edtUsername = (EditText) findViewById(R.id.edtLectureAddingId);
         tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
-        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtClassAddingLecture);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 

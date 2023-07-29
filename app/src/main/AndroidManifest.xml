@@ -84,7 +84,7 @@
             android:name=".HomePageLecture"
             android:exported="false" />
         <activity
-            android:name=".QuanlyLophoc"
+            android:name=".LogIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
