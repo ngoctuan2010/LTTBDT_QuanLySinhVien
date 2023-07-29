@@ -44,7 +44,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/edtClassAddingStarted"
+                android:id="@+id/edtLectureAddingId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -69,6 +69,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="20sp" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUserAddingPassword"
@@ -112,7 +113,7 @@
                 android:textSize="20sp" />
 
             <AutoCompleteTextView
-                android:id="@+id/edtClassAddingLecture"
+                android:id="@+id/edtUserAddingCollage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

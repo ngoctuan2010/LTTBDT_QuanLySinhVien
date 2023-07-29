@@ -19,13 +19,15 @@
         <TableRow>
 
             <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="Họ tên: "
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/edtName"
-                android:layout_width="373dp"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
 
         </TableRow>
@@ -43,7 +45,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbMale"
-                    android:layout_width="154dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Nam"
@@ -52,7 +54,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbFemale"
-                    android:layout_width="171dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nữ"
                     android:textColor="@color/black"
@@ -72,6 +74,7 @@
                 android:textColorHint="@color/black"
                 android:hint="dd/MM/yyyy"
                 android:id="@+id/edtBirth"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
 
         </TableRow>
@@ -84,6 +87,7 @@
 
             <EditText
                 android:id="@+id/edtAddress"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
 
         </TableRow>
@@ -98,6 +102,7 @@
             <EditText
                 android:id="@+id/edtPhone"
                 android:inputType="phone"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
         </TableRow>
 
@@ -110,6 +115,7 @@
 
             <EditText
                 android:id="@+id/edtDepartment"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
         </TableRow>
 
@@ -124,6 +130,7 @@
                 android:textColorHint="@color/black"
                 android:hint="yyyy-yyyy"
                 android:id="@+id/edtShoolyear"
+                android:layout_width="wrap_content"
                 android:textColor="@color/black" />
         </TableRow>
     </TableLayout>

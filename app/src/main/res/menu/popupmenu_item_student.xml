@@ -6,4 +6,5 @@
     <item
         android:id="@+id/itemupdateStudent"
         android:title="Sửa" />
+    <item android:title="Xem điểm"/>
 </menu>

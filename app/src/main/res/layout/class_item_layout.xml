@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/gray">
+
+    <TextView
+        android:id="@+id/tvSubjectName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
+        android:padding="10dp"
+        android:text="aaa"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvSubjectClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lớp: IT02"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:padding="6dp"/>
+
+    <TextView
+        android:id="@+id/tvYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Khóa: 2022-2023"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:padding="6dp"/>
+
+    <TextView
+        android:id="@+id/tvNumberStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:text="Sỉ số: 45"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+</LinearLayout>

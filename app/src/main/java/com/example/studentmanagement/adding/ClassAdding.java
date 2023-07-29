@@ -53,12 +53,12 @@ public class ClassAdding extends AppCompatActivity {
 
         edtName = (EditText) findViewById(R.id.edtClassAddingName);
         actvSubject = (AutoCompleteTextView) findViewById(R.id.edtClassAddingSubject);
-        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtClassAddingLecture);
-        edtStarted = (EditText) findViewById(R.id.edtClassAddingStarted);
-        edtQuantity = (EditText) findViewById(R.id.edtClassAddingQuantity);
+        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
+        edtStarted = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtQuantity = (EditText) findViewById(R.id.edtLectureAddingName);
         edtYear = (EditText) findViewById(R.id.edtClassAddingYear);
 
-        btnAdd = (Button) findViewById(R.id.btnClassAdd);
+        btnAdd = (Button) findViewById(R.id.btnLectureAdd);
         btnEdit = (Button) findViewById(R.id.btnClassEdit);
 
         tvTitle = (TextView) findViewById(R.id.tvTitleClassDialog);
@@ -326,7 +326,6 @@ public class ClassAdding extends AppCompatActivity {
             Subject s = new Subject(id, name, credit);
             list.add(s);
         }
-
         return list;
     }
 

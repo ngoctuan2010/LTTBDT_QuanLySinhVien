@@ -29,6 +29,14 @@ public class Class implements Serializable {
         this.started = started;
     }
 
+    public Class(int id, String name, int subject_id, int quantity, String year) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
+        this.quantity = quantity;
+        this.year = year;
+    }
+
     public Class(int id, String name, int subject_id) {
         this.id = id;
         this.name = name;
