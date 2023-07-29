@@ -117,6 +117,15 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
+    public Cursor getDiffUserByUsername(int id, String username){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.ACCOUNT_TABLE +
+                " WHERE " + DBHelper.ACCOUNT_USERNAME + " = ? AND " + DBHelper.ACCOUNT_ID + " != ?;";
+
+        String[] arg = {username, Integer.toString(id)};
+        return db.rawQuery(query, arg);
+    }
+
     public Cursor AccountQuantityStatistical() {
         String query = "SELECT " + DBHelper.ACCOUNT_ROLE + ", count(" + DBHelper.ACCOUNT_ROLE + ") " +
                 "FROM " + DBHelper.ACCOUNT_TABLE +
@@ -263,6 +272,7 @@ public class QLSVDatabase {
         values.put(DBHelper.CLASS_QUANTITY, cl.getQuantity());
         values.put(DBHelper.CLASS_YEAR, cl.getYear());
         values.put(DBHelper.CLASS_STARTED, DateFormatter.reformat(cl.getStarted(), "dd/MM/yyyy", "yyyy-MM-dd"));
+        values.put(DBHelper.CLASS_STATUS, cl.getStatus());
 
         return db.insert(DBHelper.CLASS_TABLE, null, values);
     }
@@ -276,6 +286,7 @@ public class QLSVDatabase {
         values.put(DBHelper.CLASS_QUANTITY, cl.getQuantity());
         values.put(DBHelper.CLASS_YEAR, cl.getYear());
         values.put(DBHelper.CLASS_STARTED, DateFormatter.reformat(cl.getStarted(), "dd/MM/yyyy", "yyyy-MM-dd"));
+        values.put(DBHelper.CLASS_STATUS, cl.getStatus());
 
         String clause = DBHelper.CLASS_ID + " = ?";
         String[] args = {Integer.toString(cl.getId())};
@@ -305,6 +316,15 @@ public class QLSVDatabase {
 
     public Cursor get_list_class() {
         return db.query(DBHelper.CLASS_TABLE, null, null, null, null, null, null);
+    }
+
+    public Cursor get_list_class_by_lecture_active(int lecture_id){
+        String query = "SELECT * " +
+                        "FROM " + DBHelper.CLASS_TABLE +
+                        " WHERE " + DBHelper.CLASS_STATUS + " = 0 AND " + DBHelper.CLASS_LECTURE + " = ?";
+        String[] args = {Integer.toString(lecture_id)};
+
+        return db.rawQuery(query, args);
     }
 
     public Cursor getDiffClassBySubjectAndName(String name, int class_id) {
@@ -384,8 +404,8 @@ public class QLSVDatabase {
                 " WHERE c." + DBHelper.CLASS_ID + " = ? OR " +
                 "c." + DBHelper.CLASS_NAME + " like ? OR " +
                 "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
-                "l." + DBHelper.LECTURE_NAME + " = ?;";
-        String[] args = {str, "%" + str + "%"};
+                "l." + DBHelper.LECTURE_NAME + " like ?;";
+        String[] args = {str, "%" + str + "%", "%" + str + "%", "%" + str + "%"};
         return db.rawQuery(query, args);
     }
 

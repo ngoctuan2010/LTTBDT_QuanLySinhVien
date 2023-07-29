@@ -14,12 +14,13 @@ public class Class implements Serializable {
     private int quantity;
     private String year;
     private String started;
+    private int status;
 
 
     public Class() {
     }
 
-    public Class(int id, String name, int subject_id, int lecture, int quantity, String year, String started) {
+    public Class(int id, String name, int subject_id, int lecture, int quantity, String year, String started, int status) {
         this.id = id;
         this.name = name;
         this.subject_id = subject_id;
@@ -27,6 +28,7 @@ public class Class implements Serializable {
         this.quantity = quantity;
         this.year = year;
         this.started = started;
+        this.status = status;
     }
 
     public Class(int id, String name, int subject_id, int quantity, String year) {
@@ -97,6 +99,14 @@ public class Class implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @NonNull

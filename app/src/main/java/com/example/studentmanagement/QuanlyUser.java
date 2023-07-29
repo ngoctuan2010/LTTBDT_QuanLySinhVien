@@ -25,7 +25,7 @@ import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
 import com.example.service.UserArrrayAdapter;
 import com.example.studentmanagement.adding.UserAdding;
-import com.example.studentmanagement.infomation.UserInformation;
+import com.example.studentmanagement.information.UserInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -179,7 +179,7 @@ public class QuanlyUser extends AppCompatActivity {
                         return false;
                     }
                 });
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_menu_class);
                 popupMenu.show();
             }
         });

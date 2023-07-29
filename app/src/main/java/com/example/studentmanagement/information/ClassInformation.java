@@ -1,4 +1,4 @@
-package com.example.studentmanagement.infomation;
+package com.example.studentmanagement.information;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ClassInfomation extends AppCompatActivity {
+public class ClassInformation extends AppCompatActivity {
     SimpleDateFormat spdf = new SimpleDateFormat("dd/MM/yyyy");
 
     TextView tvId, tvName, tvSubject, tvLecture, tvQuantity, tvYear, tvStarted;
@@ -79,6 +79,7 @@ public class ClassInfomation extends AppCompatActivity {
 
         tvId.setText("ID: " + Integer.toString(_class.getId()));
         tvName.setText("Lớp: " + _class.getName());
+
         Cursor c = db.getListSubjectById(_class.getSubject_id());
         if (c.getCount() > 0) {
             c.moveToFirst();
@@ -101,10 +102,10 @@ public class ClassInfomation extends AppCompatActivity {
         btnAddStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ClassInformation.this);
                 builder.setTitle("Thêm sinh viên vào lớp học");
-                EditText input = new EditText(ClassInfomation.this);
-                TextView view = new TextView(ClassInfomation.this);
+                EditText input = new EditText(ClassInformation.this);
+                TextView view = new TextView(ClassInformation.this);
 
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.addTextChangedListener(new TextWatcher() {
@@ -136,7 +137,7 @@ public class ClassInfomation extends AppCompatActivity {
                     }
                 });
 
-                LinearLayout layout = new LinearLayout(ClassInfomation.this);
+                LinearLayout layout = new LinearLayout(ClassInformation.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
                 layout.addView(input);
                 layout.addView(view);
@@ -148,7 +149,13 @@ public class ClassInfomation extends AppCompatActivity {
                         if (student != null) {
 
                             if (db.is_student_in_class(student.getId(), _class.getId())) {
-                                Toast.makeText(ClassInfomation.this, "Sinh viên đã có trong lớp", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClassInformation.this, "Sinh viên đã có trong lớp", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            if(students.size() + 1 > _class.getQuantity())
+                            {
+                                Toast.makeText(ClassInformation.this, "Lớp đã đủ sinh viên", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
@@ -156,12 +163,12 @@ public class ClassInfomation extends AppCompatActivity {
                             if (db.add_student_to_class(student.getId(), _class.getId()) > 0) {
                                 students.add(student);
                                 adapter.notifyDataSetChanged();
-                                Toast.makeText(ClassInfomation.this, "Đã thêm " + student.getName() + " vào lớp " + _class.getName(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClassInformation.this, "Đã thêm " + student.getName() + " vào lớp " + _class.getName(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(ClassInfomation.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClassInformation.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(ClassInfomation.this, "Chưa tìm thấy sinh viên", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClassInformation.this, "Chưa tìm thấy sinh viên", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -182,13 +189,13 @@ public class ClassInfomation extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Student st = (Student) parent.getItemAtPosition(position);
-                PopupMenu popupMenu = new PopupMenu(ClassInfomation.this, view);
+                PopupMenu popupMenu = new PopupMenu(ClassInformation.this, view);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int id = item.getItemId();
                         if (id == R.id.student_detail) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ClassInformation.this);
                             builder.setTitle("Thông tin sinh viên");
                             builder.setMessage(st.toString());
                             builder.setNeutralButton("Đóng", new DialogInterface.OnClickListener() {
@@ -201,14 +208,14 @@ public class ClassInfomation extends AppCompatActivity {
                             builder.show();
                             return true;
                         } else if (id == R.id.student_score) {
-                            Intent intent = new Intent(ClassInfomation.this, StudentInformation.class);
+                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
                             bundle.putSerializable("student", student);
                             bundle.putSerializable("class", _class);
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
                         } else if (id == R.id.student_remove) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ClassInformation.this);
                             builder.setTitle("Xác nhận");
                             builder.setMessage("Bạn có chắc chắn muốn xoá sinh viên này: " + st.getName() + " - " + st.getId());
                             builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
@@ -217,9 +224,9 @@ public class ClassInfomation extends AppCompatActivity {
                                     if (db.delete_student_from_class(st.getId(), _class.getId()) > 0) {
                                         students.remove(position);
                                         adapter.notifyDataSetChanged();
-                                        Toast.makeText(ClassInfomation.this, "Đã xoá " + st.getName() + " ra khỏi lớp " + _class.getName(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ClassInformation.this, "Đã xoá " + st.getName() + " ra khỏi lớp " + _class.getName(), Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(ClassInfomation.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ClassInformation.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
