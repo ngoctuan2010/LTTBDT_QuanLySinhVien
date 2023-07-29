@@ -106,14 +106,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SCORE_ID = "id";
     public static final String SCORE_STUDENT = "student_id";
     public static final String SCORE_CLASS = "class_id";
-    public static final String SCORE_MIDGRACE = "midGrace";
-    public static final String SCORE_FINALGRACE = "finalGrace";
+    public static final String SCORE_MIDGRADE = "midGrade";
+    public static final String SCORE_FINALGRADE = "finalGrade";
     public static final String CREATE_SCORE = "create table " + SCORE_TABLE + "("
             + SCORE_ID + " integer primary key autoincrement, "
             + SCORE_STUDENT + " integer, "
             + SCORE_CLASS + " integer, "
-            + SCORE_MIDGRACE + " float, "
-            + SCORE_FINALGRACE + " float, "
+            + SCORE_MIDGRADE + " float, "
+            + SCORE_FINALGRADE + " float, "
             + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + ") ON DELETE SET NULL, "
             + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + ") ON DELETE SET NULL);";
 

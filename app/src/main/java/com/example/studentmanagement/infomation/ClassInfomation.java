@@ -2,22 +2,18 @@ package com.example.studentmanagement.infomation;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -205,6 +201,11 @@ public class ClassInfomation extends AppCompatActivity {
                             builder.show();
                             return true;
                         } else if (id == R.id.student_score) {
+                            Intent intent = new Intent(ClassInfomation.this, StudentInformation.class);
+                            bundle.putSerializable("student", student);
+                            bundle.putSerializable("class", _class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                             return true;
                         } else if (id == R.id.student_remove) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ClassInfomation.this);
