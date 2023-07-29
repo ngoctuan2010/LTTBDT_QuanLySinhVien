@@ -33,6 +33,10 @@
         <activity android:name=".QuanlyUser"
             android:exported="true"
             android:parentActivityName=".HomePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".adding.UserAdding"
@@ -78,10 +82,6 @@
         <activity
             android:name=".HomePage"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Register"

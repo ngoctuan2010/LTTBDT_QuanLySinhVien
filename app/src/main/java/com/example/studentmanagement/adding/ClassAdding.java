@@ -216,6 +216,7 @@ public class ClassAdding extends AppCompatActivity {
                        try {
                            if(db.update_class(_class) > 0){
                                Toast.makeText(ClassAdding.this, "Bạn đã cập nhật lớp học thành công", Toast.LENGTH_SHORT).show();
+                               onBackPressed();
                            }else{
                                Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                            }
@@ -263,6 +264,7 @@ public class ClassAdding extends AppCompatActivity {
                             try {
                                 if(db.add_class(_class) > 0){
                                     Toast.makeText(ClassAdding.this, "Bạn đã thêm lớp học thành công", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
                                 }else{
                                     Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                                 }

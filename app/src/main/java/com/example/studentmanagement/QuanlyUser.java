@@ -136,6 +136,10 @@ public class QuanlyUser extends AppCompatActivity {
                         int choice = item.getItemId();
                         if(choice == R.id.object_show){
                             Intent intent = new Intent(QuanlyUser.this, UserInformation.class);
+                            Bundle bundle = new Bundle();
+                            Serializable pack = (Serializable) userList.get(position);
+                            bundle.putSerializable("User", pack);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
                         }else if(choice == R.id.object_edit){
