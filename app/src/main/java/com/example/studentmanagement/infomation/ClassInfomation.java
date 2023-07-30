@@ -202,7 +202,8 @@ public class ClassInfomation extends AppCompatActivity {
                             return true;
                         } else if (id == R.id.student_score) {
                             Intent intent = new Intent(ClassInfomation.this, StudentInformation.class);
-                            bundle.putSerializable("student", student);
+                            Student std = (Student) lvStudents.getItemAtPosition(position);
+                            bundle.putSerializable("student", std);
                             bundle.putSerializable("class", _class);
                             intent.putExtras(bundle);
                             startActivity(intent);
