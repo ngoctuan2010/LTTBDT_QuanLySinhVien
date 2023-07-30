@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -17,7 +19,17 @@ import android.widget.Toast;
 import com.example.pojo.Class;
 import com.example.service.HomeSubjectArrayAdapter;
 import com.example.service.QLSVDatabase;
+<<<<<<< HEAD
 import com.example.service.SharePreferenceServeice;
+import com.example.studentmanagement.information.ClassInformation;
+
+=======
+<<<<<<< HEAD
+import com.example.studentmanagement.infomation.ClassInfomation;
+=======
+import com.example.service.SharePreferenceServeice;
+>>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
+>>>>>>> main
 
 import java.util.ArrayList;
 
@@ -37,7 +49,7 @@ public class HomePageLecture extends AppCompatActivity {
         setContentView(R.layout.activity_home_page_lecture);
 
         spnSemester = (Spinner) findViewById(R.id.spnSemester);
-        lvSubject = (ListView) findViewById(R.id.lvSubject) ;
+        lvSubject = (ListView) findViewById(R.id.lvSubject);
 
         tvName = (TextView) findViewById(R.id.txtName);
         tvId = (TextView) findViewById(R.id.txtId);
@@ -72,6 +84,17 @@ public class HomePageLecture extends AppCompatActivity {
             listClass.add(new Class(id, name, idSubject, quantity, year));
         }
         lvSubject.setAdapter(homeSubjectArrayAdapter);
+        lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
+                Bundle bundle1 = new Bundle();
+                Class cl = (Class) lvSubject.getItemAtPosition(i);
+                bundle1.putSerializable("class", cl);
+                intent.putExtras(bundle1);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

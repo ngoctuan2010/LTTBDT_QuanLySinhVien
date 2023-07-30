@@ -50,9 +50,22 @@ public class UserAdding extends AppCompatActivity {
 
         tvTitle = (TextView)findViewById(R.id.tvTitleUserDialog);
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
+<<<<<<< HEAD
         edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
         tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
         edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
+
+=======
+<<<<<<< HEAD
+        edtUsername = (EditText) findViewById(R.id.edtLectureAddingId);
+        tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
+=======
+        edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
+        tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
+>>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
+>>>>>>> main
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 
