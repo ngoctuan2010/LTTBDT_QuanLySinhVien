@@ -208,18 +208,10 @@ public class ClassInformation extends AppCompatActivity {
                             builder.show();
                             return true;
                         } else if (id == R.id.student_score) {
-<<<<<<< HEAD
                             Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
-=======
-<<<<<<< HEAD:app/src/main/java/com/example/studentmanagement/infomation/ClassInfomation.java
-                            Intent intent = new Intent(ClassInfomation.this, StudentInformation.class);
->>>>>>> main
                             Student std = (Student) lvStudents.getItemAtPosition(position);
                             bundle.putSerializable("student", std);
-=======
-                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
-                            bundle.putSerializable("student", student);
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c:app/src/main/java/com/example/studentmanagement/information/ClassInformation.java
+//                            bundle.putSerializable("student", student);
                             bundle.putSerializable("class", _class);
                             intent.putExtras(bundle);
                             startActivity(intent);
@@ -255,7 +247,6 @@ public class ClassInformation extends AppCompatActivity {
                 });
                 popupMenu.inflate(R.menu.popup_menu_student_in_class);
                 popupMenu.setGravity(Gravity.END);
-
                 popupMenu.show();
             }
         });

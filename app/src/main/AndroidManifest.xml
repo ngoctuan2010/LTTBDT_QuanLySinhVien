@@ -12,186 +12,67 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         tools:targetApi="31">
-        <activity
-            android:name=".AdminStatistical"
-<<<<<<< HEAD
+        <activity android:name=".AdminStatistical"
             android:exported="true"></activity>
-=======
-            android:exported="true">
-        </activity>
->>>>>>> main
-        <activity
-            android:name=".information.LectureInformation"
+        <activity android:name=".information.LectureInformation"
             android:exported="false"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.SubjectInformation"
-<<<<<<< HEAD
-=======
+        <activity android:name=".information.SubjectInformation"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.UserInformation"
+        <activity android:name=".information.UserInformation"
             android:exported="false"
             android:theme="@style/MyDialog" />
         <activity android:name=".information.ClassInformation"
             android:exported="false"/>
-        <activity
-            android:name=".adding.LectureAdding"
+        <activity android:name=".information.StudentInformation"
+            android:exported="false"/>
+        <activity android:name=".adding.LectureAdding"
             android:exported="false"
             android:theme="@style/MyDialog" />
-        <activity
-<<<<<<< HEAD
-            android:name=".infomation.SubjectInfomation"
->>>>>>> main
-            android:exported="false"
-            android:parentActivityName=".QuanlyMonhoc"
-            android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.UserInformation"
-            android:exported="false"
-            android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.ClassInformation"
-            android:exported="false" />
-        <activity
-<<<<<<< HEAD
-            android:name=".adding.LectureAdding"
-            android:exported="false"
-            android:theme="@style/MyDialog" />
-        <!--        <activity-->
-        <!--            android:name=".QuanlyUser"-->
-        <!--            android:exported="true" />-->
-
-
-        <!--        <activity-->
-        <!--            android:name=".QuanlyUser"-->
-        <!--            android:exported="true" />-->
-        <!--        <activity-->
-        <!--            android:name=".QuanlyUser"-->
-        <!--            android:exported="true" />-->
-        <activity
-
-=======
-=======
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
-            android:name=".adding.UserAdding"
+        <activity android:name=".adding.UserAdding"
             android:exported="true"
             android:parentActivityName=".QuanlyUser"
             android:theme="@style/MyDialog"></activity>
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> main
-        <activity
-            android:name=".QuanlyMonhoc"
+        <activity android:name=".QuanlyMonhoc"
             android:exported="false"
             android:parentActivityName=".HomePageAdmin" />
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
-        <activity
-            android:name=".adding.SubjectAdding"
+        <activity android:name=".adding.SubjectAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> main
-        <activity
-            android:name=".QuanlyLophoc"
+        <activity android:name=".QuanlyLophoc"
             android:exported="false"
             android:parentActivityName=".HomePageAdmin" />
-=======
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
-        <activity
-            android:name=".adding.ClassAdding"
+        <activity android:name=".adding.ClassAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyLophoc"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".ProfileLecture"
+        <activity android:name=".ProfileLecture"
             android:exported="false"
             android:parentActivityName=".HomePageLecture" />
-        <activity
-            android:name=".adding.StudentAdding"
+        <activity android:name=".adding.StudentAdding"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-        <activity
-            android:name=".StudentUpdate"
+        <activity android:name=".StudentUpdate"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-<<<<<<< HEAD
-        <activity
-            android:name=".QuanLyGiangVien"
-            android:exported="false"
-            android:parentActivityName=".HomePageAdmin" />
-=======
-        <activity android:name=".QuanlySinhvien"
-            android:exported="false"/>
-        <activity
-            android:name=".QuanlyUser"
-            android:exported="true" >
-        </activity>
-        <activity
-            android:name=".QuanlyLophoc"
-            android:exported="true"
-            android:parentActivityName=".HomePageAdmin">
-        </activity>
-        <activity android:name=".QuanlyMonhoc"
-            android:exported="false"
-            android:parentActivityName=".HomePageAdmin"/>
         <activity android:name=".QuanLyGiangVien"
             android:exported="false"
-            android:parentActivityName=".HomePageAdmin"/>
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
-        <activity
-            android:name=".QuanlySinhvien"
+            android:parentActivityName=".HomePageAdmin" />
+        <activity android:name=".QuanlySinhvien"
+            android:exported="false"/>
+        <activity android:name=".QuanlyUser"
+            android:exported="true" >
+        </activity>
+        <activity android:name=".HomePageAdmin"
             android:exported="false" />
-        <activity
-            android:name=".QuanlyUser"
-            android:exported="true" />
-        <activity
-            android:name=".HomePageAdmin"
+        <activity android:name=".Register"
             android:exported="false" />
-        <activity
-<<<<<<< HEAD
-            android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".HomePageLecture"
-            android:exported="false" />
-        <activity
-            android:name=".LogIn"
-<<<<<<< HEAD
-=======
-=======
->>>>>>> main
-            android:name=".infomation.StudentInformation"
-            android:exported="false" />
-        <activity
-            android:name=".QuanlySinhvien"
-<<<<<<< HEAD
-=======
->>>>>>> vu
->>>>>>> main
-=======
-            android:name=".HomePageLecture"
-            android:exported="false" />
-        <activity
-            android:name=".Register"
+        <activity android:name=".HomePageLecture"
             android:exported="false" />
         <activity android:name=".LogIn"
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

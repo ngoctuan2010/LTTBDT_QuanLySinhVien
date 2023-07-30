@@ -19,17 +19,9 @@ import android.widget.Toast;
 import com.example.pojo.Class;
 import com.example.service.HomeSubjectArrayAdapter;
 import com.example.service.QLSVDatabase;
-<<<<<<< HEAD
 import com.example.service.SharePreferenceServeice;
 import com.example.studentmanagement.information.ClassInformation;
 
-=======
-<<<<<<< HEAD
-import com.example.studentmanagement.infomation.ClassInfomation;
-=======
-import com.example.service.SharePreferenceServeice;
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
 
 import java.util.ArrayList;
 
