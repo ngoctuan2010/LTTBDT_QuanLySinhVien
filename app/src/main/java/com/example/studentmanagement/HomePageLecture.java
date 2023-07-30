@@ -22,7 +22,6 @@ import com.example.service.QLSVDatabase;
 import com.example.service.SharePreferenceServeice;
 import com.example.studentmanagement.information.ClassInformation;
 
-
 import java.util.ArrayList;
 
 public class HomePageLecture extends AppCompatActivity {

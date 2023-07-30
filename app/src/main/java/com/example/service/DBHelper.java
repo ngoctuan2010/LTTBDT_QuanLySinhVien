@@ -34,14 +34,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SUBJECT_ID = "id";
     public static final String SUBJECT_NAME = "name";
     public static final String SUBJECT_CREDIT = "credit";
-    public static final String SUBJECT_FINALGRACEPERCENT = "finalGracePercent";
-    public static final String SUBJECT_MIDGRACEPERCENT = "midGracePercent";
+    public static final String SUBJECT_FINALGRADEPERCENT = "finalGradePercent";
+    public static final String SUBJECT_MIDGRADEPERCENT = "midGradePercent";
     public static final String CREATE_SUBJECT = "create table " + SUBJECT_TABLE + "( "
             + SUBJECT_ID + " integer primary key autoincrement, "
             + SUBJECT_NAME + " nvarchar(20), "
             + SUBJECT_CREDIT + " integer, "
-            + SUBJECT_MIDGRACEPERCENT + " float, "
-            + SUBJECT_FINALGRACEPERCENT + " float);";
+            + SUBJECT_MIDGRADEPERCENT + " float, "
+            + SUBJECT_FINALGRADEPERCENT + " float);";
 
     //LECTURE
     public static final String LECTURE_TABLE = "lecture";

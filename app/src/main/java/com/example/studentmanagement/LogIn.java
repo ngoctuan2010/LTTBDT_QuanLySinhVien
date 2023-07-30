@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pojo.Lecture;
+import com.example.pojo.Subject;
 import com.example.pojo.User;
 import com.example.service.HashSHA1;
 import com.example.service.QLSVDatabase;
@@ -38,6 +39,7 @@ public class LogIn extends AppCompatActivity {
         getSupportActionBar().hide();
 
         db = new QLSVDatabase(this);
+
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 //        db.add_subject(new Subject(1, "Lập trình Java", 4));
 //        db.add_class(new Class(1, "IT02", 1, 1, 45, "2022-2023", "03/07/2022"));
@@ -76,6 +78,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (logIn()) {
+
 
                     if(mckRemember.isChecked())
                         sharePreferenceServeice.putString("remember", "Check");

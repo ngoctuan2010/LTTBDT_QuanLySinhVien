@@ -53,6 +53,7 @@ public class UserAdding extends AppCompatActivity {
         edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
         tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
         edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
+
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 
