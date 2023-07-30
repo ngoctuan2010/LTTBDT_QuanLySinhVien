@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ClassAdding extends AppCompatActivity {
+    DateFormatter df = new DateFormatter("yyyy-MM-dd");
+
     EditText edtName, edtStarted, edtQuantity, edtYear;
 
     AutoCompleteTextView actvSubject, actvLecture;

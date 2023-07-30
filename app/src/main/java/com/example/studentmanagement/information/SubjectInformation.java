@@ -29,6 +29,6 @@ public class SubjectInformation extends AppCompatActivity {
         tvId.setText("ID: " + Integer.toString(subject.getId()));
         tvName.setText("Tên môn học: " + subject.getName());
         tvCredit.setText("Số tín chỉ: " + Integer.toString(subject.getCredit()));
-        tvClass.setText("Tỉ lệ điểm(GK:CK): " + Double.toString(subject.getMidGradePercent()) + ":" + Double.toString(subject.getFinalGradePercent()));
+        tvClass.setText("Tỉ lệ điểm(GK:CK): " + Double.toString(subject.getMidGracePercent()) + ":" + Double.toString(subject.getFinalGracePercent()));
     }
 }

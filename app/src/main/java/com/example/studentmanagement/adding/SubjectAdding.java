@@ -27,6 +27,15 @@ public class SubjectAdding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_subject_adding);
         db = new QLSVDatabase(this);
+
+        edtSubjectCredit = (EditText) findViewById(R.id.edtClassAddingQuantity);
+        edtSubjectName = (EditText) findViewById(R.id.edtClassAddingStarted);
+        edtSubjectMid = (EditText)findViewById(R.id.edtSubjectAddingMid);
+        edtSubjectFinal = (EditText)findViewById(R.id.edtSubjectAddingFinal);
+
+        btnSubjectAdd = (Button) findViewById(R.id.btnClassAdd);
+        btnSubjectUpdate = (Button) findViewById(R.id.btnSubjectEdit);
+
         edtSubjectCredit = (EditText) findViewById(R.id.edtLectureAddingName);
         edtSubjectName = (EditText) findViewById(R.id.edtUserAddingUsername);
         btnSubjectAdd = (Button) findViewById(R.id.btnLectureAdd);
@@ -43,8 +52,8 @@ public class SubjectAdding extends AppCompatActivity {
             Subject subject = (Subject) bundle.getSerializable("Subject");
             edtSubjectName.setText(subject.getName());
             edtSubjectCredit.setText(Integer.toString(subject.getCredit()));
-            edtSubjectMid.setText(Double.toString(subject.getMidGradePercent()));
-            edtSubjectFinal.setText(Double.toString(subject.getFinalGradePercent()));
+            edtSubjectMid.setText(Double.toString(subject.getMidGracePercent()));
+            edtSubjectFinal.setText(Double.toString(subject.getFinalGracePercent()));
 
             btnSubjectUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,8 +72,8 @@ public class SubjectAdding extends AppCompatActivity {
 
                         subject.setName(name);
                         subject.setCredit(credit);
-                        subject.setMidGradePercent(_mid);
-                        subject.setFinalGradePercent(_final);
+                        subject.setMidGracePercent(_mid);
+                        subject.setFinalGracePercent(_final);
 
                         if (db.getDiffSubjectByName(subject.getId(), subject.getName()).getCount() > 0) {
                             Toast.makeText(SubjectAdding.this, "Môn học đã tồn tại", Toast.LENGTH_SHORT).show();

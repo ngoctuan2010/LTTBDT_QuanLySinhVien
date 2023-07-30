@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.example.service.QLSVDatabase;
 import com.example.service.SharePreferenceServeice;
 import com.example.studentmanagement.information.ClassInformation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class HomePageLecture extends AppCompatActivity {
@@ -64,6 +67,7 @@ public class HomePageLecture extends AppCompatActivity {
 
         ArrayList<Class> listClass = new ArrayList<Class>();
         HomeSubjectArrayAdapter homeSubjectArrayAdapter = new HomeSubjectArrayAdapter(HomePageLecture.this, R.layout.class_item_layout, listClass);
+
         Cursor cursor = db.get_list_class_by_lecture_active(IdLecture);
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
@@ -74,62 +78,67 @@ public class HomePageLecture extends AppCompatActivity {
             String year = cursor.getString(5);
             listClass.add(new Class(id, name, idSubject, quantity, year));
         }
+        cursor.close();
         lvSubject.setAdapter(homeSubjectArrayAdapter);
+
         lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
-                Bundle bundle1 = new Bundle();
-                Class cl = (Class) lvSubject.getItemAtPosition(i);
-                bundle1.putSerializable("class", cl);
-                intent.putExtras(bundle1);
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {int id = menuItem.getItemId();
+                        if (id == R.id.object_show) {
+                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
+                            Bundle bundle = new Bundle();
+                            Serializable pack = (Serializable) listClass.get(position);
+                            bundle.putSerializable("class", pack);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            return true;
+                        } else if (id == R.id.object_delete) {
+                            Toast.makeText(HomePageLecture.this, "Bạn không thể xóa lớp", Toast.LENGTH_SHORT).show();
+                        } else if (id == R.id.object_edit) {
+                            Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
+                        }
+
+                        return false;
+                    }
+                });
+
+                popupMenu.inflate(R.menu.popup_class_item);
+                popupMenu.setGravity(Gravity.END);
+                popupMenu.show();
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_menu, menu);
-        menu.setGroupVisible(R.id.grMenuDefault, true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_profile) {
-            Intent intent = new Intent(HomePageLecture.this, ProfileLecture.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("LectureId", idLecture);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_class) {
-            Toast.makeText(this, "Bạn vào trang sửa lớp", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_collape) {
-            Toast.makeText(this, "Bạn vào trang sửa giảng viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_student) {
-            Toast.makeText(this, "Bạn vào trang sửa sinh viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_subject) {
-            Toast.makeText(this, "Bạn vào trang sửa môn học", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_sign_out) {
-            sharePreferenceServeice.clear();
-            Intent intent = new Intent(HomePageLecture.this, LogIn.class);
-            startActivity(intent);
-            Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        return true;
+//        lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//                        int id = menuItem.getItemId();
+//                        if (id == R.id.object_show) {
+//                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
+//                            Bundle bundle = new Bundle();
+//                            Serializable pack = (Serializable) listClass.get(position);
+//                            bundle.putSerializable("class", pack);
+//                            intent.putExtras(bundle);
+//                            startActivity(intent);
+//                            return true;
+//                        } else if (id == R.id.object_delete) {
+//                            Toast.makeText(HomePageLecture.this, "Bạn không thể xóa lớp", Toast.LENGTH_SHORT).show();
+//                        } else if (id == R.id.object_edit) {
+//                            Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
+//                        }
+//                        return false;
+//                    }
+//                });
+//
+//                popupMenu.inflate(R.menu.popup_class_item);
+//                popupMenu.setGravity(Gravity.END);
+//                popupMenu.show();
     }
 }

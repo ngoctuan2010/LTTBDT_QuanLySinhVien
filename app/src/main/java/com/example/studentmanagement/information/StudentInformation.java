@@ -57,8 +57,8 @@ public class StudentInformation extends AppCompatActivity {
         showScore(score);
 
         Subject subject = database.getSubjectByClass(aClass.getId());
-        percentMidGrade = subject.getMidGradePercent();
-        percentFinalGrade = subject.getFinalGradePercent();
+        percentMidGrade = subject.getMidGracePercent();
+        percentFinalGrade = subject.getFinalGracePercent();
         showAverageScoreOnCreate();
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
