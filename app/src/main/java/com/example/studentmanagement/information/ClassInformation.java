@@ -208,19 +208,10 @@ public class ClassInformation extends AppCompatActivity {
                             builder.show();
                             return true;
                         } else if (id == R.id.student_score) {
-<<<<<<< HEAD
-                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
-=======
-<<<<<<< HEAD:app/src/main/java/com/example/studentmanagement/infomation/ClassInfomation.java
-                            Intent intent = new Intent(ClassInfomation.this, StudentInformation.class);
->>>>>>> main
                             Student std = (Student) lvStudents.getItemAtPosition(position);
                             bundle.putSerializable("student", std);
-=======
-                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
-                            bundle.putSerializable("student", student);
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c:app/src/main/java/com/example/studentmanagement/information/ClassInformation.java
                             bundle.putSerializable("class", _class);
+                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
