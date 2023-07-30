@@ -13,7 +13,12 @@
         android:theme="@style/MyTheme"
         tools:targetApi="31">
         <activity android:name=".AdminStatistical"
-            android:exported="true"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".information.LectureInformation"
             android:exported="false"
             android:theme="@style/MyDialog" />
@@ -74,10 +79,7 @@
             android:exported="false" />
         <activity android:name=".LogIn"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 </manifest>
