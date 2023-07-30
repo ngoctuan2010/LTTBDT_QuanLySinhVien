@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".infomation.UserInformation">
+    tools:context=".information.UserInformation">
 
     <TextView
         android:id="@+id/textView13"
@@ -39,53 +39,13 @@
         android:textColor="@color/black"
         android:textSize="15sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="-100dp"
-            android:layout_weight="2"
-            android:padding="5dp"
-            android:text="Mật khẩu:"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:touchscreenBlocksFocus="false"
-            app:hintEnabled="false"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/black">
-
-            <EditText
-                android:id="@+id/edtUserInfoPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                android:ems="10"
-                android:focusableInTouchMode="false"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
     <TextView
         android:id="@+id/tvUserInfoRole"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="5dp"
-        android:text="Mật khẩu:"
+        android:text="Vai trò:"
         android:textColor="@color/black"
         android:textSize="15sp" />
 

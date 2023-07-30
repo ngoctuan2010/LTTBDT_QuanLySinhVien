@@ -20,14 +20,14 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 
 import com.example.pojo.Class;
-import com.example.pojo.Lecture;
 import com.example.service.ClassArrayAdapter;
 import com.example.service.DateFormatter;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.adding.ClassAdding;
-import com.example.studentmanagement.infomation.ClassInfomation;
+import com.example.studentmanagement.information.ClassInformation;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class QuanlyLophoc extends AppCompatActivity {
@@ -77,8 +77,8 @@ public class QuanlyLophoc extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int id = item.getItemId();
-                        if(id == R.id.object_show) {
-                            Intent intent = new Intent(QuanlyLophoc.this, ClassInfomation.class);
+                        if(id == R.id.class_detail) {
+                            Intent intent = new Intent(QuanlyLophoc.this, ClassInformation.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) classList.get(position);
                             bundle.putSerializable("class", pack);
@@ -86,7 +86,7 @@ public class QuanlyLophoc extends AppCompatActivity {
                             startActivity(intent);
                             return true;
                         }
-                        else if(id == R.id.object_edit) {
+                        else if(id == R.id.class_edit) {
                             Intent intent = new Intent(QuanlyLophoc.this, ClassAdding.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) classList.get(position);
@@ -95,7 +95,7 @@ public class QuanlyLophoc extends AppCompatActivity {
                             startActivity(intent);
                             return true;
                         }
-                        else if(id == R.id.object_delete){
+                        else if(id == R.id.class_remove){
                             Cursor c = db.getListSubjectById(classList.get(position).getSubject_id());
                             c.moveToFirst();
                             String subject_name = c.getString(1);
@@ -123,12 +123,29 @@ public class QuanlyLophoc extends AppCompatActivity {
                             builder.create();
                             builder.show();
                             return true;
+                        }else if(id == R.id.class_close){
+                            Class chosen_class = classList.get(position);
+                            String started;
+                            try {
+                                started = DateFormatter.reformat(chosen_class.getStarted(), "yyyy-MM-dd", "dd/MM/yyyy");
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            chosen_class.setStarted(started);
+                            chosen_class.setStatus(1);
+                            try {
+                                db.update_class(chosen_class);
+                                onResume();
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                         return false;
                     }
                 });
 
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_class_item);
                 popupMenu.setGravity(Gravity.END);
                 popupMenu.show();
             }
@@ -181,7 +198,8 @@ public class QuanlyLophoc extends AppCompatActivity {
             int quantity = c.getInt(4);
             String year = c.getString(5);
             String stared = c.getString(6);
-            Class _class = new Class(id, name, subject, lecture, quantity, year, stared);
+            int status = c.getInt(7);
+            Class _class = new Class(id, name, subject, lecture, quantity, year, stared, status);
             classList.add(_class);
         }
         adapter.notifyDataSetChanged();

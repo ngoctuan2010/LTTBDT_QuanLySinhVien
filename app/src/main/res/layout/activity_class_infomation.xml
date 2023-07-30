@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".infomation.ClassInfomation">
+    tools:context=".information.ClassInformation">
 
     <TextView
         android:layout_width="match_parent"

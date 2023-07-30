@@ -1,4 +1,4 @@
-package com.example.studentmanagement.infomation;
+package com.example.studentmanagement.information;
 
 import android.os.Bundle;
 import android.text.Editable;

@@ -91,7 +91,7 @@
         android:textSize="20sp" />
 
     <AutoCompleteTextView
-        android:id="@+id/edtUserAddingCollage"
+        android:id="@+id/edtUserAddingLecture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10sp"
@@ -157,7 +157,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/edtLectureAddingId"
+            android:id="@+id/edtUserAddingUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
