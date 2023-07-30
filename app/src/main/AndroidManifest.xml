@@ -63,8 +63,6 @@
         <activity android:name=".StudentUpdate"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-        <activity android:name=".QuanlySinhvien"
-            android:exported="false"/>
         <activity
             android:name=".QuanLyGiangVien"
             android:exported="false"

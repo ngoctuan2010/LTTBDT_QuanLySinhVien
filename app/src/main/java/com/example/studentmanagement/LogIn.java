@@ -43,8 +43,10 @@ public class LogIn extends AppCompatActivity {
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 //        db.add_subject(new Subject(1, "Lập trình Java", 4));
 //        db.add_class(new Class(1, "IT02", 1, 1, 45, "2022-2023", "03/07/2022"));
-//        db.add_lecture(new Lecture(1, "Trong Nghia"));
+//        db.add_lecture(new Lecture(1, "Trong Nghia", false, "03/07/2002", "TP.HCM", "0971934970", "CNTT"));
 //        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
+//        db.add_user(new User(1, "admin", "123", 0, 1));
+//        db.add_user(new User(1, "nghia", "123", 0, 1));
 //        db.add_user(new User(1, "admin", "123", 1, 1));
 //        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
 

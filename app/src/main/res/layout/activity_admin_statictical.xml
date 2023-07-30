@@ -411,6 +411,36 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lightBlue"
+                    android:padding="10dp"
+                    android:text="Giảng viên"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <Spinner
+                    android:id="@+id/spnLecture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_custom"/>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pcScorePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="10sp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
