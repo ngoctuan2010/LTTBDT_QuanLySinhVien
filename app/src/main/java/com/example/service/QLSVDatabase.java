@@ -193,8 +193,8 @@ public class QLSVDatabase {
         ContentValues values = new ContentValues();
         values.put(DBHelper.SUBJECT_NAME, subject.getName());
         values.put(DBHelper.SUBJECT_CREDIT, subject.getCredit());
-        values.put(DBHelper.SUBJECT_MIDGRACEPERCENT, subject.getMidGradePercent());
-        values.put(DBHelper.SUBJECT_FINALGRACEPERCENT, subject.getFinalGradePercent());
+        values.put(DBHelper.SUBJECT_MIDGRADEPERCENT, subject.getMidGradePercent());
+        values.put(DBHelper.SUBJECT_FINALGRADEPERCENT, subject.getFinalGradePercent());
 
         return db.insert(DBHelper.SUBJECT_TABLE, null, values);
     }
@@ -204,8 +204,8 @@ public class QLSVDatabase {
         values.put(DBHelper.SUBJECT_ID, subject.getId());
         values.put(DBHelper.SUBJECT_NAME, subject.getName());
         values.put(DBHelper.SUBJECT_CREDIT, subject.getCredit());
-        values.put(DBHelper.SUBJECT_MIDGRACEPERCENT, subject.getMidGradePercent());
-        values.put(DBHelper.SUBJECT_FINALGRACEPERCENT, subject.getFinalGradePercent());
+        values.put(DBHelper.SUBJECT_MIDGRADEPERCENT, subject.getMidGradePercent());
+        values.put(DBHelper.SUBJECT_FINALGRADEPERCENT, subject.getFinalGradePercent());
 
         String clause = DBHelper.SUBJECT_ID + " = ?";
         String[] args = {Integer.toString(subject.getId())};
@@ -658,8 +658,8 @@ public class QLSVDatabase {
             int idIndex = cursor.getColumnIndex(DBHelper.SUBJECT_ID);
             int nameIndex = cursor.getColumnIndex(DBHelper.SUBJECT_NAME);
             int creditIndex = cursor.getColumnIndex(DBHelper.SUBJECT_CREDIT);
-            int midGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_MIDGRACEPERCENT);
-            int finalGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_FINALGRACEPERCENT);
+            int midGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_MIDGRADEPERCENT);
+            int finalGracePercentIndex = cursor.getColumnIndex(DBHelper.SUBJECT_FINALGRADEPERCENT);
 
             if (idIndex >= 0 && nameIndex >= 0 && creditIndex >= 0 && midGracePercentIndex >= 0 && finalGracePercentIndex >= 0) {
                 int id = cursor.getInt(idIndex);
