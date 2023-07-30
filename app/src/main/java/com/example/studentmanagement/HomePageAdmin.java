@@ -112,6 +112,7 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_student) {
+            Intent intent = new Intent(HomePageAdmin.this, QuanlySinhvien.class);
             Toast.makeText(this, "Bạn vào trang sửa sinh viên", Toast.LENGTH_SHORT).show();
         }
 

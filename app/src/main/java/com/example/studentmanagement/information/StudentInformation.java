@@ -87,8 +87,8 @@ public class StudentInformation extends AppCompatActivity {
             double s10 = m * percentMidGrade * 0.1 + e * percentFinalGrade * 0.1;
             double s4 = s10 * 0.4;
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
-            txtScore10.setText(decimalFormat.format(s10));
-            txtScore4.setText(decimalFormat.format(s4));
+            txtScore10.setText(String.valueOf(s10));
+            txtScore4.setText(String.valueOf(s4));
         } else {
             txtScore10.setText("");
             txtScore4.setText("");

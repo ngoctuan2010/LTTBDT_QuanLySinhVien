@@ -30,6 +30,7 @@
             android:theme="@style/MyDialog" />
         <activity
             android:name=".information.ClassInformation"
+            android:parentActivityName=".QuanlyLophoc"
             android:exported="false" />
         <activity
             android:name=".adding.LectureAdding"
