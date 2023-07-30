@@ -189,7 +189,6 @@ public class QuanlyLophoc extends AppCompatActivity {
     public void initData(Cursor c) {
         DateFormatter df = new DateFormatter("dd/MM/yyyy");
         c.moveToPosition(-1);
-        if(c.getString(1)!=null);
         while(c.moveToNext()){
             int id = c.getInt(0);
             String name = c.getString(1);

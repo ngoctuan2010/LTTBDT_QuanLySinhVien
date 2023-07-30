@@ -19,6 +19,7 @@ import com.example.pojo.Subject;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.R;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 public class StudentInformation extends AppCompatActivity {
@@ -83,10 +84,11 @@ public class StudentInformation extends AppCompatActivity {
         if (!checkEmty() && checkInput()) {
             double m = Double.parseDouble(edtMidScore.getText().toString().trim());
             double e = Double.parseDouble(edtEndScore.getText().toString().trim());
-            double s10 = m * percentMidGrade + e * percentFinalGrade;
+            double s10 = m * percentMidGrade * 0.1 + e * percentFinalGrade * 0.1;
             double s4 = s10 * 0.4;
-            txtScore10.setText(String.valueOf(s10));
-            txtScore4.setText(String.valueOf(s4));
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            txtScore10.setText(decimalFormat.format(s10));
+            txtScore4.setText(decimalFormat.format(s4));
         } else {
             txtScore10.setText("");
             txtScore4.setText("");

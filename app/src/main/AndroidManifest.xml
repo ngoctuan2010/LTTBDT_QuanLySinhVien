@@ -38,8 +38,7 @@
         <activity
             android:name=".QuanlySinhvien"
             android:exported="false"
-            android:parentActivityName=".QuanlyMonhoc"
-            android:theme="@style/MyDialog" />
+            android:parentActivityName=".QuanlyMonhoc" />
         <activity
             android:name=".adding.UserAdding"
             android:exported="true"
@@ -49,6 +48,10 @@
             android:name=".QuanlyMonhoc"
             android:exported="false"
             android:parentActivityName=".HomePageAdmin" />
+        <activity
+            android:name=".information.StudentInformation"
+            android:exported="false"
+            android:parentActivityName=".information.ClassInformation" />
         <activity
             android:name=".adding.SubjectAdding"
             android:exported="false"

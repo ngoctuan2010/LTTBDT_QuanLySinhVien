@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pojo.Class;
 import com.example.pojo.Lecture;
 import com.example.pojo.Subject;
 import com.example.pojo.User;
@@ -51,12 +52,17 @@ public class LogIn extends AppCompatActivity {
         db.add_user(new User(1, "admin", "123", 1, 1));
         db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
-//        db.add_subject(new Subject(1, "Lập trình Java", 4));
+        db.add_subject(new Subject(1, "Lập trình Java", 4));
 //        db.add_class(new Class(1, "IT02", 1, 1, 45, "2022-2023", "03/07/2022"));
-//        db.add_lecture(new Lecture(1, "Trong Nghia"));
-//        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
-//        db.add_user(new User(1, "admin", "123", 1, 1));
-//        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
+        db.add_lecture(new Lecture(1, "Trong Nghia"));
+        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
+        db.add_user(new User(1, "admin", "123", 1, 1));
+        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
+        try {
+            db.add_class(new Class(1,"IT03", 1,1,45,"2022-2023", "03/07/2023",1));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         medtUsername = (EditText) findViewById(R.id.edtMaGV);
         medtPassword = (EditText) findViewById(R.id.edtPassword);
