@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.service.QLSVDatabase;
 
 public class HomePageAdmin extends AppCompatActivity {
-    ImageButton mbtnStudent, mbtnCollage, mbtnSubject, mbtnClass;
+    ImageButton mbtnStudent, mbtnCollage, mbtnSubject, mbtnClass, mbtnUser, mbtnStatistical;
     TextView mtxtName, mtxtId, mtxtBirth;
 
     QLSVDatabase db;
@@ -30,6 +30,8 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnCollage = (ImageButton) findViewById(R.id.btnCollage);
         mbtnSubject = (ImageButton) findViewById(R.id.btnSubject);
         mbtnClass = (ImageButton) findViewById(R.id.btnClass);
+        mbtnUser = (ImageButton) findViewById(R.id.btnUserManagement);
+        mbtnStatistical = (ImageButton) findViewById(R.id.btnStatistical);
 
         mtxtName = (TextView) findViewById(R.id.txtName);
         mtxtId = (TextView) findViewById(R.id.txtId);
@@ -53,8 +55,8 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomePageAdmin.this, "Bạn chọn vào quản lý sinh viên", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(HomePageAdmin.this, QuanlySinhvien.class);
+                startActivity(intent);
             }
         });
         mbtnCollage.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +76,22 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, QuanlyLophoc.class);
+                Intent intent = new Intent(HomePageAdmin.this, QuanlyLophoc.class);
                 startActivity(intent);
-                Toast.makeText(HomePage.this, "Bạn chọn vòa quản lý lớp học", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mbtnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePageAdmin.this, QuanlyUser.class);
+                startActivity(intent);
+            }
+        });
+        mbtnStatistical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePageAdmin.this, AdminStatistical.class);
+                startActivity(intent);
             }
         });
     }
@@ -100,7 +115,8 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_class) {
-            Toast.makeText(this, "Bạn vào trang sửa lớp", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanlyLophoc.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_collape) {
@@ -109,7 +125,8 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_student) {
-            Toast.makeText(this, "Bạn vào trang sửa sinh viên", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomePageAdmin.this, QuanlySinhvien.class);
+            startActivity(intent);
         }
 
         if (id == R.id.action_subject) {
@@ -122,6 +139,14 @@ public class HomePageAdmin extends AppCompatActivity {
             startActivity(intent);
             Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
             finish();
+        }
+        if (id == R.id.action_user) {
+            Intent intent = new Intent(HomePageAdmin.this, QuanlyUser.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_statistical) {
+            Intent intent = new Intent(HomePageAdmin.this, AdminStatistical.class);
+            startActivity(intent);
         }
         return true;
     }

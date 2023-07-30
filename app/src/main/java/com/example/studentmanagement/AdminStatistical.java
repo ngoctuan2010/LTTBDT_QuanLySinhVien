@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pojo.Class;
+import com.example.pojo.Lecture;
 import com.example.pojo.Student;
 import com.example.pojo.Subject;
 import com.example.pojo.User;
@@ -56,9 +57,9 @@ public class AdminStatistical extends AppCompatActivity {
     AutoCompleteTextView acClassScore;
 
     Button btnSubjectRun, btnClassRun;
-    Spinner spSubject;
+    Spinner spSubject, spLecture;
 
-    PieChart chartUser, chartLecture, chartStudent;
+    PieChart chartUser, chartLecture, chartStudent, chartScorePass;
 
     LineChart chartSubject;
 
@@ -67,10 +68,12 @@ public class AdminStatistical extends AppCompatActivity {
 
     QLSVDatabase db;
 
+    ArrayList<Lecture> lectures = new ArrayList<>();
     ArrayList<Subject> subjects = new ArrayList<>();
     ArrayList<Class> classes = new ArrayList<>();
     ArrayAdapter subjectAdapter;
     ArrayAdapter classAdaper;
+    ArrayAdapter lectureAdapter;
 
     int score_class_id = -1;
 
@@ -161,6 +164,23 @@ public class AdminStatistical extends AppCompatActivity {
             }
         });
 
+        Cursor cursor = db.getListLecture();
+        lectureAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lectures);
+        initLectureList(cursor);
+        spLecture.setAdapter(lectureAdapter);
+        spLecture.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Lecture lecture = (Lecture) spLecture.getSelectedItem();
+                Toast.makeText(AdminStatistical.this, Integer.toString(lecture.getId()), Toast.LENGTH_SHORT).show();
+                scoreStudentPass(lecture.getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void mappingView(){
@@ -197,6 +217,23 @@ public class AdminStatistical extends AppCompatActivity {
         //Score Statistical
         chartScore = (BarChart) findViewById(R.id.chartScore);
         acClassScore = (AutoCompleteTextView) findViewById(R.id.acASScoreClass);
+
+        //Score Pass Statistical
+        chartScorePass = (PieChart) findViewById(R.id.pcScorePass);
+        spLecture = (Spinner) findViewById(R.id.spnLecture);
+    }
+
+    private void initLectureList(Cursor c){
+        lectures.clear();
+        c.moveToPosition(-1);
+        while(c.moveToNext()){
+            int id = c.getInt(0);
+            String name = c.getString(1);
+            Lecture lecture = new Lecture(id, name);
+            lectures.add(lecture);
+        }
+        lectureAdapter.notifyDataSetChanged();
+        c.close();
     }
 
     private void initSubjectList(Cursor c){
@@ -385,8 +422,6 @@ public class AdminStatistical extends AppCompatActivity {
             setUpPieChart(chartUser);
             drawPieChart(chartUser, statistical);
         }
-
-
     }
 
     private Map<String, Integer> getDataAccount(Cursor c){
@@ -484,6 +519,31 @@ public class AdminStatistical extends AppCompatActivity {
             setUpBarChart(chartScore);
             drawBarChart(chartScore, data, "Số lượng sinh viên");
         }
+    }
 
+    public void scoreStudentPass(int idLecture) {
+        int slPass = 0;
+        int slFail = 0;
+        Cursor cursor = db.get_list_class_by_lectureId(idLecture);
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            Cursor cursor1 = db.ScoreInClassStatistical(cursor.getInt(3));
+            cursor1.moveToFirst();
+            if (cursor1.getCount() > 0) {
+                if (cursor1.getDouble(0) < 4.0) {
+                    slFail += cursor1.getInt(1);
+                }
+                else {
+                    slPass += cursor1.getInt(1);
+                }
+            }
+        }
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("Pass", slPass);
+        map.put("Fail", slFail);
+
+        setUpPieChart(chartScorePass);
+        drawPieChart(chartScorePass, map);
     }
 }

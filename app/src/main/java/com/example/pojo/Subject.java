@@ -36,11 +36,7 @@ public class Subject implements Serializable {
         this.finalGracePercent = finalGracePercent;
     }
 
-<<<<<<< HEAD
     public Subject(int id, String name, int credit) {
-=======
-    public Subject(int id, String name, int credit){
->>>>>>> main
         this.id = id;
         this.name = name;
         this.credit = credit;

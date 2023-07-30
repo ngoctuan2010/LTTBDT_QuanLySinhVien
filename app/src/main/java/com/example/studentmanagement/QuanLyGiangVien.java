@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -125,6 +127,25 @@ public class QuanLyGiangVien extends AppCompatActivity {
                 popupMenu.inflate(R.menu.popup_user_item);
                 popupMenu.setGravity(Gravity.END);
                 popupMenu.show();
+            }
+        });
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                listLecture.clear();
+                Cursor c = db.getListLectureBy(editable.toString(), 0);
+                initData(c);
             }
         });
 

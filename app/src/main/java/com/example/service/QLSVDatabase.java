@@ -71,6 +71,22 @@ public class QLSVDatabase {
         String[] args = {Integer.toString(id)};
         return db.rawQuery(query,args);
     }
+    public Cursor getListLectureBy(String str, int sort){
+        String ob = "ASC";
+        if(sort == 1){
+            ob = "DESC";
+        }
+
+        String query = "SELECT * " +
+                "FROM " + DBHelper.LECTURE_TABLE +
+                " WHERE " + DBHelper.LECTURE_ID + " = ? OR " + DBHelper.LECTURE_NAME + " like ?" +
+                "ORDER BY " + DBHelper.LECTURE_NAME + " " + ob + ";";
+
+        String[] arg = {str, "%"+str+"%"};
+        return db.rawQuery(query, arg);
+    }
+
+
 
     public Cursor checkLogin(String username, String password) {
         String query = "SELECT * " +
@@ -304,6 +320,15 @@ public class QLSVDatabase {
         return db.query(DBHelper.CLASS_TABLE, null, null, null, null, null, null);
     }
 
+    public Cursor get_list_class_by_lectureId (int idLecture) {
+        String query = "SELECT * " +
+                " FROM " + DBHelper.CLASS_TABLE +
+                " WHERE " + DBHelper.CLASS_LECTURE + " = ?;";
+
+        String[] args = {Integer.toString(idLecture)};
+        return db.rawQuery(query, args);
+    }
+
     public Cursor getDiffClassBySubjectAndName(String name, int class_id){
         String query = "SELECT * " +
                 " FROM " + DBHelper.CLASS_TABLE +
@@ -382,10 +407,7 @@ public class QLSVDatabase {
                             "c." + DBHelper.CLASS_NAME + " like ? OR " +
                             "s." + DBHelper.SUBJECT_NAME + " like ? OR " +
                             "l." + DBHelper.LECTURE_NAME + " = ?;";
-<<<<<<< HEAD
-=======
 
->>>>>>> main
         String[] args = {str, "%"+str+"%"};
         return db.rawQuery(query, args);
     }
@@ -452,6 +474,7 @@ public class QLSVDatabase {
         String clause = DBHelper.LECTURE_ID + " = ?";
         String[] args = {Integer.toString(lecture_id)};
 
+        db.setForeignKeyConstraintsEnabled(true);
         return db.delete(DBHelper.LECTURE_TABLE, clause, args);
     }
 

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ClassAdding extends AppCompatActivity {
-    DateFormatter df = new DateFormatter("dd/MM/yyyy");
+    DateFormatter df = new DateFormatter("yyyy-MM-dd");
 
     EditText edtName, edtStarted, edtQuantity, edtYear;
 
@@ -72,12 +72,6 @@ public class ClassAdding extends AppCompatActivity {
         ArrayList<Lecture> lectures = initListLecture();
         ArrayAdapter<Lecture> lAdapter = new ArrayAdapter<>(ClassAdding.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lectures);
         actvLecture.setAdapter(lAdapter);
-
-        try {
-            checkDateValidate("7/29/2023");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
 
         actvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

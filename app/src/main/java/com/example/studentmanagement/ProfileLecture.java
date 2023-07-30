@@ -107,9 +107,13 @@ public class ProfileLecture extends AppCompatActivity {
                 String department = medtDepartment.getText().toString();
 
                 Lecture lecture = new Lecture(idLecture, name, gender, birth, address, phone, department);
-                db.update_lecture(lecture);
-
-                Toast.makeText(ProfileLecture.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+                if (db.update_lecture(lecture) > 0) {
+                    Toast.makeText(ProfileLecture.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(ProfileLecture.this, "Xảy ra lỗi", Toast.LENGTH_SHORT).show();
+                }
+                onBackPressed();
             }
         });
     }
