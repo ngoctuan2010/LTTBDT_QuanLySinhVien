@@ -212,7 +212,9 @@ public class ClassInformation extends AppCompatActivity {
                             Student std = (Student) lvStudents.getItemAtPosition(position);
                             bundle.putSerializable("student", std);
 //                            bundle.putSerializable("student", student);
+
                             bundle.putSerializable("class", _class);
+                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
