@@ -609,11 +609,14 @@ public class QLSVDatabase {
 
             if (idIndex >= 0 && studentIdIndex >= 0 && classIdIndex >= 0 && midGradeIndex >= 0 && finalGradeIndex >= 0) {
                 int id = cursor.getInt(idIndex);
-                float midGrade = cursor.getFloat(midGradeIndex);
-                float finalGrade = cursor.getFloat(finalGradeIndex);
+                Double midGrade = Double.valueOf(cursor.getFloat(midGradeIndex));
+                Double finalGrade = Double.valueOf(cursor.getFloat(finalGradeIndex));
+                if (cursor.getString(midGradeIndex) == null && cursor.getString(finalGradeIndex) == null) {
+                    midGrade = -1.0;
+                    finalGrade = -1.0;
+                }
                 score = new Score(id, studentId, classId, midGrade, finalGrade);
             }
-
             cursor.close();
         }
         return score;
@@ -663,7 +666,7 @@ public class QLSVDatabase {
         String clause = DBHelper.SCORE_ID + " = ?";
         String[] args = {Integer.toString(score.getId())};
 
-        return db.update(DBHelper.ACCOUNT_TABLE, values, clause, args);
+        return db.update(DBHelper.SCORE_TABLE, values, clause, args);
     }
 
     public ArrayList<Student> getListStudentByCursor(Cursor cursor) throws ParseException {

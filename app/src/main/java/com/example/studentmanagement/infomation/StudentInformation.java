@@ -19,12 +19,16 @@ import com.example.pojo.Subject;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.R;
 
+import java.text.SimpleDateFormat;
+
 public class StudentInformation extends AppCompatActivity {
 
     TextView txtNameClass, txtQuantity, txtSchoolyear, txtIdStudent, txtStudentName, txtBirth, txtScore10, txtScore4;
     EditText edtMidScore, edtEndScore;
     Button btnSave;
     QLSVDatabase database;
+    SimpleDateFormat spdf = new SimpleDateFormat("dd/MM/yyyy");
+    double percentMidGrade, percentFinalGrade;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,92 +45,107 @@ public class StudentInformation extends AppCompatActivity {
         edtMidScore = findViewById(R.id.edtMidScore);
         edtEndScore = findViewById(R.id.edtEndScore);
         btnSave = findViewById(R.id.btnSave);
+        edtMidScore.requestFocus();
 
         Bundle bundle = getIntent().getExtras();
         Student student = (Student) bundle.getSerializable("student");
         Class aClass = (Class) bundle.getSerializable("class");
+        showInformation(student, aClass);
+
         database = new QLSVDatabase(StudentInformation.this);
-
         Score score = database.getScoreByClassAndStudent(student.getId(), aClass.getId());
-
-        txtNameClass.setText(aClass.getName());
-        txtQuantity.setText(aClass.getQuantity());
-        txtSchoolyear.setText(aClass.getYear());
-        txtIdStudent.setText(student.getId());
-        txtStudentName.setText(student.getName());
-        txtBirth.setText(student.getBirth().toString());
-        edtMidScore.setText(String.valueOf(score.getMidScore()));
-        edtEndScore.setText(String.valueOf(score.getEndScore()));
+        showScore(score);
 
         Subject subject = database.getSubjectByClass(aClass.getId());
-        double percentMidGrade = subject.getMidGradePercent();
-        double percentFinalGrade = subject.getFinalGradePercent();
-        double gradeAverage = score.getMidScore() * percentMidGrade + score.getEndScore() * percentFinalGrade;
+        percentMidGrade = subject.getMidGradePercent();
+        percentFinalGrade = subject.getFinalGradePercent();
+        showAverageScoreOnCreate();
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtScore4.getText().toString().isEmpty() && txtScore10.getText().toString().isEmpty())
+                if (txtScore4.getText().toString().isEmpty() && txtScore10.getText().toString().isEmpty()) {
+                    Toast.makeText(StudentInformation.this, "Điểm không hợp lệ.", Toast.LENGTH_SHORT).show();
                     return;
-                score.setMidScore(Double.parseDouble(edtMidScore.getText().toString()));
-                score.setMidScore(Double.parseDouble(edtEndScore.getText().toString()));
+                }
+                score.setMidScore(Double.parseDouble(edtMidScore.getText().toString().trim()));
+                score.setEndScore(Double.parseDouble(edtEndScore.getText().toString().trim()));
                 if (database.updateScore(score) == -1) {
-                    Toast.makeText(StudentInformation.this, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                    return;
+                    Toast.makeText(StudentInformation.this, "Sửa thất bại.", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(StudentInformation.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentInformation.this, "Sửa thành công.", Toast.LENGTH_SHORT).show();
             }
         });
-        edtEndScore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        showAverageScore(edtMidScore, percentMidGrade, percentFinalGrade);
+        showAverageScore(edtEndScore, percentMidGrade, percentFinalGrade);
+    }
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!checkEmty() && checkInput()) {
-                    txtScore10.setText(String.valueOf(gradeAverage));
-                    txtScore4.setText(String.valueOf(gradeAverage * 0.4));
-                }
-            }
-        });
-        edtMidScore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!checkEmty() && checkInput()) {
-                    txtScore10.setText(String.valueOf(gradeAverage));
-                    txtScore4.setText(String.valueOf(gradeAverage * 0.4));
-                }
-            }
-        });
+    public void showAverageScoreOnCreate() {
+        if (!checkEmty() && checkInput()) {
+            double m = Double.parseDouble(edtMidScore.getText().toString().trim());
+            double e = Double.parseDouble(edtEndScore.getText().toString().trim());
+            double s10 = m * percentMidGrade + e * percentFinalGrade;
+            double s4 = s10 * 0.4;
+            txtScore10.setText(String.valueOf(s10));
+            txtScore4.setText(String.valueOf(s4));
+        } else {
+            txtScore10.setText("");
+            txtScore4.setText("");
+        }
     }
 
     public boolean checkEmty() {
-        if (!edtMidScore.getText().toString().isEmpty() && !edtEndScore.getText().toString().isEmpty())
+        if (!edtMidScore.getText().toString().trim().isEmpty() && !edtEndScore.getText().toString().trim().isEmpty())
             return false;
         return true;
     }
 
     public boolean checkInput() {
-        String string1 = edtMidScore.getText().toString();
-        String string2 = edtEndScore.getText().toString();
+        String string1 = edtMidScore.getText().toString().trim();
+        String string2 = edtEndScore.getText().toString().trim();
         float midScore = Float.parseFloat(string1);
         float endScore = Float.parseFloat(string2);
         return (midScore >= 0 && midScore <= 10) && (endScore >= 0 && endScore <= 10);
+    }
+
+    public void showInformation(Student student, Class cl) {
+        if (student != null && cl != null) {
+            txtNameClass.setText(cl.getName());
+            txtQuantity.setText(String.valueOf(cl.getQuantity()));
+            txtSchoolyear.setText(cl.getYear());
+            txtIdStudent.setText(String.valueOf(student.getId()));
+            txtStudentName.setText(student.getName());
+            txtBirth.setText(spdf.format(student.getBirth()));
+        }
+    }
+
+    public void showScore(Score score) {
+        if (score != null) {
+            if (score.getMidScore() == -1 && score.getEndScore() == -1) {
+                edtMidScore.setText("");
+                edtEndScore.setText("");
+            } else {
+                edtMidScore.setText(String.valueOf(score.getMidScore()));
+                edtEndScore.setText(String.valueOf(score.getEndScore()));
+            }
+        }
+    }
+
+    public void showAverageScore(EditText editText, double percentMidGrade, double percentFinalGrade) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                showAverageScoreOnCreate();
+            }
+        });
     }
 }

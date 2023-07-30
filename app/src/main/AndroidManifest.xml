@@ -34,26 +34,34 @@
             android:exported="true">
 
         </activity>
+<<<<<<< HEAD
 
 <!--        <activity-->
 <!--            android:name=".QuanlyUser"-->
 <!--            android:exported="true" />-->
+=======
+        <!--        <activity-->
+        <!--            android:name=".QuanlyUser"-->
+        <!--            android:exported="true" />-->
+>>>>>>> vu
         <activity
             android:name=".adding.UserAdding"
             android:exported="true"
             android:parentActivityName=".QuanlyUser"
             android:theme="@style/MyDialog"></activity>
-<!--        <activity-->
-<!--            android:name=".QuanlyMonhoc"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".QuanlyMonhoc"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".adding.SubjectAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
-<!--        <activity-->
-<!--            android:name=".QuanlyLophoc"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".QuanlyLophoc"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".adding.ClassAdding"
             android:exported="false"
@@ -64,16 +72,17 @@
             android:exported="false"
             android:parentActivityName=".HomePageLecture" />
         <activity
-            android:name=".StudentAdding"
+            android:name=".adding.StudentAdding"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
         <activity
             android:name=".StudentUpdate"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-<!--        <activity-->
-<!--            android:name=".QuanlySinhvien"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".QuanLyGiangVien"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".HomePageAdmin"
             android:exported="false" />
@@ -81,10 +90,21 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".infomation.ClassInfomation"
+            android:exported="false"
+            android:parentActivityName=".HomePageLecture" />
+        <activity
             android:name=".HomePageLecture"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".LogIn"
+=======
+            android:name=".infomation.StudentInformation"
+            android:exported="false" />
+        <activity
+            android:name=".QuanlySinhvien"
+>>>>>>> vu
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

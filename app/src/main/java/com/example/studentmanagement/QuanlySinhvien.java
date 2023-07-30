@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pojo.Student;
 import com.example.service.QLSVDatabase;
 import com.example.service.StudentArrayAdapter;
+import com.example.studentmanagement.adding.StudentAdding;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -135,34 +136,18 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                 String string = medtSearch.getText().toString().trim().toLowerCase();
                 switch (selectedSpinnerPosition) {
                     case 0:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập mã sinh viên.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
                         try {
-                            if (database.getStudentById(Integer.parseInt(string)) == null) {
-                                Toast.makeText(QuanlySinhvien.this, "Không tìm thấy sinh viên phù hợp.", Toast.LENGTH_SHORT).show();
-                                arrayListStudent.clear();
-                                studentArrayAdapter.notifyDataSetChanged();
-                                return;
-                            }
+                            showSearchList("mã sinh viên.", database.get_list_students_by_id(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 1:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập tên sinh viên.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get_list_students_by_name(string));
+                            showSearchList("tên sinh viên.", database.get_list_students_by_name(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 2:
                         boolean gioiTinh;
@@ -183,69 +168,39 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
                         checkAndShow();
                         break;
                     case 3:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập ngày sinh sinh viên.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get_list_students_by_birth(string));
+                            showSearchList("ngày sinh sinh viên.", database.get_list_students_by_birth(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 4:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập địa chỉ sinh viên.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get_list_students_by_address(string));
+                            showSearchList("địa chỉ sinh viên.", database.get_list_students_by_address(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 5:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập số điện thoại sinh viên.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get__list_students_by_phone(string));
+                            showSearchList("số điện thoại sinh viên.", database.get__list_students_by_phone(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 6:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập khoa.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get_list_students_by_department(string));
+                            showSearchList("khoa.", database.get_list_students_by_department(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                     case 7:
-                        if (string.isEmpty()) {
-                            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập niên khóa.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        arrayListStudent.clear();
                         try {
-                            arrayListStudent.addAll(database.get_list_students_by_schoolyear(string));
+                            showSearchList("niên khóa.", database.get_list_students_by_schoolyear(string));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        checkAndShow();
                         break;
                 }
             }
@@ -257,85 +212,73 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (selectedSpinnerPosition == 5) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get__list_students_by_phone(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 0) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_id(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 3) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_birth(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 7) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_schoolyear(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 4) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_address(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 1) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_name(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 2) {
-                    String string = medtSearch.getText().toString().trim().toLowerCase();
-                    boolean gioiTinh;
-                    if (string.equals("nam"))
-                        gioiTinh = true;
-                    else if (string.equals("nu") || string.equals("nữ"))
-                        gioiTinh = false;
-                    else
-                        return;
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
-                }
-                if (selectedSpinnerPosition == 6) {
-                    arrayListStudent.clear();
-                    try {
-                        arrayListStudent.addAll(database.get_list_students_by_department(medtSearch.getText().toString().trim().toLowerCase()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    studentArrayAdapter.notifyDataSetChanged();
+                String string = medtSearch.getText().toString().trim().toLowerCase();
+                switch (selectedSpinnerPosition){
+                    case 0:
+                        try {
+                            showSuggestionList(database.get_list_students_by_id(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            showSuggestionList(database.get_list_students_by_name(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 2:
+                        boolean gioiTinh;
+                        if (string.equals("nam"))
+                            gioiTinh = true;
+                        else if (string.equals("nu") || string.equals("nữ"))
+                            gioiTinh = false;
+                        else
+                            return;
+                        arrayListStudent.clear();
+                        try {
+                            arrayListStudent.addAll(database.get_list_students_by_gender(gioiTinh));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        studentArrayAdapter.notifyDataSetChanged();
+                        break;
+                    case 3:
+                        try {
+                            showSuggestionList(database.get_list_students_by_birth(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 4:
+                        try {
+                            showSuggestionList(database.get_list_students_by_address(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 5:
+                        try {
+                            showSuggestionList(database.get__list_students_by_phone(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 6:
+                        try {
+                            showSuggestionList(database.get_list_students_by_department(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 7:
+                        try {
+                            showSuggestionList(database.get_list_students_by_schoolyear(string));
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
                 }
             }
 
@@ -417,6 +360,23 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
             Toast.makeText(QuanlySinhvien.this, "Không tìm thấy sinh viên phù hợp.", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(QuanlySinhvien.this, "Tìm thấy " + arrayListStudent.size() + " sinh viên.", Toast.LENGTH_SHORT).show();
+        studentArrayAdapter.notifyDataSetChanged();
+    }
+
+    public void showSearchList(String stringMessgae, ArrayList<Student> arrayList) {
+        String string = medtSearch.getText().toString().trim().toLowerCase();
+        if (string.isEmpty()) {
+            Toast.makeText(QuanlySinhvien.this, "Vui lòng nhập " + stringMessgae, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        arrayListStudent.clear();
+        arrayListStudent.addAll(arrayList);
+        studentArrayAdapter.notifyDataSetChanged();
+        checkAndShow();
+    }
+    public void showSuggestionList(ArrayList<Student> arrayList){
+        arrayListStudent.clear();
+        arrayListStudent.addAll(arrayList);
         studentArrayAdapter.notifyDataSetChanged();
     }
 
