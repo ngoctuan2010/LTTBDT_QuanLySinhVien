@@ -74,7 +74,8 @@ public class SubjectAdding extends AppCompatActivity {
                         }
                         if (db.update_subject(subject) > 0) {
                             Toast.makeText(SubjectAdding.this, "Bạn đã sửa môn học thành công", Toast.LENGTH_SHORT).show();
-                        } else {
+                            onBackPressed();
+                        }else{
                             Toast.makeText(SubjectAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                         }
                         onBackPressed();
@@ -109,7 +110,8 @@ public class SubjectAdding extends AppCompatActivity {
                         Subject s = new Subject(-1, name, credit, _mid, _final);
                         if (db.add_subject(s) > 0) {
                             Toast.makeText(SubjectAdding.this, "Bạn đã thêm môn học thành công", Toast.LENGTH_SHORT).show();
-                        } else {
+                            onBackPressed();
+                        }else{
                             Toast.makeText(SubjectAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                         }
                     } else {

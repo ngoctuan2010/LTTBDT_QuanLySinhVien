@@ -70,20 +70,34 @@
                 android:textColorHint="@color/black"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/edtLectureAddingName"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUserAddingPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="password"
-                android:inputType="text"
-                android:padding="5dp"
-                android:textColor="@color/black"
+                android:animateLayoutChanges="false"
                 android:textColorHint="@color/gray"
-                android:textSize="20sp" />
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/black">
+
+
+                <EditText
+                    android:id="@+id/edtUserAddingPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView3"

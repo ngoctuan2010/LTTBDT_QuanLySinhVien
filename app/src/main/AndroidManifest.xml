@@ -34,9 +34,22 @@
             android:exported="true">
 
         </activity>
+<<<<<<< HEAD
         <!--        <activity-->
         <!--            android:name=".QuanlyUser"-->
         <!--            android:exported="true" />-->
+=======
+<<<<<<< HEAD
+
+<!--        <activity-->
+<!--            android:name=".QuanlyUser"-->
+<!--            android:exported="true" />-->
+=======
+        <!--        <activity-->
+        <!--            android:name=".QuanlyUser"-->
+        <!--            android:exported="true" />-->
+>>>>>>> vu
+>>>>>>> main
         <activity
             android:name=".adding.UserAdding"
             android:exported="true"
@@ -90,10 +103,20 @@
             android:name=".HomePageLecture"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            android:name=".LogIn"
+=======
+>>>>>>> main
             android:name=".infomation.StudentInformation"
             android:exported="false" />
         <activity
             android:name=".QuanlySinhvien"
+<<<<<<< HEAD
+=======
+>>>>>>> vu
+>>>>>>> main
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
