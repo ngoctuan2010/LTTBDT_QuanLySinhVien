@@ -24,7 +24,7 @@ import com.example.pojo.Subject;
 import com.example.service.QLSVDatabase;
 import com.example.service.SubjectArrayAdapter;
 import com.example.studentmanagement.adding.SubjectAdding;
-import com.example.studentmanagement.infomation.SubjectInfomation;
+import com.example.studentmanagement.information.SubjectInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -106,7 +106,7 @@ public class QuanlyMonhoc extends AppCompatActivity {
                             builder.show();
                             return true;
                         }else if(id == R.id.object_show){
-                            Intent intent = new Intent(QuanlyMonhoc.this, SubjectInfomation.class);
+                            Intent intent = new Intent(QuanlyMonhoc.this, SubjectInformation.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) subjectList.get(position);
                             bundle.putSerializable("Subject", pack);
@@ -118,7 +118,7 @@ public class QuanlyMonhoc extends AppCompatActivity {
                     }
                 });
 
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_menu_class);
                 popupMenu.setGravity(Gravity.END);
                 popupMenu.show();
             }

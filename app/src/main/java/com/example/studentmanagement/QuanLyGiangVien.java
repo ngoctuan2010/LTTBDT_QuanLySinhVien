@@ -24,14 +24,11 @@ import com.example.pojo.Lecture;
 import com.example.service.LectureArrayAdapter;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.adding.LectureAdding;
-import com.example.studentmanagement.adding.SubjectAdding;
-import com.example.studentmanagement.infomation.LectureInformation;
-import com.example.studentmanagement.infomation.SubjectInfomation;
+import com.example.studentmanagement.information.LectureInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class QuanLyGiangVien extends AppCompatActivity {
     Button btnFilter, btnAddLecture;
@@ -124,7 +121,7 @@ public class QuanLyGiangVien extends AppCompatActivity {
                     }
                 });
 
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_menu_class);
                 popupMenu.setGravity(Gravity.END);
                 popupMenu.show();
             }

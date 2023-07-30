@@ -1,15 +1,13 @@
-package com.example.studentmanagement.infomation;
+package com.example.studentmanagement.information;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.pojo.Lecture;
-import com.example.pojo.Subject;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.R;
 

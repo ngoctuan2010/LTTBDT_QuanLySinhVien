@@ -21,8 +21,8 @@ import android.widget.Toast;
 import com.example.pojo.Class;
 import com.example.service.HomeSubjectArrayAdapter;
 import com.example.service.QLSVDatabase;
-import com.example.studentmanagement.infomation.ClassInfomation;
-import com.example.studentmanagement.infomation.SubjectInfomation;
+import com.example.service.SharePreferenceServeice;
+import com.example.studentmanagement.information.ClassInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,26 +35,25 @@ public class HomePageLecture extends AppCompatActivity {
     QLSVDatabase db;
     int idLecture;
 
+    SharePreferenceServeice sharePreferenceServeice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page_lecture);
 
         spnSemester = (Spinner) findViewById(R.id.spnSemester);
-        lvSubject = (ListView) findViewById(R.id.lvSubject) ;
+        lvSubject = (ListView) findViewById(R.id.lvSubject);
 
         tvName = (TextView) findViewById(R.id.txtName);
         tvId = (TextView) findViewById(R.id.txtId);
         tvBirth = (TextView) findViewById(R.id.txtBirth);
 
         db = new QLSVDatabase(this);
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 
-        Bundle bundle = getIntent().getExtras();
-        int idUser = bundle.getInt("idUser");
-        Cursor cursorGetId = db.getUserById(idUser);
-        cursorGetId.moveToFirst();
-        idLecture = cursorGetId.getInt(3);
-        Cursor cursorLecture = db.getLectureById(idLecture);
+        int IdLecture = Integer.parseInt(sharePreferenceServeice.getString("current_user"));
+        Cursor cursorLecture = db.getLectureById(IdLecture);
         cursorLecture.moveToFirst();
 
 //        SetText textview
@@ -68,7 +67,8 @@ public class HomePageLecture extends AppCompatActivity {
 
         ArrayList<Class> listClass = new ArrayList<Class>();
         HomeSubjectArrayAdapter homeSubjectArrayAdapter = new HomeSubjectArrayAdapter(HomePageLecture.this, R.layout.class_item_layout, listClass);
-        Cursor cursor = db.get_list_class_by_lectureId(idLecture);
+
+        Cursor cursor = db.get_list_class_by_lecture_active(IdLecture);
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -87,10 +87,9 @@ public class HomePageLecture extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        int id = menuItem.getItemId();
+                    public boolean onMenuItemClick(MenuItem menuItem) {int id = menuItem.getItemId();
                         if (id == R.id.object_show) {
-                            Intent intent = new Intent(HomePageLecture.this, ClassInfomation.class);
+                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
                             Bundle bundle = new Bundle();
                             Serializable pack = (Serializable) listClass.get(position);
                             bundle.putSerializable("class", pack);
@@ -102,58 +101,44 @@ public class HomePageLecture extends AppCompatActivity {
                         } else if (id == R.id.object_edit) {
                             Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
                         }
+
                         return false;
                     }
                 });
 
-                popupMenu.inflate(R.menu.popup_user_item);
+                popupMenu.inflate(R.menu.popup_class_item);
                 popupMenu.setGravity(Gravity.END);
                 popupMenu.show();
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_menu, menu);
-        menu.setGroupVisible(R.id.grMenuDefault, true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_profile) {
-            Intent intent = new Intent(HomePageLecture.this, ProfileLecture.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("LectureId", idLecture);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_class) {
-            Toast.makeText(this, "Bạn vào trang sửa lớp", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_collape) {
-            Toast.makeText(this, "Bạn vào trang sửa giảng viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_student) {
-            Toast.makeText(this, "Bạn vào trang sửa sinh viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_subject) {
-            Toast.makeText(this, "Bạn vào trang sửa môn học", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_sign_out) {
-            Intent intent = new Intent(HomePageLecture.this, LogIn.class);
-            startActivity(intent);
-            Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        return true;
+//        lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//                        int id = menuItem.getItemId();
+//                        if (id == R.id.object_show) {
+//                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
+//                            Bundle bundle = new Bundle();
+//                            Serializable pack = (Serializable) listClass.get(position);
+//                            bundle.putSerializable("class", pack);
+//                            intent.putExtras(bundle);
+//                            startActivity(intent);
+//                            return true;
+//                        } else if (id == R.id.object_delete) {
+//                            Toast.makeText(HomePageLecture.this, "Bạn không thể xóa lớp", Toast.LENGTH_SHORT).show();
+//                        } else if (id == R.id.object_edit) {
+//                            Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
+//                        }
+//                        return false;
+//                    }
+//                });
+//
+//                popupMenu.inflate(R.menu.popup_class_item);
+//                popupMenu.setGravity(Gravity.END);
+//                popupMenu.show();
     }
 }

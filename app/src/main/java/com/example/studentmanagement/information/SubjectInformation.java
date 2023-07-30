@@ -1,4 +1,4 @@
-package com.example.studentmanagement.infomation;
+package com.example.studentmanagement.information;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.example.pojo.Subject;
 import com.example.studentmanagement.R;
 
-public class SubjectInfomation extends AppCompatActivity {
+public class SubjectInformation extends AppCompatActivity {
 
     TextView tvId, tvName, tvCredit, tvClass;
 

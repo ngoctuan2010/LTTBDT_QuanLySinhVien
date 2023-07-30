@@ -13,41 +13,40 @@
         android:theme="@style/MyTheme"
         tools:targetApi="31">
         <activity
-            android:name=".infomation.LectureInformation"
+            android:name=".AdminStatistical"
+            android:exported="true"></activity>
+        <activity
+            android:name=".information.LectureInformation"
             android:exported="false"
-            android:theme="@style/MyDialog"/>
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".information.SubjectInformation"
+            android:exported="false"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".information.UserInformation"
+            android:exported="false"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".information.ClassInformation"
+            android:exported="false" />
         <activity
             android:name=".adding.LectureAdding"
             android:exported="false"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".QuanLyGiangVien"
-            android:exported="false" />
-        <activity
-            android:name=".infomation.ClassInfomation"
-            android:exported="false"
-            android:parentActivityName=".QuanlyLophoc" />
-        <activity
-            android:name=".infomation.SubjectInfomation"
+            android:name=".QuanlySinhvien"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".infomation.UserInformation"
-            android:exported="false"
-            android:theme="@style/MyDialog" />
-        <activity
-            android:name=".AdminStatistical"
-            android:exported="true" >
-
-        </activity>
-        <activity
             android:name=".adding.UserAdding"
             android:exported="true"
             android:parentActivityName=".QuanlyUser"
-            android:theme="@style/MyDialog" >
-        </activity>
-        <activity android:name=".QuanlyMonhoc"
+            android:theme="@style/MyDialog"></activity>
+        <activity
+            android:name=".QuanlyMonhoc"
             android:exported="false"
             android:parentActivityName=".HomePageAdmin"/>
         <activity
@@ -68,7 +67,7 @@
             android:exported="false"
             android:parentActivityName=".HomePageLecture" />
         <activity
-            android:name=".StudentAdding"
+            android:name=".adding.StudentAdding"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
         <activity
@@ -76,12 +75,12 @@
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
         <activity
-            android:name=".QuanlySinhvien"
-            android:exported="false" />
-        <activity
-            android:name=".QuanlyUser"
+            android:name=".QuanLyGiangVien"
             android:exported="false"
             android:parentActivityName=".HomePageAdmin" />
+        <activity
+            android:name=".QuanlyUser"
+            android:exported="true"></activity>
         <activity
             android:name=".HomePageAdmin"
             android:exported="false" />
@@ -100,5 +99,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

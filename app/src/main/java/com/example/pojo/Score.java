@@ -23,16 +23,35 @@ public class Score implements Serializable {
 
     private int idStudent;
     private int idClass;
-    private double score;
+
+    public double getMidScore() {
+        return midScore;
+    }
+
+    public void setMidScore(double midScore) {
+        this.midScore = midScore;
+    }
+
+    public double getEndScore() {
+        return endScore;
+    }
+
+    public void setEndScore(double endScore) {
+        this.endScore = endScore;
+    }
+
+    private double midScore;
+    private double endScore;
 
     public Score() {
     }
 
-    public Score(int id, int idStudent, int idClass, double score) {
+    public Score(int id, int idStudent, int idClass, double midScore, double endScore) {
         this.id = id;
         this.idStudent = idStudent;
         this.idClass = idClass;
-        this.score = score;
+        this.midScore = midScore;
+        this.endScore = endScore;
     }
 
     public int getId() {
@@ -41,13 +60,5 @@ public class Score implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.studentmanagement;
+package com.example.studentmanagement.adding;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pojo.Student;
 import com.example.service.QLSVDatabase;
+import com.example.studentmanagement.R;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 
 public class StudentAdding extends AppCompatActivity {

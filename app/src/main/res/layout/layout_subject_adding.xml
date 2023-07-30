@@ -37,7 +37,11 @@
             android:textSize="20sp" />
 
         <EditText
+<<<<<<< HEAD
             android:id="@+id/edtClassAddingStarted"
+=======
+            android:id="@+id/edtUserAddingUsername"
+>>>>>>> main
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"

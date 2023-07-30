@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.service.QLSVDatabase;
+import com.example.service.SharePreferenceServeice;
 
 public class HomePageAdmin extends AppCompatActivity {
     ImageButton mbtnStudent, mbtnCollage, mbtnSubject, mbtnClass, mbtnUser, mbtnStatistical;
     TextView mtxtName, mtxtId, mtxtBirth;
 
     QLSVDatabase db;
+
+    SharePreferenceServeice sharePreferenceServeice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +41,10 @@ public class HomePageAdmin extends AppCompatActivity {
         mtxtBirth = (TextView) findViewById(R.id.txtBirth);
 
         db = new QLSVDatabase(this);
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 
-        Bundle bundle = getIntent().getExtras();
-        int idUser = bundle.getInt("idUser");
-        Cursor cursor = db.getUserById(idUser);
-        cursor.moveToFirst();
-        int idLecture = cursor.getInt(3);
-        Cursor cursorLecture = db.getLectureById(idLecture);
+        int IdLecture = Integer.parseInt(sharePreferenceServeice.getString("current_user"));
+        Cursor cursorLecture = db.getLectureById(IdLecture);
         cursorLecture.moveToFirst();
 
 //        SetText textview
@@ -135,6 +135,7 @@ public class HomePageAdmin extends AppCompatActivity {
         }
 
         if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
             Intent intent = new Intent(HomePageAdmin.this, LogIn.class);
             startActivity(intent);
             Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();

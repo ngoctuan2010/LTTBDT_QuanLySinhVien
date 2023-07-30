@@ -35,14 +35,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SUBJECT_ID = "id";
     public static final String SUBJECT_NAME = "name";
     public static final String SUBJECT_CREDIT = "credit";
-    public static final String SUBJECT_FINALGRACEPERCENT = "finalGracePercent";
-    public static final String SUBJECT_MIDGRACEPERCENT = "midGracePercent";
+    public static final String SUBJECT_FINALGRADEPERCENT = "finalGradePercent";
+    public static final String SUBJECT_MIDGRADEPERCENT = "midGradePercent";
     public static final String CREATE_SUBJECT = "create table " + SUBJECT_TABLE + "( "
             + SUBJECT_ID + " integer primary key autoincrement, "
             + SUBJECT_NAME + " nvarchar(20), "
             + SUBJECT_CREDIT + " integer, "
-            + SUBJECT_MIDGRACEPERCENT + " float, "
-            + SUBJECT_FINALGRACEPERCENT + " float);";
+            + SUBJECT_MIDGRADEPERCENT + " float, "
+            + SUBJECT_FINALGRADEPERCENT + " float);";
 
     //LECTURE
     public static final String LECTURE_TABLE = "lecture";
@@ -72,6 +72,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CLASS_YEAR = "year";
     public static final String CLASS_STARTED = "started_date";
 
+    public static final String CLASS_STATUS = "status";
+
     public static final String CREATE_CLASS = "create table " + CLASS_TABLE + "( "
                                             + CLASS_ID + " integer primary key autoincrement, "
                                             + CLASS_NAME + " nvarchar(50), "
@@ -80,6 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                             + CLASS_QUANTITY + " integer, "
                                             + CLASS_YEAR + " nvarchar(10), "
                                             + CLASS_STARTED + " date, "
+                                            + CLASS_STATUS + " bit, "
                                             + "FOREIGN KEY(" + CLASS_SUBJECT + ") REFERENCES " + SUBJECT_TABLE + "(" + SUBJECT_ID + ") ON DELETE SET NULL,"
                                             + "FOREIGN KEY(" + CLASS_LECTURE + ") REFERENCES " + LECTURE_TABLE + "(" + LECTURE_ID + ") ON DELETE SET NULL);";
 
@@ -106,14 +109,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SCORE_ID = "id";
     public static final String SCORE_STUDENT = "student_id";
     public static final String SCORE_CLASS = "class_id";
-    public static final String SCORE_MIDGRACE = "midGrace";
-    public static final String SCORE_FINALGRACE = "finalGrace";
+    public static final String SCORE_MIDGRADE = "midGrade";
+    public static final String SCORE_FINALGRADE = "finalGrade";
     public static final String CREATE_SCORE = "create table " + SCORE_TABLE + "("
             + SCORE_ID + " integer primary key autoincrement, "
             + SCORE_STUDENT + " integer, "
             + SCORE_CLASS + " integer, "
-            + SCORE_MIDGRACE + " float, "
-            + SCORE_FINALGRACE + " float, "
+            + SCORE_MIDGRADE + " float, "
+            + SCORE_FINALGRADE + " float, "
             + "FOREIGN KEY (" + SCORE_STUDENT + ") REFERENCES " + STUDENT_TABLE + "(" + STUDENT_ID + ") ON DELETE SET NULL, "
             + "FOREIGN KEY (" + SCORE_CLASS + ") REFERENCES " + CLASS_TABLE + "(" + CLASS_ID + ") ON DELETE SET NULL);";
 

@@ -53,8 +53,8 @@ public class ClassAdding extends AppCompatActivity {
 
         edtName = (EditText) findViewById(R.id.edtClassAddingName);
         actvSubject = (AutoCompleteTextView) findViewById(R.id.edtClassAddingSubject);
-        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
-        edtStarted = (EditText) findViewById(R.id.edtLectureAddingId);
+        actvLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
+        edtStarted = (EditText) findViewById(R.id.edtUserAddingUsername);
         edtQuantity = (EditText) findViewById(R.id.edtLectureAddingName);
         edtYear = (EditText) findViewById(R.id.edtClassAddingYear);
 
@@ -210,6 +210,7 @@ public class ClassAdding extends AppCompatActivity {
                        try {
                            if(db.update_class(_class) > 0){
                                Toast.makeText(ClassAdding.this, "Bạn đã cập nhật lớp học thành công", Toast.LENGTH_SHORT).show();
+                               onBackPressed();
                            }else{
                                Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                            }
@@ -241,7 +242,7 @@ public class ClassAdding extends AppCompatActivity {
                         String started = edtStarted.getText().toString();
                         int quantity = Integer.parseInt(edtQuantity.getText().toString());
                         String year = edtYear.getText().toString();
-                        Class _class = new Class(-1, name, subject_id, lecture_id, quantity, year, started);
+                        Class _class = new Class(-1, name, subject_id, lecture_id, quantity, year, started, 0);
 
                         if(db.getDiffClassBySubjectAndName(name, -1).getCount() > 0){
                             Toast.makeText(ClassAdding.this, "Lớp học đã tồn tại", Toast.LENGTH_SHORT).show();
@@ -257,6 +258,7 @@ public class ClassAdding extends AppCompatActivity {
                             try {
                                 if(db.add_class(_class) > 0){
                                     Toast.makeText(ClassAdding.this, "Bạn đã thêm lớp học thành công", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
                                 }else{
                                     Toast.makeText(ClassAdding.this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                                 }
@@ -362,10 +364,10 @@ public class ClassAdding extends AppCompatActivity {
 
         if(!(quantity != null && !quantity.isEmpty()))
             edtQuantity.setError(getResources().getString(R.string.inputRequired));
-
     }
 
     private boolean checkDateValidate(String date) throws ParseException {
+        DateFormatter df = new DateFormatter("yyyy-MM-dd");
         Date d = df.StringToDate(date);
         Date now = new Date();
         long m = d.getTime() - now.getTime();
