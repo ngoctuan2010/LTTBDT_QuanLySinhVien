@@ -39,17 +39,7 @@ public class LogIn extends AppCompatActivity {
         getSupportActionBar().hide();
 
         db = new QLSVDatabase(this);
-        db.add_subject(new Subject(1, "Lập trình Java", 4));
-        db.add_lecture(new Lecture(1, "Trong Nghia"));
-        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
-        db.add_user(new User(1, "admin", "123", 1, 1));
-        db.add_user(new User(1, "nghia", "123", 0, 1));
-        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
-        db.add_subject(new Subject(1, "Lập trình Java", 4));
-        db.add_lecture(new Lecture(1, "Trong Nghia"));
-        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
-        db.add_user(new User(1, "admin", "123", 1, 1));
-        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
+
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 //        db.add_subject(new Subject(1, "Lập trình Java", 4));
 //        db.add_class(new Class(1, "IT02", 1, 1, 45, "2022-2023", "03/07/2022"));
@@ -72,27 +62,43 @@ public class LogIn extends AppCompatActivity {
         medtUsername.setText("admin");
         medtPassword.setText("123");
 
+        if(checkRemember())
+        {
+            idRole = Integer.parseInt(sharePreferenceServeice.getString("user_role"));
+            Intent intent;
+            if(idRole == 0) {
+                intent = new Intent(LogIn.this, HomePageAdmin.class);
+            }
+            else {
+                intent = new Intent(LogIn.this, HomePageLecture.class);
+            }
+            startActivity(intent);
+            finish();
+        }
+
         mbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (logIn()) {
 
-                    if (mckRemember.isChecked())
+
+                    if(mckRemember.isChecked())
                         sharePreferenceServeice.putString("remember", "Check");
 
                     sharePreferenceServeice.putString("current_user", Integer.toString(idLecture));
                     sharePreferenceServeice.putString("user_role", Integer.toString(idRole));
                     sharePreferenceServeice.putString("user_id", Integer.toString(idAccount));
                     Intent intent;
-                    if (idRole == 0) {
+                    if(idRole == 0) {
                         intent = new Intent(LogIn.this, HomePageAdmin.class);
-                    } else {
+                    }
+                    else {
                         intent = new Intent(LogIn.this, HomePageLecture.class);
                     }
                     startActivity(intent);
                     finish();
-                } else {
-
+                }
+                else {
                     Toast.makeText(LogIn.this, "Username hoặc Password không đúng", Toast.LENGTH_SHORT).show();
                     medtUsername.selectAll();
                     medtUsername.requestFocus();
@@ -126,6 +132,5 @@ public class LogIn extends AppCompatActivity {
         if(user_id != null && !user_id.isEmpty())
             return true;
         return false;
-
     }
 }

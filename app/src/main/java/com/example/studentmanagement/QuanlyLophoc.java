@@ -69,6 +69,34 @@ public class QuanlyLophoc extends AppCompatActivity {
             }
         });
 
+        String[] filter1 = {"A - Z", "Z - A"};
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(QuanlyLophoc.this);
+                builder.setTitle("Lọc danh sách");
+                builder.setSingleChoiceItems(filter1, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which == 0){
+                            classList.sort( (c1,c2) -> {
+                                return c1.getName().compareTo(c2.getName());
+                            });
+                        }else{
+                            classList.sort( (c1,c2) -> {
+                                return c2.getName().compareTo(c1.getName());
+                            });
+                        }
+                        adapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                });
+
+                builder.create();
+                builder.show();
+            }
+        });
+
         lvClass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -189,7 +217,6 @@ public class QuanlyLophoc extends AppCompatActivity {
     public void initData(Cursor c) {
         DateFormatter df = new DateFormatter("dd/MM/yyyy");
         c.moveToPosition(-1);
-        if(c.getString(1)!=null);
         while(c.moveToNext()){
             int id = c.getInt(0);
             String name = c.getString(1);

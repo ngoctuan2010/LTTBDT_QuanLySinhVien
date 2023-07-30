@@ -24,54 +24,47 @@
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.UserInformation"
+        <activity android:name=".information.UserInformation"
             android:exported="false"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".information.ClassInformation"
-            android:exported="false" />
-        <activity
-            android:name=".adding.LectureAdding"
+        <activity android:name=".information.ClassInformation"
+            android:exported="false"/>
+        <activity android:name=".information.StudentInformation"
+            android:exported="false"/>
+        <activity android:name=".adding.LectureAdding"
             android:exported="false"
             android:theme="@style/MyDialog" />
+        <activity android:name=".adding.UserAdding"
+            android:exported="true"
+            android:parentActivityName=".QuanlyUser"
+            android:theme="@style/MyDialog"></activity>
+        <activity android:name=".QuanlyMonhoc"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin" />
+        <activity android:name=".adding.SubjectAdding"
+            android:exported="false"
+            android:parentActivityName=".QuanlyMonhoc"
+            android:theme="@style/MyDialog" />
+        <activity android:name=".QuanlyLophoc"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".QuanlySinhvien"
             android:exported="false"
             android:parentActivityName=".QuanlyMonhoc"
             android:theme="@style/MyDialog" />
         <activity
-            android:name=".adding.UserAdding"
-            android:exported="true"
-            android:parentActivityName=".QuanlyUser"
-            android:theme="@style/MyDialog"></activity>
-        <activity
-            android:name=".QuanlyMonhoc"
-            android:exported="false"
-            android:parentActivityName=".HomePageAdmin"/>
-        <activity
-            android:name=".adding.SubjectAdding"
-            android:exported="false"
-            android:parentActivityName=".QuanlyMonhoc"
-            android:theme="@style/MyDialog" />
-        <activity android:name=".QuanlyLophoc"
-                android:exported="false"
-                android:parentActivityName=".HomePageAdmin"/>
-        <activity
             android:name=".adding.ClassAdding"
             android:exported="false"
             android:parentActivityName=".QuanlyLophoc"
             android:theme="@style/MyDialog" />
-        <activity
-            android:name=".ProfileLecture"
+        <activity android:name=".ProfileLecture"
             android:exported="false"
             android:parentActivityName=".HomePageLecture" />
-        <activity
-            android:name=".adding.StudentAdding"
+        <activity android:name=".adding.StudentAdding"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
-        <activity
-            android:name=".StudentUpdate"
+        <activity android:name=".StudentUpdate"
             android:exported="false"
             android:parentActivityName=".QuanlySinhvien" />
         <activity

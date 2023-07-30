@@ -208,8 +208,11 @@ public class ClassInformation extends AppCompatActivity {
                             builder.show();
                             return true;
                         } else if (id == R.id.student_score) {
+                            Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
                             Student std = (Student) lvStudents.getItemAtPosition(position);
                             bundle.putSerializable("student", std);
+//                            bundle.putSerializable("student", student);
+
                             bundle.putSerializable("class", _class);
                             Intent intent = new Intent(ClassInformation.this, StudentInformation.class);
                             intent.putExtras(bundle);
@@ -246,7 +249,6 @@ public class ClassInformation extends AppCompatActivity {
                 });
                 popupMenu.inflate(R.menu.popup_menu_student_in_class);
                 popupMenu.setGravity(Gravity.END);
-
                 popupMenu.show();
             }
         });
