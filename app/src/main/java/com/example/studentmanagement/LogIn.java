@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pojo.Lecture;
+import com.example.pojo.Subject;
 import com.example.pojo.User;
 import com.example.service.HashSHA1;
 import com.example.service.QLSVDatabase;
@@ -38,26 +39,17 @@ public class LogIn extends AppCompatActivity {
         getSupportActionBar().hide();
 
         db = new QLSVDatabase(this);
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> main
         db.add_subject(new Subject(1, "Lập trình Java", 4));
         db.add_lecture(new Lecture(1, "Trong Nghia"));
         db.add_lecture(new Lecture(999, "Ngoc Tuan"));
         db.add_user(new User(1, "admin", "123", 1, 1));
         db.add_user(new User(1, "nghia", "123", 0, 1));
-<<<<<<< HEAD
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
         db.add_subject(new Subject(1, "Lập trình Java", 4));
         db.add_lecture(new Lecture(1, "Trong Nghia"));
         db.add_lecture(new Lecture(999, "Ngoc Tuan"));
         db.add_user(new User(1, "admin", "123", 1, 1));
         db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
-
-=======
-=======
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 //        db.add_subject(new Subject(1, "Lập trình Java", 4));
 //        db.add_class(new Class(1, "IT02", 1, 1, 45, "2022-2023", "03/07/2022"));
@@ -65,8 +57,6 @@ public class LogIn extends AppCompatActivity {
 //        db.add_lecture(new Lecture(999, "Ngoc Tuan"));
 //        db.add_user(new User(1, "admin", "123", 1, 1));
 //        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
 
         medtUsername = (EditText) findViewById(R.id.edtMaGV);
         medtPassword = (EditText) findViewById(R.id.edtPassword);
@@ -80,22 +70,6 @@ public class LogIn extends AppCompatActivity {
         medtUsername.setText("admin");
         medtPassword.setText("123");
 
-<<<<<<< HEAD
-        if (checkRemember()) {
-            idRole = Integer.parseInt(sharePreferenceServeice.getString("user_role"));
-            Intent intent;
-            if (idRole == 0) {
-                intent = new Intent(LogIn.this, HomePageAdmin.class);
-            } else {
-                intent = new Intent(LogIn.this, HomePageLecture.class);
-            }
-            startActivity(intent);
-            finish();
-        }
-
-=======
-<<<<<<< HEAD
->>>>>>> main
         mbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,44 +90,7 @@ public class LogIn extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-=======
-        if(checkRemember())
-        {
-            idRole = Integer.parseInt(sharePreferenceServeice.getString("user_role"));
-            Intent intent;
-            if(idRole == 0) {
-                intent = new Intent(LogIn.this, HomePageAdmin.class);
-            }
-            else {
-                intent = new Intent(LogIn.this, HomePageLecture.class);
-            }
-            startActivity(intent);
-            finish();
-        }
-        
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (logIn()) {
 
-                    if(mckRemember.isChecked())
-                        sharePreferenceServeice.putString("remember", "Check");
-
-                    sharePreferenceServeice.putString("current_user", Integer.toString(idLecture));
-                    sharePreferenceServeice.putString("user_role", Integer.toString(idRole));
-                    sharePreferenceServeice.putString("user_id", Integer.toString(idAccount));
-                    Intent intent;
-                    if(idRole == 0) {
-                        intent = new Intent(LogIn.this, HomePageAdmin.class);
-                    }
-                    else {
-                        intent = new Intent(LogIn.this, HomePageLecture.class);
-                    }
-                    startActivity(intent);
-                    finish();
-                }
-                else {
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
                     Toast.makeText(LogIn.this, "Username hoặc Password không đúng", Toast.LENGTH_SHORT).show();
                     medtUsername.selectAll();
                     medtUsername.requestFocus();
@@ -171,35 +108,12 @@ public class LogIn extends AppCompatActivity {
     }
 
     private boolean logIn() {
-
         Cursor cursor = db.checkLogin(medtUsername.getText().toString().trim(), HashSHA1.SHA1(medtPassword.getText().toString().trim()));
         cursor.moveToFirst();
-<<<<<<< HEAD
         if (cursor.getCount() > 0) {
             idAccount = cursor.getInt(0);
             idLecture = cursor.getInt(3);
             idRole = cursor.getInt(4);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkRemember() {
-        String user_id = sharePreferenceServeice.getString("remember");
-        if (user_id != null && !user_id.isEmpty())
-            return true;
-        return false;
-=======
-        if (cursor.getCount() > 0){
-            idAccount = cursor.getInt(0);
-            idLecture = cursor.getInt(3);
-            idRole = cursor.getInt(4);
-<<<<<<< HEAD
-            return cursor.getInt(0);
-        } else {
-            return -1;
-        }
-=======
             return true;
         }
         return false;
@@ -210,7 +124,6 @@ public class LogIn extends AppCompatActivity {
         if(user_id != null && !user_id.isEmpty())
             return true;
         return false;
->>>>>>> 3ce845fc4280a0edc8352c149f1ad8279fe1209c
->>>>>>> main
+
     }
 }
