@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/class_detail"
+        android:title="Xem lớp học" />
+    <item
+        android:id="@+id/class_edit"
+        android:title="Sửa lớp học" />
+    <item
+        android:id="@+id/class_close"
+        android:title="Đóng lớp học" />
+    <item
+        android:id="@+id/class_remove"
+        android:title="Xoá lớp học" />
+</menu>

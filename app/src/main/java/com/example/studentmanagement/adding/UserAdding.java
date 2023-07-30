@@ -13,10 +13,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pojo.Lecture;
 import com.example.pojo.User;
+import com.example.service.HashSHA1;
 import com.example.service.QLSVDatabase;
 import com.example.studentmanagement.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,6 +31,8 @@ public class UserAdding extends AppCompatActivity {
     private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
     Spinner spRole;
     EditText edtUsername, edtPassword;
+
+    TextView tvTitle;
 
     TextInputLayout tilPassword;
     AutoCompleteTextView edtLecture;
@@ -44,10 +48,12 @@ public class UserAdding extends AppCompatActivity {
 
         db = new QLSVDatabase(this);
 
+        tvTitle = (TextView)findViewById(R.id.tvTitleUserDialog);
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
         tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
-        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingCollage);
+        edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
+
         btnAdd = (Button) findViewById(R.id.btnUserAdd);
         btnUpdate = (Button) findViewById(R.id.btnUserEdit);
 
@@ -95,10 +101,19 @@ public class UserAdding extends AppCompatActivity {
         {
             btnAdd.setVisibility(View.GONE);
             edtLecture.setEnabled(false);
+            tvTitle.setText("Sửa người dùng");
 
             User user = (User) bundle.get("User");
             edtUsername.setText(user.getUsername());
             tilPassword.getEditText().setText(user.getPassword());
+            tilPassword.setPasswordVisibilityToggleEnabled(false);
+            tilPassword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus)
+                        tilPassword.getEditText().setText("");
+                }
+            });
 
             Cursor cLecture = db.getLectureById(user.getLecture());
             cLecture.moveToFirst();
@@ -116,10 +131,11 @@ public class UserAdding extends AppCompatActivity {
                        String password = tilPassword.getEditText().getText().toString();
                        int role = spRole.getSelectedItemPosition();
 
-                       Cursor c = db.getUserByUsername(username);
+                       Cursor c = db.getDiffUserByUsername(user.getId(), username);
                        if(!(c.getCount() > 0)){
                            user.setUsername(username);
-                           user.setPassword(password);
+                           String hashPassword = HashSHA1.SHA1(password);
+                           user.setPassword(hashPassword);
                            user.setRole(role);
 
                            if(db.update_user(user) > 0){
@@ -148,7 +164,7 @@ public class UserAdding extends AppCompatActivity {
                 public void onClick(View v) {
                    if(validateInput()){
                        String username = edtUsername.getText().toString();
-                       String password = tilPassword.getEditText().getText().toString();
+                       String password = HashSHA1.SHA1(tilPassword.getEditText().getText().toString());
                        int role = spRole.getSelectedItemPosition();
 
                        if(lecture_id == -1){

@@ -1,10 +1,9 @@
-package com.example.studentmanagement.infomation;
+package com.example.studentmanagement.information;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.pojo.User;
@@ -14,8 +13,6 @@ import com.example.studentmanagement.R;
 public class UserInformation extends AppCompatActivity {
 
     TextView tvID, tvUsername, tvRole, tvLecture;
-
-    EditText edtPassword;
 
     QLSVDatabase db;
 
@@ -30,14 +27,12 @@ public class UserInformation extends AppCompatActivity {
         tvUsername = (TextView) findViewById(R.id.tvUserInfoUsername);
         tvRole = (TextView) findViewById(R.id.tvUserInfoRole);
         tvLecture = (TextView) findViewById(R.id.tvUserInfoLecture);
-        edtPassword = (EditText) findViewById( R.id.edtUserInfoPassword);
 
         Bundle bundle = getIntent().getExtras();
         User user = (User) bundle.getSerializable("User");
 
         tvID.setText("ID: " + Integer.toString(user.getId()));
         tvUsername.setText("Tài khoản: " + user.getUsername());
-        edtPassword.setText(user.getPassword());
         tvRole.setText("Vai trò: " + User.ROLE.values()[user.getRole()]);
         Cursor lecture = db.getLectureById(user.getLecture());
         lecture.moveToFirst();

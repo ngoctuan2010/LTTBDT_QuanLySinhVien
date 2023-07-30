@@ -2,10 +2,12 @@ package com.example.service;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,14 +39,13 @@ public class ClassArrayAdapter extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(R.layout.listview_class_item, null);
         if(listClass.size() > 0 && position >= 0){
-
-
             TextView tvSubject = (TextView) convertView.findViewById(R.id.tvClassSubject);
             TextView tvClass = (TextView) convertView.findViewById(R.id.tvClassName);
             TextView tvQuantity = (TextView) convertView.findViewById(R.id.tvClassQuantity);
             TextView tvLecture = (TextView) convertView.findViewById(R.id.tvClassLecture);
             TextView tvDate = (TextView) convertView.findViewById(R.id.tvClassStarted);
             TextView tvYear = (TextView) convertView.findViewById(R.id.tvClassYear);
+            FrameLayout flStatus = (FrameLayout) convertView.findViewById(R.id.flClassState);
 
             Class cl = listClass.get(position);
 
@@ -65,11 +66,13 @@ public class ClassArrayAdapter extends ArrayAdapter {
                 tvLecture.setText("GV: ");
             }
 
-
             tvClass.setText("[" + cl.getId() + "] " + cl.getName());
             tvQuantity.setText("SL: " +Integer.toString(cl.getQuantity()));
             tvDate.setText("Thời gian bắt đầu: " + cl.getStarted());
             tvYear.setText("Khoá: " + cl.getYear());
+
+            if(cl.getStatus() == 1)
+                flStatus.setBackgroundColor(Color.RED);
 
 
         }

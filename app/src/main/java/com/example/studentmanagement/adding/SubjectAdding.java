@@ -1,8 +1,6 @@
 package com.example.studentmanagement.adding;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +28,7 @@ public class SubjectAdding extends AppCompatActivity {
         setContentView(R.layout.layout_subject_adding);
         db = new QLSVDatabase(this);
         edtSubjectCredit = (EditText) findViewById(R.id.edtLectureAddingName);
-        edtSubjectName = (EditText) findViewById(R.id.edtLectureAddingId);
+        edtSubjectName = (EditText) findViewById(R.id.edtUserAddingUsername);
         btnSubjectAdd = (Button) findViewById(R.id.btnLectureAdd);
         btnSubjectUpdate = (Button) findViewById(R.id.btnLectureEdit);
         edtSubjectMid = (EditText) findViewById(R.id.edtSubjectAddingMid);

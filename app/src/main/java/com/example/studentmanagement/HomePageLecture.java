@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.example.pojo.Class;
 import com.example.service.HomeSubjectArrayAdapter;
 import com.example.service.QLSVDatabase;
-import com.example.studentmanagement.infomation.ClassInfomation;
+import com.example.service.SharePreferenceServeice;
+import com.example.studentmanagement.information.ClassInformation;
+
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class HomePageLecture extends AppCompatActivity {
     String[] listSemester = {"Học kì I năm 2022-2023", "Học kì II năm 2022-2023", "Học kì III năm 2022-2023"};
     QLSVDatabase db;
     int idLecture;
+
+    SharePreferenceServeice sharePreferenceServeice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +48,10 @@ public class HomePageLecture extends AppCompatActivity {
         tvBirth = (TextView) findViewById(R.id.txtBirth);
 
         db = new QLSVDatabase(this);
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
 
-        Bundle bundle = getIntent().getExtras();
-        int idUser = bundle.getInt("idUser");
-        Cursor cursorGetId = db.getUserById(idUser);
-        cursorGetId.moveToFirst();
-        idLecture = cursorGetId.getInt(3);
-        Cursor cursorLecture = db.getLectureById(idLecture);
+        int IdLecture = Integer.parseInt(sharePreferenceServeice.getString("current_user"));
+        Cursor cursorLecture = db.getLectureById(IdLecture);
         cursorLecture.moveToFirst();
 
 //        SetText textview
@@ -64,7 +65,7 @@ public class HomePageLecture extends AppCompatActivity {
 
         ArrayList<Class> listClass = new ArrayList<Class>();
         HomeSubjectArrayAdapter homeSubjectArrayAdapter = new HomeSubjectArrayAdapter(HomePageLecture.this, R.layout.class_item_layout, listClass);
-        Cursor cursor = db.get_list_class();
+        Cursor cursor = db.get_list_class_by_lecture_active(IdLecture);
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -78,7 +79,7 @@ public class HomePageLecture extends AppCompatActivity {
         lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(HomePageLecture.this, ClassInfomation.class);
+                Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
                 Bundle bundle1 = new Bundle();
                 Class cl = (Class) lvSubject.getItemAtPosition(i);
                 bundle1.putSerializable("class", cl);
@@ -124,6 +125,7 @@ public class HomePageLecture extends AppCompatActivity {
         }
 
         if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
             Intent intent = new Intent(HomePageLecture.this, LogIn.class);
             startActivity(intent);
             Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
