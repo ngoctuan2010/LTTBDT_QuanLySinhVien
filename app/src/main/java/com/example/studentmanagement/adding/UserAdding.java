@@ -146,8 +146,11 @@ public class UserAdding extends AppCompatActivity {
                        Cursor c = db.getDiffUserByUsername(user.getId(), username);
                        if(!(c.getCount() > 0)){
                            user.setUsername(username);
-                           String hashPassword = HashSHA1.SHA1(password);
-                           user.setPassword(hashPassword);
+
+                           if(user.getPassword().equals(HashSHA1.SHA1(password)))
+                               password = HashSHA1.SHA1(password);
+                           user.setPassword(password);
+
                            user.setRole(role);
 
                            if(db.update_user(user) > 0){
