@@ -153,7 +153,15 @@ public class QuanlyMonhoc extends AppCompatActivity {
                 builder.setSingleChoiceItems(filter1, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Collections.reverse(subjectList);
+                        if(which == 0){
+                            subjectList.sort( (s1,s2) -> {
+                                return s1.getName().compareTo(s2.getName());
+                            });
+                        }else{
+                            subjectList.sort( (s1,s2) -> {
+                                return s2.getName().compareTo(s1.getName());
+                            });
+                        }
                         adapter.notifyDataSetChanged();
                         dialog.cancel();
                     }

@@ -256,6 +256,14 @@ public class QLSVDatabase {
         return db.rawQuery(query, arg);
     }
 
+    public Cursor getDiffSubjectByName(int id, String name){
+        String query = "SELECT * " +
+                "FROM " + DBHelper.SUBJECT_TABLE +
+                " WHERE " + DBHelper.SUBJECT_NAME + " = ? AND " + DBHelper.SUBJECT_ID + " != ?";
+        String[] arg = {name, Integer.toString(id)};
+        return db.rawQuery(query, arg);
+    }
+
     public int countSubject() {
         String query = "SELECT COUNT(*) " +
                 "FROM " + DBHelper.SUBJECT_TABLE + ";";

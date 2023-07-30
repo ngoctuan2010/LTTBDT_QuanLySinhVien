@@ -66,10 +66,11 @@ public class SubjectAdding extends AppCompatActivity {
                         subject.setMidGradePercent(_mid);
                         subject.setFinalGradePercent(_final);
 
-                        if (db.getSubjectByName(name).getCount() > 0) {
+                        if (db.getDiffSubjectByName(subject.getId(), subject.getName()).getCount() > 0) {
                             Toast.makeText(SubjectAdding.this, "Môn học đã tồn tại", Toast.LENGTH_SHORT).show();
                             return;
                         }
+
                         if (db.update_subject(subject) > 0) {
                             Toast.makeText(SubjectAdding.this, "Bạn đã sửa môn học thành công", Toast.LENGTH_SHORT).show();
                             onBackPressed();
