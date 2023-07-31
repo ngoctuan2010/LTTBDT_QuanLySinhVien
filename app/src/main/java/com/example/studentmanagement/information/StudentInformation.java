@@ -23,7 +23,8 @@ import java.text.SimpleDateFormat;
 
 public class StudentInformation extends AppCompatActivity {
 
-    TextView txtNameClass, txtQuantity, txtSchoolyear, txtIdStudent, txtStudentName, txtBirth, txtScore10, txtScore4;
+
+    TextView txtNameClass,tvNameSubject, txtQuantity, txtSchoolyear, txtIdStudent, txtStudentName, txtBirth, txtScore10, txtScore4;
     EditText edtMidScore, edtEndScore;
     Button btnSave;
     QLSVDatabase database;
@@ -35,6 +36,7 @@ public class StudentInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_information);
         txtNameClass = findViewById(R.id.txtClassName);
+        tvNameSubject = findViewById(R.id.tvNameSubject);
         txtQuantity = findViewById(R.id.txtQuantity);
         txtSchoolyear = findViewById(R.id.txtSchoolyear);
         txtIdStudent = findViewById(R.id.txtIdStudent);
@@ -52,11 +54,14 @@ public class StudentInformation extends AppCompatActivity {
         Class aClass = (Class) bundle.getSerializable("class");
         showInformation(student, aClass);
 
+
         database = new QLSVDatabase(StudentInformation.this);
-        Score score = database.getScoreByClassAndStudent(student.getId(), aClass.getId());
+        Score score = database.getScoreByClassAndStudent(aClass.getId(), student.getId());
         showScore(score);
 
+
         Subject subject = database.getSubjectByClass(aClass.getId());
+        tvNameSubject.setText(subject.getName());
         percentMidGrade = subject.getMidGracePercent();
         percentFinalGrade = subject.getFinalGracePercent();
         showAverageScoreOnCreate();

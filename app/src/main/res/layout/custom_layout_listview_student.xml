@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/icon_card"
     android:descendantFocusability="blocksDescendants"
     android:elevation="6dp">
 
     <ImageView
-        android:layout_marginLeft="10dp"
         android:id="@+id/imgItemStudent"
         android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:background="@color/white"
         app:srcCompat="@drawable/femalestudent" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -32,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:background="@color/black"
+        android:layout_margin="10dp"
+        android:background="@color/buttonBlue"
         android:outlineSpotShadowColor="@color/black"
         android:textColor="@color/black" />
 </LinearLayout>

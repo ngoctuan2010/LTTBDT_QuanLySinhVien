@@ -74,9 +74,11 @@ public class HomePageLecture extends AppCompatActivity {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             int idSubject = cursor.getInt(2);
+            int idLecture = Integer.parseInt(sharePreferenceServeice.getString("current_user"));
             int quantity = cursor.getInt(4);
             String year = cursor.getString(5);
-            listClass.add(new Class(id, name, idSubject, quantity, year));
+            String date = cursor.getString(6);
+            listClass.add(new Class(id, name, idSubject, idLecture, quantity, year, date));
         }
         cursor.close();
         lvSubject.setAdapter(homeSubjectArrayAdapter);
@@ -84,61 +86,48 @@ public class HomePageLecture extends AppCompatActivity {
         lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {int id = menuItem.getItemId();
-                        if (id == R.id.object_show) {
-                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
-                            Bundle bundle = new Bundle();
-                            Serializable pack = (Serializable) listClass.get(position);
-                            bundle.putSerializable("class", pack);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            return true;
-                        } else if (id == R.id.object_delete) {
-                            Toast.makeText(HomePageLecture.this, "Bạn không thể xóa lớp", Toast.LENGTH_SHORT).show();
-                        } else if (id == R.id.object_edit) {
-                            Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
-                        }
-
-                        return false;
-                    }
-                });
-
-                popupMenu.inflate(R.menu.popup_class_item);
-                popupMenu.setGravity(Gravity.END);
-                popupMenu.show();
+                Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
+                Bundle bundle = new Bundle();
+                Serializable pack = (Serializable) listClass.get(position);
+                bundle.putSerializable("class", pack);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
-//        lvSubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                PopupMenu popupMenu = new PopupMenu(HomePageLecture.this, view);
-//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem) {
-//                        int id = menuItem.getItemId();
-//                        if (id == R.id.object_show) {
-//                            Intent intent = new Intent(HomePageLecture.this, ClassInformation.class);
-//                            Bundle bundle = new Bundle();
-//                            Serializable pack = (Serializable) listClass.get(position);
-//                            bundle.putSerializable("class", pack);
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                            return true;
-//                        } else if (id == R.id.object_delete) {
-//                            Toast.makeText(HomePageLecture.this, "Bạn không thể xóa lớp", Toast.LENGTH_SHORT).show();
-//                        } else if (id == R.id.object_edit) {
-//                            Toast.makeText(HomePageLecture.this, "Bạn không thể chỉnh sửa lớp", Toast.LENGTH_SHORT).show();
-//                        }
-//                        return false;
-//                    }
-//                });
-//
-//                popupMenu.inflate(R.menu.popup_class_item);
-//                popupMenu.setGravity(Gravity.END);
-//                popupMenu.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        menu.findItem(R.id.action_class).setVisible(false);
+        menu.findItem(R.id.action_collape).setVisible(false);
+        menu.findItem(R.id.action_statistical).setVisible(false);
+        menu.findItem(R.id.action_student).setVisible(false);
+        menu.findItem(R.id.action_user).setVisible(false);
+        menu.findItem(R.id.action_subject).setVisible(false);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
+            Intent intent = new Intent(HomePageLecture.this, LogIn.class);
+            startActivity(intent);
+            finish();
+        }
+        if(id == R.id.action_profile)
+        {
+            Intent intent = new Intent(HomePageLecture.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        return true;
     }
 }

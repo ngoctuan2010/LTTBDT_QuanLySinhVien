@@ -123,6 +123,12 @@ public class ProfileLecture extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.action_menu, menu);
         menu.setGroupVisible(R.id.grMenuDefault, true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        menu.findItem(R.id.action_class).setVisible(false);
+        menu.findItem(R.id.action_collape).setVisible(false);
+        menu.findItem(R.id.action_statistical).setVisible(false);
+        menu.findItem(R.id.action_student).setVisible(false);
+        menu.findItem(R.id.action_user).setVisible(false);
+        menu.findItem(R.id.action_subject).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -140,28 +146,6 @@ public class ProfileLecture extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_profile) {
-            Intent intent = new Intent(ProfileLecture.this, ProfileLecture.class);
-            startActivity(intent);
-            Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_class) {
-            Toast.makeText(this, "Bạn vào trang sửa lớp", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_collape) {
-            Toast.makeText(this, "Bạn vào trang sửa giảng viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_student) {
-            Toast.makeText(this, "Bạn vào trang sửa sinh viên", Toast.LENGTH_SHORT).show();
-        }
-
-        if (id == R.id.action_subject) {
-            Toast.makeText(this, "Bạn vào trang sửa môn học", Toast.LENGTH_SHORT).show();
-        }
-
         if (id == R.id.action_sign_out) {
             Intent intent = new Intent(ProfileLecture.this, LogIn.class);
             startActivity(intent);

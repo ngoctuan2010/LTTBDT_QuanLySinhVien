@@ -45,6 +45,16 @@ public class Class implements Serializable {
         this.subject_id = subject_id;
     }
 
+    public Class(int id, String name, int subject_id, int lecture, int quantity, String year, String started) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
+        this.lecture = lecture;
+        this.quantity = quantity;
+        this.year = year;
+        this.started = started;
+    }
+
     public int getId() {
         return id;
     }

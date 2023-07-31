@@ -56,7 +56,7 @@ public class AdminStatistical extends AppCompatActivity {
 
     AutoCompleteTextView acClassScore;
 
-    Button btnSubjectRun, btnClassRun;
+    Button btnSubjectRun, btnClassRun, btnStudentRun;
     Spinner spSubject, spLecture;
 
     PieChart chartUser, chartLecture, chartStudent, chartScorePass;
@@ -80,6 +80,7 @@ public class AdminStatistical extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_admin_statictical);
         db = new QLSVDatabase(this);
         int now_year = Calendar.getInstance().get(Calendar.YEAR);
@@ -92,8 +93,6 @@ public class AdminStatistical extends AppCompatActivity {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        studentStatisticalChart("2022-2023");
-        edtStudentYear.setText("2022-2023");
 
         subjectStatistical();
         classStatistical();
@@ -101,6 +100,17 @@ public class AdminStatistical extends AppCompatActivity {
 
         edtClassYear.setText(Integer.toString(now_year));
         classStatisticalChart(now_year);
+
+
+        btnStudentRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String year_school = edtStudentYear.getText().toString();
+                if(year_school != null && !year_school.isEmpty()){
+                    studentStatisticalChart(year_school);
+                }
+            }
+        });
 
         subjectAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, subjects);
         spSubject.setAdapter(subjectAdapter);
@@ -172,7 +182,6 @@ public class AdminStatistical extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Lecture lecture = (Lecture) spLecture.getSelectedItem();
-//                Toast.makeText(AdminStatistical.this, Integer.toString(lecture.getId()), Toast.LENGTH_SHORT).show();
                 scoreStudentPass(lecture.getId());
             }
 
@@ -199,6 +208,7 @@ public class AdminStatistical extends AppCompatActivity {
         tvStudentTotal = (TextView) findViewById(R.id.tvASStudentTotal);
         tvStudentInYear = (TextView) findViewById(R.id.tvASStudentInYear);
         edtStudentYear = (EditText) findViewById(R.id.edtASStudentYear);
+        btnStudentRun = (Button)findViewById(R.id.btnASStudentRun);
 
         //Subject Statistical
         tvSubjectTotal = (TextView) findViewById(R.id.tvASTotalSubject);
@@ -527,16 +537,18 @@ public class AdminStatistical extends AppCompatActivity {
         Cursor cursor = db.get_list_class_by_lectureId(idLecture);
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
-            Cursor cursor1 = db.ScoreInClassStatistical(cursor.getInt(3));
-            cursor1.moveToFirst();
-            if (cursor1.getCount() > 0) {
-                if (cursor1.getDouble(0) < 4.0) {
-                    slFail += cursor1.getInt(1);
+            Cursor cursor1 = db.ScoreInClassStatistical(cursor.getInt(0));
+            cursor1.moveToPosition(-1);
+            while(cursor1.moveToNext()){
+                    if (cursor1.getDouble(0) < 4.0) {
+                        slFail += cursor1.getInt(1);
+                    }
+                    else {
+                        slPass += cursor1.getInt(1);
+                    }
                 }
-                else {
-                    slPass += cursor1.getInt(1);
-                }
-            }
+
+
         }
 
         Map<String, Integer> map = new HashMap<>();

@@ -202,7 +202,7 @@
                             android:background="@color/white"
                             android:ems="10"
                             android:hint="Khoá..."
-                            android:inputType="number"
+                            android:inputType="text"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray" />
 
@@ -414,8 +414,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="400dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -424,14 +425,16 @@
                     android:text="Giảng viên"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+
                 <Spinner
                     android:id="@+id/spnLecture"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/spinner_custom"/>
+                    android:layout_marginRight="40dp"
+                    android:background="@drawable/spinner_custom" />
+
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pcScorePass"
                     android:layout_width="match_parent"

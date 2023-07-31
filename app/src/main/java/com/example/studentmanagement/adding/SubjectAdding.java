@@ -28,18 +28,14 @@ public class SubjectAdding extends AppCompatActivity {
         setContentView(R.layout.layout_subject_adding);
         db = new QLSVDatabase(this);
 
-        edtSubjectCredit = (EditText) findViewById(R.id.edtClassAddingQuantity);
-        edtSubjectName = (EditText) findViewById(R.id.edtClassAddingStarted);
+        edtSubjectCredit = (EditText) findViewById(R.id.edtSubjectAddingCredit);
+        edtSubjectName = (EditText) findViewById(R.id.edtSubjectAddingName);
         edtSubjectMid = (EditText)findViewById(R.id.edtSubjectAddingMid);
         edtSubjectFinal = (EditText)findViewById(R.id.edtSubjectAddingFinal);
 
-        btnSubjectAdd = (Button) findViewById(R.id.btnClassAdd);
-        btnSubjectUpdate = (Button) findViewById(R.id.btnSubjectEdit);
+        btnSubjectAdd = (Button) findViewById(R.id.btnSubjectAdd);
+        btnSubjectUpdate = (Button) findViewById(R.id.btnSubjectUpdate);
 
-        edtSubjectCredit = (EditText) findViewById(R.id.edtLectureAddingName);
-        edtSubjectName = (EditText) findViewById(R.id.edtUserAddingUsername);
-        btnSubjectAdd = (Button) findViewById(R.id.btnLectureAdd);
-        btnSubjectUpdate = (Button) findViewById(R.id.btnLectureEdit);
         edtSubjectMid = (EditText) findViewById(R.id.edtSubjectAddingMid);
         edtSubjectFinal = (EditText) findViewById(R.id.edtSubjectAddingFinal);
         tvTitle = (TextView) findViewById(R.id.tvTitleSubjectDialog);
@@ -72,8 +68,8 @@ public class SubjectAdding extends AppCompatActivity {
 
                         subject.setName(name);
                         subject.setCredit(credit);
-                        subject.setMidGracePercent(_mid);
-                        subject.setFinalGracePercent(_final);
+                        subject.setMidGracePercent(_mid / 10);
+                        subject.setFinalGracePercent(_final / 10);
 
                         if (db.getDiffSubjectByName(subject.getId(), subject.getName()).getCount() > 0) {
                             Toast.makeText(SubjectAdding.this, "Môn học đã tồn tại", Toast.LENGTH_SHORT).show();
@@ -94,6 +90,7 @@ public class SubjectAdding extends AppCompatActivity {
             });
 
         } else {
+
             btnSubjectUpdate.setVisibility(View.GONE);
             btnSubjectAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,7 +112,7 @@ public class SubjectAdding extends AppCompatActivity {
                             return;
                         }
 
-                        Subject s = new Subject(-1, name, credit, _mid, _final);
+                        Subject s = new Subject(-1, name, credit, _mid / 10, _final / 10);
                         if (db.add_subject(s) > 0) {
                             Toast.makeText(SubjectAdding.this, "Bạn đã thêm môn học thành công", Toast.LENGTH_SHORT).show();
                             onBackPressed();

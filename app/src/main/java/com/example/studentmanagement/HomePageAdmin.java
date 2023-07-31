@@ -110,8 +110,12 @@ public class HomePageAdmin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_profile) {
-            Toast.makeText(this, "Bạn vào trang cá nhân", Toast.LENGTH_SHORT).show();
+        if(id == R.id.action_profile){
+            Intent intent = new Intent(HomePageAdmin.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
 
         if (id == R.id.action_class) {
@@ -138,7 +142,6 @@ public class HomePageAdmin extends AppCompatActivity {
             sharePreferenceServeice.clear();
             Intent intent = new Intent(HomePageAdmin.this, LogIn.class);
             startActivity(intent);
-            Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
             finish();
         }
         if (id == R.id.action_user) {
