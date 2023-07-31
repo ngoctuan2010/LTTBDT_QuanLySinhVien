@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/lightBlue"
+            android:background="@drawable/text_background_custom"
             android:padding="10dp"
             android:text="Danh sách user"
             android:textColor="@color/black"

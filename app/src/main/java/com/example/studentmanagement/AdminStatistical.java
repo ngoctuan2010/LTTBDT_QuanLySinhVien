@@ -419,11 +419,14 @@ public class AdminStatistical extends AppCompatActivity {
         Cursor c = db.AccountQuantityStatistical();
         if(c.getCount() > 0){
             Map<String, Integer> statistical = getDataAccount(c);
-
+            int qUser = 0;
             // Data
-            int qUser = statistical.get(User.ROLE.values()[0].toString());
+            if (statistical.containsKey(User.ROLE.values()[1].toString())) {
+                qUser = statistical.get(User.ROLE.values()[1].toString());
+
+            }
             tvUser.setText("User: " + Integer.toString(qUser));
-            int qAdmin = statistical.get(User.ROLE.values()[1].toString());
+            int qAdmin = statistical.get(User.ROLE.values()[0].toString());
             tvAdmin.setText("Admin: " + Integer.toString(qAdmin));
             int total = qUser + qAdmin;
             tvUserTotal.setText("Tổng cộng: " + total);

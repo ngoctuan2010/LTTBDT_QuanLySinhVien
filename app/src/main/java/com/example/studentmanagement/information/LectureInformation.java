@@ -33,6 +33,14 @@ public class LectureInformation extends AppCompatActivity {
         rdMale = (RadioButton) findViewById(R.id.rdLectureInfoMale);
         rdFermale = (RadioButton) findViewById(R.id.rdLectureInfoFermale);
 
+        edtName.setKeyListener(null);
+        edtBirth.setKeyListener(null);
+        edtAddress.setKeyListener(null);
+        edtPhone.setKeyListener(null);
+        edtDepartment.setKeyListener(null);
+        rdFermale.setKeyListener(null);
+        rdMale.setKeyListener(null);
+
         db = new QLSVDatabase(this);
 
         Bundle bundle = getIntent().getExtras();

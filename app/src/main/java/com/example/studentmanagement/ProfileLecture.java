@@ -21,7 +21,7 @@ import com.example.service.QLSVDatabase;
 
 public class ProfileLecture extends AppCompatActivity {
     EditText medtName, medtBirth,medtAddress, medtPhone, medtDepartment;
-    TextView tvId;
+    TextView tvId, tvName;
     RadioGroup mrdgGender;
     RadioButton mrdMale, mrdFemale;
     Button mbtnSave;
@@ -33,6 +33,7 @@ public class ProfileLecture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_lecture);
 
+        tvName = (TextView) findViewById(R.id.tvName);
         tvId = (TextView) findViewById(R.id.tvId);
 
         medtName = (EditText) findViewById(R.id.edtName);
@@ -54,6 +55,7 @@ public class ProfileLecture extends AppCompatActivity {
         cursor.moveToFirst();
 
         //setText
+        tvName.setText(cursor.getString(1));
         tvId.setText(cursor.getString(0));
         medtName.setText(cursor.getString(1));
         if (cursor.getString(2).equals("0")) {

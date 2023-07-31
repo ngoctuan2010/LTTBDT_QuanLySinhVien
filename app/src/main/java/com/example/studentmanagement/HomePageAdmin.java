@@ -37,8 +37,6 @@ public class HomePageAdmin extends AppCompatActivity {
         mbtnStatistical = (ImageButton) findViewById(R.id.btnStatistical);
 
         mtxtName = (TextView) findViewById(R.id.txtName);
-        mtxtId = (TextView) findViewById(R.id.txtId);
-        mtxtBirth = (TextView) findViewById(R.id.txtBirth);
 
         db = new QLSVDatabase(this);
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
@@ -49,8 +47,6 @@ public class HomePageAdmin extends AppCompatActivity {
 
 //        SetText textview
         mtxtName.setText(cursorLecture.getString(1));
-        mtxtId.setText(cursorLecture.getString(0));
-        mtxtBirth.setText(cursorLecture.getString(4));
 
         mbtnStudent.setOnClickListener(new View.OnClickListener() {
             @Override

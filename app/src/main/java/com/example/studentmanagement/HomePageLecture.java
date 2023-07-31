@@ -46,8 +46,6 @@ public class HomePageLecture extends AppCompatActivity {
         lvSubject = (ListView) findViewById(R.id.lvSubject);
 
         tvName = (TextView) findViewById(R.id.txtName);
-        tvId = (TextView) findViewById(R.id.txtId);
-        tvBirth = (TextView) findViewById(R.id.txtBirth);
 
         db = new QLSVDatabase(this);
         sharePreferenceServeice = new SharePreferenceServeice(this, "User");
@@ -58,8 +56,6 @@ public class HomePageLecture extends AppCompatActivity {
 
 //        SetText textview
         tvName.setText(cursorLecture.getString(1));
-        tvId.setText(cursorLecture.getString(0));
-        tvBirth.setText(cursorLecture.getString(4));
 
         ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listSemester);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
