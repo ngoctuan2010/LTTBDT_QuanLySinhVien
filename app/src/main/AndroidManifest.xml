@@ -37,7 +37,7 @@
             android:exported="false"
             android:theme="@style/MyDialog" />
         <activity android:name=".adding.UserAdding"
-            android:exported="true"
+            android:exported="false"
             android:parentActivityName=".QuanlyUser"
             android:theme="@style/MyDialog"></activity>
         <activity android:name=".QuanlyMonhoc"

@@ -427,7 +427,7 @@ public class AdminStatistical extends AppCompatActivity {
         Cursor c = db.AccountQuantityStatistical();
         if(c.getCount() > 0){
             Map<String, Integer> statistical = getDataAccount(c);
-
+            int qUser = 0;
             // Data
             int qAdmin = statistical.get(User.ROLE.values()[0].toString());
             tvAdmin.setText("Admin: " + Integer.toString(qAdmin));

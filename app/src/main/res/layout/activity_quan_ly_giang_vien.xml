@@ -62,7 +62,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightBlue"
+            android:background="@drawable/text_background_custom"
             android:elevation="6sp"
             android:padding="10dp"
             android:text="Danh sách giảng viên"

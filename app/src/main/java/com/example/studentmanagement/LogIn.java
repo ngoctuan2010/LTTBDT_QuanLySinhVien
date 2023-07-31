@@ -48,7 +48,7 @@ public class LogIn extends AppCompatActivity {
 //        db.add_user(new User(1, "admin", "123", 0, 1));
 //        db.add_user(new User(1, "nghia", "123", 0, 1));
 //        db.add_user(new User(1, "admin", "123", 1, 1));
-//        db.add_user(new User(1, "admin", HashSHA1.SHA1("123"), 0, 1));
+//        db.add_user(new User(1, "admin123", HashSHA1.SHA1("123"), 0, 1));
 
         medtUsername = (EditText) findViewById(R.id.edtMaGV);
         medtPassword = (EditText) findViewById(R.id.edtPassword);
@@ -59,7 +59,7 @@ public class LogIn extends AppCompatActivity {
         mbtnForgotPassword = (Button) findViewById(R.id.btnLoginForgotPassword);
 
         //Login Default
-        medtUsername.setText("admin");
+        medtUsername.setText("admin123");
         medtPassword.setText("123");
 
         if(checkRemember())

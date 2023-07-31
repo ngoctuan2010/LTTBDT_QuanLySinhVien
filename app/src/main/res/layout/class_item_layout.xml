@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/gray"
     android:elevation="4dp">
 
     <TextView
         android:id="@+id/tvSubjectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightBlue"
+        android:background="@drawable/radius_top_custom"
         android:padding="10dp"
         android:text="aaa"
         android:textColor="@color/black"
@@ -23,7 +22,8 @@
         android:text="Lớp: IT02"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:padding="6dp"/>
+        android:padding="6dp"
+        android:background="@color/gray"/>
 
     <TextView
         android:id="@+id/tvYear"
@@ -32,7 +32,8 @@
         android:text="Khóa: 2022-2023"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:padding="6dp"/>
+        android:padding="6dp"
+        android:background="@color/gray"/>
 
     <TextView
         android:id="@+id/tvNumberStudent"
@@ -41,5 +42,6 @@
         android:padding="6dp"
         android:text="Sỉ số: 45"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:background="@drawable/radius_bottom_custom"/>
 </LinearLayout>

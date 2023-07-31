@@ -12,7 +12,7 @@
         android:id="@+id/textView32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightBlue"
+        android:background="@drawable/text_background_custom"
         android:padding="10dp"
         android:text="Thông tin môn học"
         android:textColor="@color/black"
