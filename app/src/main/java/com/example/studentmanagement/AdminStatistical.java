@@ -1,12 +1,16 @@
 package com.example.studentmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +27,7 @@ import com.example.pojo.Student;
 import com.example.pojo.Subject;
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
+import com.example.service.SharePreferenceServeice;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -68,6 +73,8 @@ public class AdminStatistical extends AppCompatActivity {
 
     QLSVDatabase db;
 
+    SharePreferenceServeice sharePreferenceServeice;
+
     ArrayList<Lecture> lectures = new ArrayList<>();
     ArrayList<Subject> subjects = new ArrayList<>();
     ArrayList<Class> classes = new ArrayList<>();
@@ -82,6 +89,7 @@ public class AdminStatistical extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_admin_statictical);
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
         db = new QLSVDatabase(this);
         int now_year = Calendar.getInstance().get(Calendar.YEAR);
         mappingView();
@@ -421,13 +429,16 @@ public class AdminStatistical extends AppCompatActivity {
             Map<String, Integer> statistical = getDataAccount(c);
             int qUser = 0;
             // Data
-            if (statistical.containsKey(User.ROLE.values()[1].toString())) {
-                qUser = statistical.get(User.ROLE.values()[1].toString());
-
-            }
-            tvUser.setText("User: " + Integer.toString(qUser));
             int qAdmin = statistical.get(User.ROLE.values()[0].toString());
             tvAdmin.setText("Admin: " + Integer.toString(qAdmin));
+
+            int qUser = 0;
+            if(statistical.containsKey(User.ROLE.values()[1].toString())){
+                qUser = statistical.get(User.ROLE.values()[1].toString());
+            }
+
+            tvUser.setText("User: " + Integer.toString(qUser));
+
             int total = qUser + qAdmin;
             tvUserTotal.setText("Tổng cộng: " + total);
 
@@ -550,8 +561,6 @@ public class AdminStatistical extends AppCompatActivity {
                         slPass += cursor1.getInt(1);
                     }
                 }
-
-
         }
 
         Map<String, Integer> map = new HashMap<>();
@@ -560,5 +569,47 @@ public class AdminStatistical extends AppCompatActivity {
 
         setUpPieChart(chartScorePass);
         drawPieChart(chartScorePass, map);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        Menu menuInflater = menu;
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_profile){
+            Intent intent = new Intent(AdminStatistical.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_class) {
+            Intent intent = new Intent(AdminStatistical.this, QuanlyLophoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_subject) {
+            Intent intent = new Intent(AdminStatistical.this, QuanlyMonhoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
+            Intent intent = new Intent(AdminStatistical.this, LogIn.class);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.action_user) {
+            Intent intent = new Intent(AdminStatistical.this, QuanlyUser.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

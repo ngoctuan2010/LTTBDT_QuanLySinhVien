@@ -1,5 +1,6 @@
 package com.example.studentmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.example.pojo.Lecture;
 import com.example.service.LectureArrayAdapter;
 import com.example.service.QLSVDatabase;
+import com.example.service.SharePreferenceServeice;
 import com.example.studentmanagement.adding.LectureAdding;
 import com.example.studentmanagement.information.LectureInformation;
 
@@ -39,6 +41,8 @@ public class QuanLyGiangVien extends AppCompatActivity {
 
     QLSVDatabase db;
 
+    SharePreferenceServeice sharePreferenceServeice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +53,7 @@ public class QuanLyGiangVien extends AppCompatActivity {
         btnAddLecture = (Button) findViewById(R.id.btnLectureAdding);
         edtSearch = (EditText) findViewById(R.id.edtSearchLecture);
         lvLecture = (ListView) findViewById(R.id.lvLectureList);
-
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
         db = new QLSVDatabase(this);
 
         //Set ListView
@@ -201,5 +205,48 @@ public class QuanLyGiangVien extends AppCompatActivity {
         Menu menuInflater = menu;
         menu.setGroupVisible(R.id.grMenuDefault, true);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_profile){
+            Intent intent = new Intent(QuanLyGiangVien.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_class) {
+            Intent intent = new Intent(QuanLyGiangVien.this, QuanlyLophoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_student) {
+            Intent intent = new Intent(QuanLyGiangVien.this, QuanlySinhvien.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_subject) {
+            Intent intent = new Intent(QuanLyGiangVien.this, QuanlyMonhoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
+            Intent intent = new Intent(QuanLyGiangVien.this, LogIn.class);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.action_user) {
+            Intent intent = new Intent(QuanLyGiangVien.this, QuanlyUser.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_statistical) {
+            Intent intent = new Intent(QuanLyGiangVien.this, AdminStatistical.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

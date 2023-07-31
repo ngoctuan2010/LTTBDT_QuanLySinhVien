@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.pojo.User;
 import com.example.service.QLSVDatabase;
+import com.example.service.SharePreferenceServeice;
 import com.example.service.UserArrrayAdapter;
 import com.example.studentmanagement.adding.UserAdding;
 import com.example.studentmanagement.information.UserInformation;
@@ -42,6 +44,8 @@ public class QuanlyUser extends AppCompatActivity {
 
     QLSVDatabase db;
 
+    SharePreferenceServeice sharePreferenceServeice;
+
     String[] _role = {"Quản trị viên", "Giảng viên"};
 
     @Override
@@ -50,7 +54,7 @@ public class QuanlyUser extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_user);
 
-
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
         db = new QLSVDatabase(this);
         edtUserSearch = (EditText) findViewById(R.id.edtSearchUser);
         btnUserFilter = (Button) findViewById(R.id.btnFilterUser);
@@ -226,6 +230,41 @@ public class QuanlyUser extends AppCompatActivity {
             remove_checked_list();
             userArrrayAdapter.notifyDataSetChanged();
              }
+
+        if(item_id == R.id.action_profile){
+            Intent intent = new Intent(QuanlyUser.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        if (item_id == R.id.action_class) {
+            Intent intent = new Intent(QuanlyUser.this, QuanlyLophoc.class);
+            startActivity(intent);
+        }
+
+        if (item_id == R.id.action_student) {
+            Intent intent = new Intent(QuanlyUser.this, QuanlySinhvien.class);
+            startActivity(intent);
+        }
+
+        if (item_id == R.id.action_subject) {
+            Intent intent = new Intent(QuanlyUser.this, QuanlyMonhoc.class);
+            startActivity(intent);
+        }
+
+        if (item_id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
+            Intent intent = new Intent(QuanlyUser.this, LogIn.class);
+            startActivity(intent);
+            finish();
+        }
+
+        if (item_id == R.id.action_statistical) {
+            Intent intent = new Intent(QuanlyUser.this, AdminStatistical.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

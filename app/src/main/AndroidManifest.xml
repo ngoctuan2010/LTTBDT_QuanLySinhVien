@@ -15,7 +15,8 @@
 
         <activity
             android:name=".AdminStatistical"
-            android:exported="false"></activity>
+            android:exported="true"
+            android:parentActivityName=".HomePageAdmin"></activity>
         <activity
             android:name=".information.LectureInformation"
             android:exported="false"
@@ -80,8 +81,9 @@
         <activity
             android:name=".HomePageLecture"
             android:exported="false" />
+
         <activity android:name=".QuanlySinhvien"
-            android:exported="false"
+            android:exported="true"
             android:parentActivityName=".HomePageAdmin"/>
         <activity
             android:name=".LogIn"

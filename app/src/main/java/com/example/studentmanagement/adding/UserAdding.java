@@ -112,6 +112,11 @@ public class UserAdding extends AppCompatActivity {
                 public void onFocusChange(View v, boolean hasFocus) {
                     if(hasFocus)
                         tilPassword.getEditText().setText("");
+                    else{
+                        String input = tilPassword.getEditText().getText().toString();
+                        if(input == null || input.isEmpty())
+                            tilPassword.getEditText().setText(user.getPassword());
+                    }
                 }
             });
 
