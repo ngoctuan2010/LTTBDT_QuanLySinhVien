@@ -94,11 +94,12 @@
 
             <ImageButton
                 android:id="@+id/btnStudent"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/studen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_background_custom"
+                android:padding="20dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/image_background_custom"/>
+                android:src="@drawable/graduation_cap_solid" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -119,11 +120,12 @@
 
             <ImageButton
                 android:id="@+id/btnCollage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/teacher"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_background_custom"
+                android:padding="20dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/image_background_custom"/>
+                app:srcCompat="@drawable/chalkboard_user_solid" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -133,6 +135,7 @@
                 android:text="Giảng viên"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -143,11 +146,12 @@
 
             <ImageButton
                 android:id="@+id/btnSubject"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/subject"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_background_custom"
+                android:padding="20dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/image_background_custom"/>
+                app:srcCompat="@drawable/book_open_solid" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -174,11 +178,12 @@
 
             <ImageButton
                 android:id="@+id/btnClass"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/classs" android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/image_background_custom"
-                />
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/chalkboard_solid" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -198,11 +203,12 @@
 
             <ImageButton
                 android:id="@+id/btnUserManagement"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/teacher"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_background_custom"
+                android:padding="20dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/image_background_custom"/>
+                app:srcCompat="@drawable/users_solid" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -221,11 +227,12 @@
 
             <ImageButton
                 android:id="@+id/btnStatistical"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/subject"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_background_custom"
+                android:padding="20dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/image_background_custom"/>
+                app:srcCompat="@drawable/magnifying_glass_chart_solid" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -237,19 +244,5 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="..."
-        android:textSize="20dp"
-        android:paddingLeft="40dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:background="@drawable/text_background_custom" />
 
 </LinearLayout>

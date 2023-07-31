@@ -157,7 +157,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/edtUserAddingUsername"
+            android:id="@+id/edtSubjectAddingName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"

@@ -69,7 +69,8 @@
             android:parentActivityName=".HomePageAdmin" />
         <activity
             android:name=".QuanlyUser"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:parentActivityName=".HomePageAdmin"></activity>
         <activity
             android:name=".HomePageAdmin"
             android:exported="false" />
@@ -79,6 +80,9 @@
         <activity
             android:name=".HomePageLecture"
             android:exported="false" />
+        <activity android:name=".QuanlySinhvien"
+            android:exported="false"
+            android:parentActivityName=".HomePageAdmin"/>
         <activity
             android:name=".LogIn"
             android:exported="true">

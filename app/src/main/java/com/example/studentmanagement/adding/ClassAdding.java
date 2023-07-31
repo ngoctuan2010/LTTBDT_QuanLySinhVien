@@ -54,7 +54,7 @@ public class ClassAdding extends AppCompatActivity {
         edtName = (EditText) findViewById(R.id.edtClassAddingName);
         actvSubject = (AutoCompleteTextView) findViewById(R.id.edtClassAddingSubject);
         actvLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
-        edtStarted = (EditText) findViewById(R.id.edtUserAddingUsername);
+        edtStarted = (EditText) findViewById(R.id.edtSubjectAddingName);
         edtQuantity = (EditText) findViewById(R.id.edtLectureAddingName);
         edtYear = (EditText) findViewById(R.id.edtClassAddingYear);
 
@@ -199,7 +199,7 @@ public class ClassAdding extends AppCompatActivity {
                        }
 
                        try {
-                           if(!checkDateValidate(_class.getStarted())){
+                           if(!checkDateValidate(DateFormatter.reformat(_class.getStarted(), "dd/MM/yyyy", "yyyy-MM-dd"))){
                                Toast.makeText(ClassAdding.this, "Thời gian không phù hợp", Toast.LENGTH_SHORT).show();
                                return;
                            }

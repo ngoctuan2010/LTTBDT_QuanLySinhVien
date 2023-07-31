@@ -50,7 +50,7 @@ public class UserAdding extends AppCompatActivity {
 
         tvTitle = (TextView)findViewById(R.id.tvTitleUserDialog);
         spRole = (Spinner) findViewById(R.id.spUserAddingRole);
-        edtUsername = (EditText) findViewById(R.id.edtUserAddingUsername);
+        edtUsername = (EditText) findViewById(R.id.edtSubjectAddingName);
         tilPassword = (TextInputLayout) findViewById(R.id.tilUserAddingPassword);
         edtLecture = (AutoCompleteTextView) findViewById(R.id.edtUserAddingLecture);
 
@@ -135,9 +135,12 @@ public class UserAdding extends AppCompatActivity {
                        if(!(c.getCount() > 0)){
                            user.setUsername(username);
 
-                           if(user.getPassword().equals(HashSHA1.SHA1(password)))
+                           if(!user.getPassword().equals(password)){
                                password = HashSHA1.SHA1(password);
-                           user.setPassword(password);
+                               user.setPassword(password);
+                           }
+
+
 
                            user.setRole(role);
 
