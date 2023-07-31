@@ -5,6 +5,11 @@ import java.io.Serializable;
 public class Score implements Serializable {
     private int id;
 
+    private double midScore;
+    private double endScore;
+    private int idStudent;
+    private int idClass;
+
     public int getIdStudent() {
         return idStudent;
     }
@@ -21,8 +26,7 @@ public class Score implements Serializable {
         this.idClass = idClass;
     }
 
-    private int idStudent;
-    private int idClass;
+
 
     public double getMidScore() {
         return midScore;
@@ -40,8 +44,7 @@ public class Score implements Serializable {
         this.endScore = endScore;
     }
 
-    private double midScore;
-    private double endScore;
+
 
     public Score() {
     }

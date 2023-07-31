@@ -191,7 +191,7 @@ public class QLSVDatabase {
     }
 
     public Cursor ScoreInClassStatistical(int class_id) {
-        String avgScoreSQL = "(s.midGrace * sj.midGracePercent + s.finalGrace * sj.finalGracePercent) / (sj.midGracePercent + sj.finalGracePercent)";
+        String avgScoreSQL = "(s.midGrade * sj.midGradePercent + s.finalGrade * sj.finalGradePercent) / (sj.midGradePercent + sj.finalGradePercent)";
 
         String query = "SELECT " + avgScoreSQL + " as avg, count(" + avgScoreSQL + ") as q " +
                 "FROM " + DBHelper.CLASS_TABLE + " as c " +

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,6 +49,7 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_sinhvien);
         medtSearch = findViewById(R.id.edtSearchStudent);
         mbtnSearch = findViewById(R.id.btnSearch);
