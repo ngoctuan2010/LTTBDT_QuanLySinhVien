@@ -172,7 +172,7 @@ public class AdminStatistical extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Lecture lecture = (Lecture) spLecture.getSelectedItem();
-                Toast.makeText(AdminStatistical.this, Integer.toString(lecture.getId()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AdminStatistical.this, Integer.toString(lecture.getId()), Toast.LENGTH_SHORT).show();
                 scoreStudentPass(lecture.getId());
             }
 
