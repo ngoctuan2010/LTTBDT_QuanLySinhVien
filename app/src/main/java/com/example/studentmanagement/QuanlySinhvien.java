@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,12 +20,14 @@ import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pojo.Student;
 import com.example.service.QLSVDatabase;
+import com.example.service.SharePreferenceServeice;
 import com.example.service.StudentArrayAdapter;
 import com.example.studentmanagement.adding.StudentAdding;
 
@@ -46,11 +49,16 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
     QLSVDatabase database;
     int selectedSpinnerPosition = 0;
 
+    SharePreferenceServeice sharePreferenceServeice;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_quanly_sinhvien);
+
+        sharePreferenceServeice = new SharePreferenceServeice(this, "User");
+
         medtSearch = findViewById(R.id.edtSearchStudent);
         mbtnSearch = findViewById(R.id.btnSearch);
         mspnProperties = findViewById(R.id.spnProperties);
@@ -391,5 +399,52 @@ public class QuanlySinhvien extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        Menu menuInflater = menu;
+        menu.setGroupVisible(R.id.grMenuDefault, true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_profile){
+            Intent intent = new Intent(QuanlySinhvien.this, ProfileLecture.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("LectureId", Integer.parseInt(sharePreferenceServeice.getString("current_user")));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_class) {
+            Intent intent = new Intent(QuanlySinhvien.this, QuanlyLophoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_subject) {
+            Intent intent = new Intent(QuanlySinhvien.this, QuanlyMonhoc.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_sign_out) {
+            sharePreferenceServeice.clear();
+            Intent intent = new Intent(QuanlySinhvien.this, LogIn.class);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.action_user) {
+            Intent intent = new Intent(QuanlySinhvien.this, QuanlyUser.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_statistical) {
+            Intent intent = new Intent(QuanlySinhvien.this, AdminStatistical.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
